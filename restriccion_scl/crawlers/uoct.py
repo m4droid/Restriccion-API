@@ -12,6 +12,8 @@ class UOCT_Crawler:
 
     def __init__(self):
         self.url = CONFIG['crawlers_urls']['uoct']
+        self.mongo_client = pymongo.MongoClient(**CONFIG['pymongo']['client'])
+        self.mongo_db = self.mongo_client[CONFIG['pymongo']['database']]
 
     def parse(self):
         if self.url.startswith('file://'):
@@ -48,11 +50,9 @@ class UOCT_Crawler:
 
             raw_data.append(data)
 
-        client = pymongo.MongoClient(**CONFIG['pymongo']['client'])
-        database = client[CONFIG['pymongo']['database']]
-
+        new_entries = []
         for row in raw_data:
-            current_registry_row = database.registro.find_one(
+            current_registry_row = self.mongo_db.restrictions.find_one(
                 {
                     'fecha': row['fecha']
                 },
@@ -72,9 +72,12 @@ class UOCT_Crawler:
             row['actualizacion'] = update_time
 
             if current_registry_row is None:
-                database.registro.insert_one(row)
+                self.mongo_db.restrictions.insert_one(row)
+                new_entries.append(row)
             else:
-                database.registro.update_one({'fecha': row['fecha']}, {'$set': row})
+                self.mongo_db.restrictions.update_one({'fecha': row['fecha']}, {'$set': row})
+
+        return new_entries
 
     @staticmethod
     def clean_digits_string(string):

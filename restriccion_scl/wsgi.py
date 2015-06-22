@@ -28,7 +28,7 @@ def registry():
         except ValueError:
             return json_response(data, status_code=400)
 
-    rows = db.registro.find({'$query': query, '$orderby': {'fecha' : -1}}, {'_id': 0})
+    rows = db.restrictions.find({'$query': query, '$orderby': {'fecha' : -1}}, {'_id': 0})
 
     if rows is None:
         return json_response(data)

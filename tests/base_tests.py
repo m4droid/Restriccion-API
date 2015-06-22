@@ -16,7 +16,7 @@ class BaseTestCase(unittest.TestCase):
         self.mongo_db = self.mongo_client[CONFIG['pymongo']['database']]
 
     def tearDown(self):
-        self.mongo_db.registro.drop()
+        self.mongo_db.restrictions.drop()
 
     def get_fixture_file_path(self, fixture):
         return 'file://'+ os.path.join(self.script_path, '..', 'fixtures', fixture)

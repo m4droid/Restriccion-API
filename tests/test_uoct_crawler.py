@@ -11,9 +11,11 @@ class TestApi(BaseTestCase):
         crawler = UOCT_Crawler()
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_0.html')
 
-        self.assertEquals(0, self.mongo_db.registro.count())
-        crawler.parse()
-        self.assertEquals(26, self.mongo_db.registro.count())
+        self.assertEquals(0, self.mongo_db.restrictions.count())
+        new_restrictions = crawler.parse()
+        self.assertEquals(list, type(new_restrictions))
+        self.assertEquals(26, len(new_restrictions))
+        self.assertEquals(26, self.mongo_db.restrictions.count())
 
     @patch('restriccion_scl.crawlers.uoct.moment.now')
     def test_database_entry_data(self, mock_moment):
@@ -24,7 +26,7 @@ class TestApi(BaseTestCase):
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_0.html')
         crawler.parse()
 
-        first_entry = self.mongo_db.registro.find_one({'$query': {}, '$orderby': {'fecha' : -1}}, {'_id': 0})
+        first_entry = self.mongo_db.restrictions.find_one({'$query': {}, '$orderby': {'fecha' : -1}}, {'_id': 0})
 
         self.assertEquals(
             {
@@ -49,15 +51,17 @@ class TestApi(BaseTestCase):
 
         first_entries = []
         second_entries = []
-        rows = self.mongo_db.registro.find({'$query': {}, '$orderby': {'fecha' : -1}})
+        rows = self.mongo_db.restrictions.find({'$query': {}, '$orderby': {'fecha' : -1}})
 
         for row in rows:
             first_entries.append(row)
 
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_1.html')
-        crawler.parse()
+        new_restrictions = crawler.parse()
 
-        rows = self.mongo_db.registro.find({'$query': {}, '$orderby': {'fecha' : -1}})
+        self.assertEquals(1, len(new_restrictions))
+
+        rows = self.mongo_db.restrictions.find({'$query': {}, '$orderby': {'fecha' : -1}})
         for row in rows:
             second_entries.append(row)
 
@@ -91,7 +95,7 @@ class TestApi(BaseTestCase):
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_1.html')
         crawler.parse()
 
-        rows = self.mongo_db.registro.find({'$query': {}, '$orderby': {'fecha' : -1}})
+        rows = self.mongo_db.restrictions.find({'$query': {}, '$orderby': {'fecha' : -1}})
         for row in rows:
             first_entries.append(row)
 
@@ -100,9 +104,11 @@ class TestApi(BaseTestCase):
 
         crawler = UOCT_Crawler()
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_2.html')
-        crawler.parse()
+        new_restrictions = crawler.parse()
 
-        rows = self.mongo_db.registro.find({'$query': {}, '$orderby': {'fecha' : -1}})
+        self.assertEquals(0, len(new_restrictions))
+
+        rows = self.mongo_db.restrictions.find({'$query': {}, '$orderby': {'fecha' : -1}})
         for row in rows:
             second_entries.append(row)
 
