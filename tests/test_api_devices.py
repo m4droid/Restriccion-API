@@ -29,7 +29,7 @@ class TestApiDevices(BaseTestCase):
 
     def test_get_ok(self):
         expected_device = {'tipo': 'android', 'id': 'dummy', 'fecha_registro': moment.now().isoformat()}
-        self.mongo_db.devices.insert(expected_device)
+        self.mongo_db.devices.insert_one(expected_device)
 
         response = self.app.get('0/dispositivos?tipo=android&id=dummy')
         self.assertEqual('application/json; charset=utf-8', response.content_type)
@@ -61,12 +61,11 @@ class TestApiDevices(BaseTestCase):
     def test_post_ok(self, mock_moment):
         mock_datetime = moment.date('2015-06-22', '%Y-%m-%d')
         mock_moment.side_effect = lambda: mock_datetime
-        from restriccion_scl.wsgi import app
 
         expected_device = {'tipo': 'android', 'id': 'dummy'}
 
-        response = app.test_client().post('0/dispositivos', data=expected_device)
-        
+        response = self.app.post('0/dispositivos', data=expected_device)
+
         self.assertEqual('application/json; charset=utf-8', response.content_type)
         self.assertEqual(200, response.status_code)
 
