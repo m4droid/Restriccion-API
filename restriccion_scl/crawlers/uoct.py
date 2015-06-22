@@ -51,7 +51,6 @@ class UOCT_Crawler:
         client = pymongo.MongoClient(**CONFIG['pymongo']['client'])
         database = client[CONFIG['pymongo']['database']]
 
-        updated_rows = []
         for row in raw_data:
             current_registry_row = database.registro.find_one(
                 {
@@ -72,12 +71,10 @@ class UOCT_Crawler:
 
             row['actualizacion'] = update_time
 
-            if current_registry_row is not None:
-                # To change ObjectID
-                database.registro.delete_one({'fecha': row['fecha']})
-            database.registro.insert_one(row)
-
-            updated_rows.append(row)
+            if current_registry_row is None:
+                database.registro.insert_one(row)
+            else:
+                database.registro.update_one({'fecha': row['fecha']}, {'$set': row})
 
     @staticmethod
     def clean_digits_string(string):
