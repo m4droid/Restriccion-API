@@ -1,6 +1,6 @@
 import json
 
-from flask import Flask, request
+from flask import Flask, request, Response
 import moment
 import pymongo
 
@@ -17,7 +17,9 @@ db = client[CONFIG['pymongo']['database']]
 app = Flask(__name__)
 
 def json_response(data, status_code=200):
-    return json.dumps(data), status_code, {'Content-Type': 'application/json; charset=utf-8'}
+    response = Response(response=json.dumps(data), mimetype='application/json')
+    response.status_code = status_code
+    return response
 
 @app.route("/0/restricciones", methods=['GET'])
 def restrictions_get():

@@ -17,14 +17,14 @@ class TestApiDevices(BaseTestCase):
         params_list = ['', '?tipo=android', '?id=dummy']
 
         for params in params_list:
-            response = self.app.get('0/dispositivos' + params)
-            self.assertEqual('application/json; charset=utf-8', response.content_type)
+            response = self.app.get('/0/dispositivos' + params)
+            self.assertEqual('application/json', response.mimetype)
             self.assertEqual(400, response.status_code)
             self.assertEqual('[]', response.data.decode())
 
     def test_get_not_found(self):
         response = self.app.get('0/dispositivos?tipo=android&id=dummy')
-        self.assertEqual('application/json; charset=utf-8', response.content_type)
+        self.assertEqual('application/json', response.mimetype)
         self.assertEqual(404, response.status_code)
         self.assertEqual('[]', response.data.decode())
 
@@ -32,8 +32,8 @@ class TestApiDevices(BaseTestCase):
         expected_device = {'tipo': 'android', 'id': 'dummy', 'fecha_registro': moment.now().isoformat()}
         self.mongo_db.devices.insert_one(expected_device)
 
-        response = self.app.get('0/dispositivos?tipo=android&id=dummy')
-        self.assertEqual('application/json; charset=utf-8', response.content_type)
+        response = self.app.get('/0/dispositivos?tipo=android&id=dummy')
+        self.assertEqual('application/json', response.mimetype)
         self.assertEqual(200, response.status_code)
 
         data = json.loads(response.data.decode())
@@ -47,14 +47,14 @@ class TestApiDevices(BaseTestCase):
         data_list = [{}, {'tipo': 'android'}, {'id': 'dummy'}]
 
         for data in data_list:
-            response = app.test_client().post('0/dispositivos', data=data)
-            self.assertEqual('application/json; charset=utf-8', response.content_type)
+            response = app.test_client().post('/0/dispositivos', data=data)
+            self.assertEqual('application/json', response.mimetype)
             self.assertEqual(400, response.status_code)
             self.assertEqual('[]', response.data.decode())
 
     def test_post_wrong_type(self):
-        response = app.test_client().post('0/dispositivos', data={'tipo': 'fake', 'id': 'dummy'})
-        self.assertEqual('application/json; charset=utf-8', response.content_type)
+        response = app.test_client().post('/0/dispositivos', data={'tipo': 'fake', 'id': 'dummy'})
+        self.assertEqual('application/json', response.mimetype)
         self.assertEqual(400, response.status_code)
         self.assertEqual('[]', response.data.decode())
 
@@ -69,7 +69,7 @@ class TestApiDevices(BaseTestCase):
 
         response = self.app.post('/0/dispositivos', data=expected_device)
 
-        self.assertEqual('application/json; charset=utf-8', response.content_type)
+        self.assertEqual('application/json', response.mimetype)
         self.assertEqual(200, response.status_code)
 
         data = json.loads(response.data.decode())
