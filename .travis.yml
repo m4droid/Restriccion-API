@@ -10,3 +10,5 @@ install:
   - python setup.py develop
 # command to run tests
 script: ./runtests.sh
+after_success:
+  - coveralls
