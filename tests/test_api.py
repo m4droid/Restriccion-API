@@ -3,7 +3,7 @@ import json
 from mock import patch
 import moment
 
-from base_tests import BaseTestCase
+from .base_tests import BaseTestCase
 from restriccion_scl.wsgi import app
 
 
@@ -14,9 +14,9 @@ class TestApi(BaseTestCase):
 
     def test_empty_entries(self):
         response = self.app.get('0/registro')
-        self.assertEquals('application/json; charset=utf-8', response.content_type)
-        self.assertEquals(200, response.status_code)
-        self.assertEquals('[]', response.data.decode())
+        self.assertEqual('application/json; charset=utf-8', response.content_type)
+        self.assertEqual(200, response.status_code)
+        self.assertEqual('[]', response.data.decode())
 
     @patch('restriccion_scl.crawlers.uoct.moment.now')
     def test_get_all_entries(self, mock_moment):
@@ -28,12 +28,12 @@ class TestApi(BaseTestCase):
         crawler.parse()
 
         response = self.app.get('0/registro')
-        self.assertEquals('application/json; charset=utf-8', response.content_type)
-        self.assertEquals(200, response.status_code)
+        self.assertEqual('application/json; charset=utf-8', response.content_type)
+        self.assertEqual(200, response.status_code)
 
         entries = json.loads(response.data.decode())
 
-        self.assertEquals(26, len(entries))
+        self.assertEqual(26, len(entries))
 
     @patch('restriccion_scl.crawlers.uoct.moment.now')
     def test_get_date_entry(self, mock_moment):
@@ -45,14 +45,14 @@ class TestApi(BaseTestCase):
         crawler.parse()
 
         response = self.app.get('0/registro?fecha=2015-06-21')
-        self.assertEquals('application/json; charset=utf-8', response.content_type)
-        self.assertEquals(200, response.status_code)
+        self.assertEqual('application/json; charset=utf-8', response.content_type)
+        self.assertEqual(200, response.status_code)
 
         entries = json.loads(response.data.decode())
 
-        self.assertEquals(1, len(entries))
+        self.assertEqual(1, len(entries))
 
-        self.assertEquals(
+        self.assertEqual(
             {
                 'fecha': '2015-06-21',
                 'hash': '5e15b0168c9978cb5a50ad4c27c8065942d7fd30',
@@ -67,6 +67,6 @@ class TestApi(BaseTestCase):
     def test_wrong_date_parameter(self):
         for date in ['', 'asdf', '21-06-2015']:
             response = self.app.get('0/registro?fecha=' + date)
-            self.assertEquals('application/json; charset=utf-8', response.content_type)
-            self.assertEquals(400, response.status_code)
-            self.assertEquals('[]', response.data.decode())
+            self.assertEqual('application/json; charset=utf-8', response.content_type)
+            self.assertEqual(400, response.status_code)
+            self.assertEqual('[]', response.data.decode())

@@ -1,7 +1,7 @@
 from mock import Mock, patch
 import moment
 
-from base_tests import BaseTestCase
+from .base_tests import BaseTestCase
 
 
 class TestLibsNotifications(BaseTestCase):
@@ -47,11 +47,11 @@ class TestLibsNotifications(BaseTestCase):
             'fecha_registro': mock_datetime.isoformat()
         })
         self.mongo_db.devices.insert_one(device_to_remain_data)
-        self.assertEquals(3, self.mongo_db.devices.count())
+        self.assertEqual(3, self.mongo_db.devices.count())
 
         send_to_android_devices(['fake_gcm_id'], {'payload': 'asdf'})
-        self.assertEquals(1, self.mongo_db.devices.count())
-        self.assertEquals(
+        self.assertEqual(1, self.mongo_db.devices.count())
+        self.assertEqual(
             0,
             self.mongo_db.devices.find({
                 'tipo': 'android',
@@ -60,7 +60,7 @@ class TestLibsNotifications(BaseTestCase):
         )        
 
         device_to_remain = self.mongo_db.devices.find_one({})
-        self.assertEquals(device_to_remain_data, device_to_remain)
+        self.assertEqual(device_to_remain_data, device_to_remain)
 
     @patch('restriccion_scl.libs.notifications.moment.now')
     @patch('restriccion_scl.libs.notifications.GCM')
@@ -84,9 +84,9 @@ class TestLibsNotifications(BaseTestCase):
         self.mongo_db.devices.insert_one({'tipo': 'android', 'id': 'gcm_id_to_remove'})
         self.mongo_db.devices.insert_one(device_to_remain_1_data)
         self.mongo_db.devices.insert_one(device_to_remain_2_data)
-        self.assertEquals(3, self.mongo_db.devices.count())
+        self.assertEqual(3, self.mongo_db.devices.count())
 
         send_to_android_devices(['fake_gcm_id'], {'payload': 'asdf'})
-        self.assertEquals(3, self.mongo_db.devices.count())
+        self.assertEqual(3, self.mongo_db.devices.count())
 
-        self.assertEquals(0, self.mongo_db.devices.find({'tipo': 'android', 'id': 'gcm_id_to_remove'}).count())        
+        self.assertEqual(0, self.mongo_db.devices.find({'tipo': 'android', 'id': 'gcm_id_to_remove'}).count())        

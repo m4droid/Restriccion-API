@@ -6,6 +6,7 @@ services:
 # command to install dependencies
 install:
   - pip install coverage
+  - pip install coveralls
   - pip install git+https://github.com/wonderpush/python3-gcm.git
   - python setup.py develop
 # command to run tests

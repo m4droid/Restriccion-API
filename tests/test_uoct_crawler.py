@@ -1,45 +1,45 @@
 from mock import patch
 import moment
 
-from base_tests import BaseTestCase
+from .base_tests import BaseTestCase
 from restriccion_scl.crawlers.uoct import UOCT_Crawler
 
 
 class TestUoct_Crawler(BaseTestCase):
 
     def test_clean_digits_string_ok(self):
-        self.assertEquals('1-2-3', UOCT_Crawler.clean_digits_string('1-2-3'))
+        self.assertEqual('1-2-3', UOCT_Crawler.clean_digits_string('1-2-3'))
 
     def test_clean_digits_string_none_value(self):
         self.assertIsNone(UOCT_Crawler.clean_digits_string(None))
 
     def test_clean_digits_string_multiple_dash(self):
-        self.assertEquals('1-2-3', UOCT_Crawler.clean_digits_string('1-2--3'))
-        self.assertEquals('1-2-3', UOCT_Crawler.clean_digits_string('1---2-3'))
+        self.assertEqual('1-2-3', UOCT_Crawler.clean_digits_string('1-2--3'))
+        self.assertEqual('1-2-3', UOCT_Crawler.clean_digits_string('1---2-3'))
 
     def test_clean_digits_string_ends_dashes(self):
         # Single
-        self.assertEquals('1-2-3', UOCT_Crawler.clean_digits_string('1-2-3-'))
-        self.assertEquals('1-2-3', UOCT_Crawler.clean_digits_string('-1-2-3'))
-        self.assertEquals('1-2-3', UOCT_Crawler.clean_digits_string('-1-2-3-'))
+        self.assertEqual('1-2-3', UOCT_Crawler.clean_digits_string('1-2-3-'))
+        self.assertEqual('1-2-3', UOCT_Crawler.clean_digits_string('-1-2-3'))
+        self.assertEqual('1-2-3', UOCT_Crawler.clean_digits_string('-1-2-3-'))
 
         # Multiple
-        self.assertEquals('1-2-3', UOCT_Crawler.clean_digits_string('1-2-3--'))
-        self.assertEquals('1-2-3', UOCT_Crawler.clean_digits_string('--1-2-3'))
-        self.assertEquals('1-2-3', UOCT_Crawler.clean_digits_string('--1-2-3--'))
+        self.assertEqual('1-2-3', UOCT_Crawler.clean_digits_string('1-2-3--'))
+        self.assertEqual('1-2-3', UOCT_Crawler.clean_digits_string('--1-2-3'))
+        self.assertEqual('1-2-3', UOCT_Crawler.clean_digits_string('--1-2-3--'))
 
     def test_clean_digits_string_order(self):
-        self.assertEquals('1-2-3', UOCT_Crawler.clean_digits_string('2-1-3'))
+        self.assertEqual('1-2-3', UOCT_Crawler.clean_digits_string('2-1-3'))
 
     def test_parse(self):
         crawler = UOCT_Crawler()
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_0.html')
 
-        self.assertEquals(0, self.mongo_db.restrictions.count())
+        self.assertEqual(0, self.mongo_db.restrictions.count())
         new_restrictions = crawler.parse()
-        self.assertEquals(list, type(new_restrictions))
-        self.assertEquals(26, len(new_restrictions))
-        self.assertEquals(26, self.mongo_db.restrictions.count())
+        self.assertEqual(list, type(new_restrictions))
+        self.assertEqual(26, len(new_restrictions))
+        self.assertEqual(26, self.mongo_db.restrictions.count())
 
     @patch('restriccion_scl.crawlers.uoct.moment.now')
     def test_database_entry_data(self, mock_moment):
@@ -52,7 +52,7 @@ class TestUoct_Crawler(BaseTestCase):
 
         first_entry = self.mongo_db.restrictions.find_one({'$query': {}, '$orderby': {'fecha' : -1}}, {'_id': 0})
 
-        self.assertEquals(
+        self.assertEqual(
             {
                 'fecha': '2015-06-21',
                 'hash': '5e15b0168c9978cb5a50ad4c27c8065942d7fd30',
@@ -83,19 +83,19 @@ class TestUoct_Crawler(BaseTestCase):
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_1.html')
         new_restrictions = crawler.parse()
 
-        self.assertEquals(1, len(new_restrictions))
+        self.assertEqual(1, len(new_restrictions))
 
         rows = self.mongo_db.restrictions.find({'$query': {}, '$orderby': {'fecha' : -1}})
         for row in rows:
             second_entries.append(row)
 
         # Keep old data
-        self.assertEquals(first_entries, second_entries[1:])
+        self.assertEqual(first_entries, second_entries[1:])
 
         new_document = second_entries[0]
         del new_document['_id']
 
-        self.assertEquals(
+        self.assertEqual(
             {
                 'fecha': '2015-06-22',
                 'hash': '1abfb85af96da8080510d2c051a70edf5093da48',
@@ -130,21 +130,21 @@ class TestUoct_Crawler(BaseTestCase):
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_2.html')
         new_restrictions = crawler.parse()
 
-        self.assertEquals(0, len(new_restrictions))
+        self.assertEqual(0, len(new_restrictions))
 
         rows = self.mongo_db.restrictions.find({'$query': {}, '$orderby': {'fecha' : -1}})
         for row in rows:
             second_entries.append(row)
 
         # Keep old data
-        self.assertEquals(first_entries[0], second_entries[0])
-        self.assertEquals(first_entries[2:], second_entries[2:])
+        self.assertEqual(first_entries[0], second_entries[0])
+        self.assertEqual(first_entries[2:], second_entries[2:])
 
-        self.assertEquals(first_entries[1]['_id'], second_entries[1]['_id'])
-        self.assertEquals(first_entries[1]['fecha'], second_entries[1]['fecha'])
-        self.assertEquals(first_entries[1]['estado'], second_entries[1]['estado'])
-        self.assertEquals(first_entries[1]['sin_sello_verde'], second_entries[1]['sin_sello_verde'])
+        self.assertEqual(first_entries[1]['_id'], second_entries[1]['_id'])
+        self.assertEqual(first_entries[1]['fecha'], second_entries[1]['fecha'])
+        self.assertEqual(first_entries[1]['estado'], second_entries[1]['estado'])
+        self.assertEqual(first_entries[1]['sin_sello_verde'], second_entries[1]['sin_sello_verde'])
 
-        self.assertNotEquals(first_entries[1]['hash'], second_entries[1]['hash'])
-        self.assertNotEquals(first_entries[1]['con_sello_verde'], second_entries[1]['con_sello_verde'])
-        self.assertNotEquals(first_entries[1]['actualizacion'], second_entries[1]['actualizacion'])
+        self.assertNotEqual(first_entries[1]['hash'], second_entries[1]['hash'])
+        self.assertNotEqual(first_entries[1]['con_sello_verde'], second_entries[1]['con_sello_verde'])
+        self.assertNotEqual(first_entries[1]['actualizacion'], second_entries[1]['actualizacion'])
