@@ -63,3 +63,10 @@ class TestApi(BaseTestCase):
             },
             entries[0]
         )
+
+    def test_wrong_date_parameter(self):
+        for date in ['', 'asdf', '21-06-2015']:
+            response = self.app.get('0/registro?fecha=' + date)
+            self.assertEquals('application/json; charset=utf-8', response.content_type)
+            self.assertEquals(400, response.status_code)
+            self.assertEquals('[]', response.data.decode())
