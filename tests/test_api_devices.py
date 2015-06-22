@@ -59,7 +59,7 @@ class TestApiDevices(BaseTestCase):
         self.assertEqual('[]', response.data.decode())
 
 
-    @unittest.skip("Travis CI Failing")
+    # @unittest.skip("Travis CI Failing")
     @patch('restriccion_scl.wsgi.moment.now')
     def test_post_ok(self, mock_moment):
         mock_datetime = moment.date('2015-06-22', '%Y-%m-%d')
@@ -67,7 +67,7 @@ class TestApiDevices(BaseTestCase):
 
         expected_device = {'tipo': 'android', 'id': 'dummy'}
 
-        response = self.app.post('0/dispositivos', data=expected_device)
+        response = self.app.post('/0/dispositivos', data=expected_device)
 
         self.assertEqual('application/json; charset=utf-8', response.content_type)
         self.assertEqual(200, response.status_code)
