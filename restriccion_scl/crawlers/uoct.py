@@ -8,7 +8,7 @@ from pyquery import PyQuery as pq
 from restriccion_scl import CONFIG
 
 
-class UOCT_Crawler:
+class UOCT_Crawler(object):
 
     def __init__(self):
         self.url = CONFIG['crawlers_urls']['uoct']
