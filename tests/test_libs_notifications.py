@@ -2,6 +2,7 @@ from mock import Mock, patch
 import moment
 
 from .base_tests import BaseTestCase
+from restriccion_scl.libs.notifications import send_to_android_devices
 
 
 class TestLibsNotifications(BaseTestCase):
@@ -12,7 +13,6 @@ class TestLibsNotifications(BaseTestCase):
         mock_method.json_request = Mock(return_value={})
 
         mock_gcm.side_effect = lambda *a, **ka: mock_method
-        from restriccion_scl.libs.notifications import send_to_android_devices
 
         send_to_android_devices(['fake_gcm_id'], {'payload': 'asdf'})
 
@@ -32,7 +32,6 @@ class TestLibsNotifications(BaseTestCase):
         })
 
         mock_gcm.side_effect = lambda *a, **ka: mock_method
-        from restriccion_scl.libs.notifications import send_to_android_devices
 
         device_to_remain_data = {'tipo': 'android', 'id': 'gcm_to_remain', 'fecha_registro': mock_datetime.isoformat()}
 
@@ -76,7 +75,6 @@ class TestLibsNotifications(BaseTestCase):
         })
 
         mock_gcm.side_effect = lambda *a, **ka: mock_method
-        from restriccion_scl.libs.notifications import send_to_android_devices
 
         device_to_remain_1_data = {'tipo': 'android', 'id': 'gcm_to_remain_1', 'fecha_registro': mock_datetime.isoformat()}
         device_to_remain_2_data = {'tipo': 'android', 'id': 'gcm_to_remain_2', 'fecha_registro': mock_datetime.isoformat()}

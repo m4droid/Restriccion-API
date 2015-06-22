@@ -44,7 +44,6 @@ class TestUoct_Crawler(BaseTestCase):
     @patch('restriccion_scl.crawlers.uoct.moment.now')
     def test_database_entry_data(self, mock_moment):
         mock_moment.side_effect = lambda: moment.date('2015-06-22', '%Y-%m-%d')
-        from restriccion_scl.crawlers.uoct import UOCT_Crawler
 
         crawler = UOCT_Crawler()
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_0.html')
@@ -67,7 +66,6 @@ class TestUoct_Crawler(BaseTestCase):
     @patch('restriccion_scl.crawlers.uoct.moment.now')
     def test_parse_new_entry(self, mock_moment):
         mock_moment.side_effect = lambda: moment.date('2015-06-22', '%Y-%m-%d')
-        from restriccion_scl.crawlers.uoct import UOCT_Crawler
 
         crawler = UOCT_Crawler()
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_0.html')
@@ -110,7 +108,6 @@ class TestUoct_Crawler(BaseTestCase):
     @patch('restriccion_scl.crawlers.uoct.moment.now')
     def test_parse_update_entry(self, mock_moment):
         mock_moment.side_effect = lambda: moment.date('2015-06-22T00:00:00', '%Y-%m-%dT%H:%M:%S')
-        from restriccion_scl.crawlers.uoct import UOCT_Crawler
 
         first_entries = []
         second_entries = []
@@ -124,7 +121,6 @@ class TestUoct_Crawler(BaseTestCase):
             first_entries.append(row)
 
         mock_moment.side_effect = lambda: moment.date('2015-06-22T01:00:00', '%Y-%m-%dT%H:%M:%S')
-        from restriccion_scl.crawlers.uoct import UOCT_Crawler
 
         crawler = UOCT_Crawler()
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_2.html')

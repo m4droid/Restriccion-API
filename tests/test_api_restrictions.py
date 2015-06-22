@@ -4,6 +4,7 @@ from mock import patch
 import moment
 
 from .base_tests import BaseTestCase
+from restriccion_scl.crawlers.uoct import UOCT_Crawler
 from restriccion_scl.wsgi import app
 
 
@@ -21,7 +22,7 @@ class TestApiRestrictions(BaseTestCase):
     @patch('restriccion_scl.crawlers.uoct.moment.now')
     def test_get_all_entries(self, mock_moment):
         mock_moment.side_effect = lambda: moment.date('2015-06-22', '%Y-%m-%d')
-        from restriccion_scl.crawlers.uoct import UOCT_Crawler
+
 
         crawler = UOCT_Crawler()
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_0.html')
@@ -38,7 +39,6 @@ class TestApiRestrictions(BaseTestCase):
     @patch('restriccion_scl.crawlers.uoct.moment.now')
     def test_get_date_entry(self, mock_moment):
         mock_moment.side_effect = lambda: moment.date('2015-06-22', '%Y-%m-%d')
-        from restriccion_scl.crawlers.uoct import UOCT_Crawler
 
         crawler = UOCT_Crawler()
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_0.html')
