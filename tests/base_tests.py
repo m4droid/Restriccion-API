@@ -19,5 +19,7 @@ class BaseTestCase(unittest.TestCase):
         self.mongo_db.restrictions.drop()
         self.mongo_db.devices.drop()
 
+        self.mongo_client.close()
+
     def get_fixture_file_path(self, fixture):
         return 'file://'+ os.path.join(self.script_path, '..', 'fixtures', fixture)

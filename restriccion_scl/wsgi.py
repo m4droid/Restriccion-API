@@ -7,6 +7,10 @@ import pymongo
 from restriccion_scl import CONFIG
 
 
+ALLOWED_DEVICE_TYPES = ['android']
+EMPTY_VALUES = [None, '']
+
+
 client = pymongo.MongoClient(**CONFIG['pymongo']['client'])
 db = client[CONFIG['pymongo']['database']]
 
@@ -15,8 +19,8 @@ app = Flask(__name__)
 def json_response(data, status_code=200):
     return json.dumps(data), status_code, {'Content-Type': 'application/json; charset=utf-8'}
 
-@app.route("/0/registro")
-def registry():
+@app.route("/0/restricciones", methods=['GET'])
+def restrictions_get():
     date = request.args.get('fecha', None)
 
     data = []
@@ -34,3 +38,39 @@ def registry():
         data.append(row)
 
     return json_response(data)
+
+@app.route("/0/dispositivos", methods=['GET'])
+def devices_get():
+    device_type = request.args.get('tipo', None)
+    device_id = request.args.get('id', None)
+
+    if device_type not in ALLOWED_DEVICE_TYPES \
+        or device_id in EMPTY_VALUES:
+        return json_response([], 400)
+
+    row = db.devices.find_one({'tipo': device_type.strip(), 'id': device_id.strip()}, {'_id': 0})
+
+    if row is None:
+        return json_response([], 404)
+
+    return json_response([row])
+
+@app.route("/0/dispositivos", methods=['POST'])
+def devices_post():
+    device_type = request.form.get('tipo', None)
+    device_id = request.form.get('id', None)
+
+    if device_type not in ALLOWED_DEVICE_TYPES \
+        or device_id in EMPTY_VALUES:
+        return json_response([], 400)
+
+    query = {'tipo': device_type.strip(), 'id': device_id.strip()}
+    row = db.devices.find_one(query, {'_id': 0})
+
+    data = dict(query)
+    data['fecha_registro'] = moment.now().isoformat()
+    if row is None:
+        db.devices.insert_one(data)
+    db.devices.update_one(query, {'$set': data})
+    del data['_id']
+    return json_response([data], 200)

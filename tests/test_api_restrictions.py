@@ -7,13 +7,13 @@ from .base_tests import BaseTestCase
 from restriccion_scl.wsgi import app
 
 
-class TestApi(BaseTestCase):
+class TestApiRestrictions(BaseTestCase):
 
     def setUp(self):        
         self.app = app.test_client()
 
-    def test_empty_entries(self):
-        response = self.app.get('0/registro')
+    def test_get_empty_entries(self):
+        response = self.app.get('0/restricciones')
         self.assertEqual('application/json; charset=utf-8', response.content_type)
         self.assertEqual(200, response.status_code)
         self.assertEqual('[]', response.data.decode())
@@ -27,7 +27,7 @@ class TestApi(BaseTestCase):
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_0.html')
         crawler.parse()
 
-        response = self.app.get('0/registro')
+        response = self.app.get('0/restricciones')
         self.assertEqual('application/json; charset=utf-8', response.content_type)
         self.assertEqual(200, response.status_code)
 
@@ -44,7 +44,7 @@ class TestApi(BaseTestCase):
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_0.html')
         crawler.parse()
 
-        response = self.app.get('0/registro?fecha=2015-06-21')
+        response = self.app.get('0/restricciones?fecha=2015-06-21')
         self.assertEqual('application/json; charset=utf-8', response.content_type)
         self.assertEqual(200, response.status_code)
 
@@ -64,9 +64,9 @@ class TestApi(BaseTestCase):
             entries[0]
         )
 
-    def test_wrong_date_parameter(self):
+    def test_get_wrong_date_parameter(self):
         for date in ['', 'asdf', '21-06-2015']:
-            response = self.app.get('0/registro?fecha=' + date)
+            response = self.app.get('0/restricciones?fecha=' + date)
             self.assertEqual('application/json; charset=utf-8', response.content_type)
             self.assertEqual(400, response.status_code)
             self.assertEqual('[]', response.data.decode())

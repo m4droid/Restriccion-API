@@ -34,7 +34,7 @@ class TestLibsNotifications(BaseTestCase):
         mock_gcm.side_effect = lambda *a, **ka: mock_method
         from restriccion_scl.libs.notifications import send_to_android_devices
 
-        device_to_remain_data = {'tipo': 'android', 'id': 'gcm_to_remain'}
+        device_to_remain_data = {'tipo': 'android', 'id': 'gcm_to_remain', 'fecha_registro': mock_datetime.isoformat()}
 
         self.mongo_db.devices.insert_one({
             'tipo': 'android',
@@ -78,10 +78,10 @@ class TestLibsNotifications(BaseTestCase):
         mock_gcm.side_effect = lambda *a, **ka: mock_method
         from restriccion_scl.libs.notifications import send_to_android_devices
 
-        device_to_remain_1_data = {'tipo': 'android', 'id': 'gcm_to_remain_1'}
-        device_to_remain_2_data = {'tipo': 'android', 'id': 'gcm_to_remain_2'}
+        device_to_remain_1_data = {'tipo': 'android', 'id': 'gcm_to_remain_1', 'fecha_registro': mock_datetime.isoformat()}
+        device_to_remain_2_data = {'tipo': 'android', 'id': 'gcm_to_remain_2', 'fecha_registro': mock_datetime.isoformat()}
 
-        self.mongo_db.devices.insert_one({'tipo': 'android', 'id': 'gcm_id_to_remove'})
+        self.mongo_db.devices.insert_one({'tipo': 'android', 'id': 'gcm_id_to_remove', 'fecha_registro': mock_datetime.isoformat()})
         self.mongo_db.devices.insert_one(device_to_remain_1_data)
         self.mongo_db.devices.insert_one(device_to_remain_2_data)
         self.assertEqual(3, self.mongo_db.devices.count())
