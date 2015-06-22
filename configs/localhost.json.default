@@ -1,0 +1,12 @@
+{
+	"pymongo": {
+		"client": {
+			"host": "localhost",
+			"port": 27017
+		},
+		"database": "restriccion_scl"
+	},
+	"crawlers_urls": {
+		"uoct": "http://www.uoct.cl/restriccion-vehicular/"
+	}
+}
