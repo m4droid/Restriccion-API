@@ -83,6 +83,9 @@ class UOCT_Crawler:
     def clean_digits_string(string):
         if string is None:
             return string
-        string = '-'.join(sorted(re.sub('-+', '-', string.strip()).split('-')))
+
+        string = re.sub('-+', '-', string.strip())
+        string = string.strip('-')
+        string = '-'.join(sorted(string.split('-')))
 
         return string

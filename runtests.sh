@@ -6,4 +6,4 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 export RESTRICCION_SCL_CONFIG="$DIR/configs/tests.json"
 
-nosetests "$@"
+nosetests --with-coverage --cover-package=restriccion_scl "$@"

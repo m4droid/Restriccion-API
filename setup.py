@@ -25,9 +25,8 @@ setup(
         'pymongo',
         'pyquery',
         'moment',
-        'python-gcm',
     ],
-    tests_require=['nose'],
+    tests_require=['nose', 'mock', 'coverage'],
     test_suite="tests",
     entry_points={},
 )

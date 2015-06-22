@@ -30,9 +30,6 @@ def registry():
 
     rows = db.restrictions.find({'$query': query, '$orderby': {'fecha' : -1}}, {'_id': 0})
 
-    if rows is None:
-        return json_response(data)
-
     for row in rows:
         data.append(row)
 
