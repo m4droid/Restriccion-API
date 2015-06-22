@@ -1,32 +1,16 @@
 import json
-import unittest
-import os
 
 from mock import patch
 import moment
-import pymongo
 
-from restriccion_scl import CONFIG
+from base_tests import BaseTestCase
 from restriccion_scl.wsgi import app
 
 
-client = pymongo.MongoClient(**CONFIG['pymongo']['client'])
-db = client[CONFIG['pymongo']['database']]
-
-script_path = os.path.dirname(os.path.realpath(__file__))
-
-
-class TestApi(unittest.TestCase):
-
-    @staticmethod
-    def get_fixture_file_path(fixture):
-        return 'file://'+ os.path.join(script_path, '..', 'fixtures', fixture)
+class TestApi(BaseTestCase):
 
     def setUp(self):        
         self.app = app.test_client()
-
-    def tearDown(self):        
-        db.registro.drop()
 
     def test_empty_entries(self):
         response = self.app.get('0/registro')
