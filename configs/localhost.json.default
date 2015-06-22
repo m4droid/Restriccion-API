@@ -6,6 +6,11 @@
 		},
 		"database": "restriccion_scl"
 	},
+	"notifications": {
+		"gcm": {
+			"api_key": "dummy_gcm_key"
+		}
+	},
 	"crawlers_urls": {
 		"uoct": "http://www.uoct.cl/restriccion-vehicular/"
 	}
