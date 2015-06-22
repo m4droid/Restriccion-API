@@ -57,10 +57,10 @@ class TestApiDevices(BaseTestCase):
         self.assertEqual(400, response.status_code)
         self.assertEqual('[]', response.data.decode())
 
-    @patch('restriccion_scl.wsgi.moment.now')
-    def test_post_ok(self, mock_moment):
-        mock_datetime = moment.date('2015-06-22', '%Y-%m-%d')
-        mock_moment.side_effect = lambda: mock_datetime
+    # @patch('restriccion_scl.wsgi.moment.now')
+    def test_post_ok(self):
+        # mock_datetime = moment.date('2015-06-22', '%Y-%m-%d')
+        # mock_moment.side_effect = lambda: mock_datetime
 
         expected_device = {'tipo': 'android', 'id': 'dummy'}
 
@@ -72,6 +72,10 @@ class TestApiDevices(BaseTestCase):
         data = json.loads(response.data.decode())
 
         self.assertEqual(list, type(data))
+        device = data[0]
 
-        expected_device['fecha_registro'] = mock_datetime.isoformat()
-        self.assertEqual(expected_device, data[0])
+        self.assertIn('fecha_registro', device)
+        del device['fecha_registro']
+
+        # expected_device['fecha_registro'] = mock_datetime.isoformat()
+        self.assertEqual(expected_device, device)
