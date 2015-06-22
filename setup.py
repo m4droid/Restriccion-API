@@ -20,8 +20,8 @@ setup(
     zip_safe=False,
     install_requires=[
         'Flask>=0.10.1',
-        'flask-cors',
-        'tornado',
+        # 'flask-cors',
+        # 'tornado',
         'pymongo',
         'pyquery',
         'moment',
