@@ -8,7 +8,7 @@ from restriccion_scl.libs.notifications import send_to_android_devices
 class TestLibsNotifications(BaseTestCase):
 
     @patch('restriccion_scl.libs.notifications.GCM')
-    def test_send_to_android_devices_empty_response(self, mock_gcm):
+    def test_libs_notifications_send_to_android_devices_empty_response(self, mock_gcm):
         mock_method = Mock()
         mock_method.json_request = Mock(return_value={})
 
@@ -19,7 +19,7 @@ class TestLibsNotifications(BaseTestCase):
 
     @patch('restriccion_scl.libs.notifications.moment.now')
     @patch('restriccion_scl.libs.notifications.GCM')
-    def test_send_to_unregistered_or_invalid_devices(self, mock_gcm, mock_moment):
+    def test_libs_notifications_send_to_android_unregistered_or_invalid_devices(self, mock_gcm, mock_moment):
         mock_datetime = moment.date('2015-06-22', '%Y-%m-%d')
         mock_moment.side_effect = lambda: mock_datetime
 
@@ -63,7 +63,7 @@ class TestLibsNotifications(BaseTestCase):
 
     @patch('restriccion_scl.libs.notifications.moment.now')
     @patch('restriccion_scl.libs.notifications.GCM')
-    def test_send_with_canonical_id_response(self, mock_gcm, mock_moment):
+    def test_libs_notifications_send_to_android_receiving_canonical_ids_response(self, mock_gcm, mock_moment):
         mock_datetime = moment.date('2015-06-22', '%Y-%m-%d')
         mock_moment.side_effect = lambda: mock_datetime
 
