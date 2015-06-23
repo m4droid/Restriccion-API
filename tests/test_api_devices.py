@@ -1,4 +1,3 @@
-import unittest
 import json
 
 from mock import patch
@@ -10,7 +9,9 @@ from restriccion_scl.wsgi import app
 
 class TestApiDevices(BaseTestCase):
 
-    def setUp(self):        
+    def setUp(self):
+        app.config['TESTING'] = True
+        app.config['DEBUG'] = True
         self.app = app.test_client()
 
     def test_get_empty_params(self):
@@ -59,7 +60,6 @@ class TestApiDevices(BaseTestCase):
         self.assertEqual('[]', response.data.decode())
 
 
-    # @unittest.skip("Travis CI Failing")
     @patch('restriccion_scl.wsgi.moment.now')
     def test_post_ok(self, mock_moment):
         mock_datetime = moment.date('2015-06-22', '%Y-%m-%d')

@@ -73,6 +73,7 @@ def devices_post():
     data['fecha_registro'] = moment.now().isoformat()
     if row is None:
         db.devices.insert_one(data)
-    db.devices.update_one(query, {'$set': data})
+    else:
+        db.devices.update_one(query, {'$set': data})
     del data['_id']
     return json_response([data], 200)

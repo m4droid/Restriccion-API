@@ -10,7 +10,9 @@ from restriccion_scl.wsgi import app
 
 class TestApiRestrictions(BaseTestCase):
 
-    def setUp(self):        
+    def setUp(self):
+        app.config['TESTING'] = True
+        app.config['DEBUG'] = True
         self.app = app.test_client()
 
     def test_get_empty_entries(self):
