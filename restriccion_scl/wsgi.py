@@ -36,7 +36,7 @@ def restrictions_get():
         except ValueError:
             return json_response(data, status_code=400)
 
-    rows = db.restrictions.find({'$query': query, '$orderby': {'fecha' : -1}}, {'_id': 0})
+    rows = db.restrictions.find({'$query': query, '$orderby': {'fecha' : -1}}, {'_id': 0}, limit=10)
 
     for row in rows:
         data.append(row)

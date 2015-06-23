@@ -31,7 +31,7 @@ class TestApiRestrictions(ApiBaseTestCase):
 
         entries = json.loads(response.data.decode())
 
-        self.assertEqual(26, len(entries))
+        self.assertEqual(10, len(entries))
 
     @patch('restriccion_scl.crawlers.uoct.moment.now')
     def test_restrictions_get_date_entry(self, mock_moment):
