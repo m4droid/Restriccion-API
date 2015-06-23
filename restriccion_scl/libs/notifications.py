@@ -5,12 +5,15 @@ import pymongo
 from restriccion_scl import CONFIG
 
 
-def send_to_android_devices(device_list, data_dict):
+def send_to_android_devices(device_list, data):
+    if len(device_list or []) == 0 or (data or {}) == {}:
+        return False
+
     mongo_client = pymongo.MongoClient(**CONFIG['pymongo']['client'])
     mongo_db = mongo_client[CONFIG['pymongo']['database']]
 
     gcm = GCM(CONFIG['notifications']['gcm']['api_key'])
-    response = gcm.json_request(registration_ids=device_list, data=data_dict)
+    response = gcm.json_request(registration_ids=device_list, data=data)
 
     # Delete not registered or invalid devices
     if 'errors' in response:
@@ -36,3 +39,5 @@ def send_to_android_devices(device_list, data_dict):
 
             if row is None:
                 mongo_db.devices.insert_one({'tipo': 'android', 'id': id_, 'fecha_registro': current_datetime})
+
+    return True
