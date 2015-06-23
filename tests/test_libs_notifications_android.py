@@ -7,6 +7,12 @@ from restriccion_scl.libs.notifications import send_to_android_devices
 
 class TestLibsNotifications(BaseTestCase):
 
+    def test_libs_notifications_send_to_android_devices_empty_params(self):
+        self.assertFalse(send_to_android_devices(None, None))
+        self.assertFalse(send_to_android_devices([], None))
+        self.assertFalse(send_to_android_devices(None, {}))
+        self.assertFalse(send_to_android_devices([], {}))
+
     @patch('restriccion_scl.libs.notifications.GCM')
     def test_libs_notifications_send_to_android_devices_empty_response(self, mock_gcm):
         mock_method = Mock()
@@ -15,7 +21,6 @@ class TestLibsNotifications(BaseTestCase):
         mock_gcm.side_effect = lambda *a, **ka: mock_method
 
         send_to_android_devices(['fake_gcm_id'], {'payload': 'asdf'})
-
 
     @patch('restriccion_scl.libs.notifications.moment.now')
     @patch('restriccion_scl.libs.notifications.GCM')
