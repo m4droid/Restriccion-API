@@ -1,6 +1,7 @@
 import json
 
 from flask import Flask, request, Response
+from flask.ext.cors import CORS
 import moment
 import pymongo
 
@@ -15,6 +16,7 @@ client = pymongo.MongoClient(**CONFIG['pymongo']['client'])
 db = client[CONFIG['pymongo']['database']]
 
 app = Flask(__name__)
+cors = CORS(app)
 
 def json_response(data, status_code=200):
     response = Response(response=json.dumps(data), mimetype='application/json')
