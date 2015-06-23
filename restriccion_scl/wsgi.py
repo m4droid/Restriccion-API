@@ -75,5 +75,6 @@ def devices_post():
         db.devices.insert_one(data)
     else:
         db.devices.update_one(query, {'$set': data})
-    del data['_id']
+    if '_id' in data:
+        del data['_id']
     return json_response([data], 200)

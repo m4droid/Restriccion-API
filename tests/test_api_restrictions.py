@@ -15,7 +15,7 @@ class TestApiRestrictions(BaseTestCase):
         app.config['DEBUG'] = True
         self.app = app.test_client()
 
-    def test_get_empty_entries(self):
+    def test_restrictions_get_empty_entries(self):
         response = self.app.get('/0/restricciones')
 
         self.assertEqual('application/json', response.mimetype)
@@ -23,7 +23,7 @@ class TestApiRestrictions(BaseTestCase):
         self.assertEqual('[]', response.data.decode())
 
     @patch('restriccion_scl.crawlers.uoct.moment.now')
-    def test_get_all_entries(self, mock_moment):
+    def test_restrictions_get_all_entries(self, mock_moment):
         mock_moment.side_effect = lambda: moment.date('2015-06-22', '%Y-%m-%d')
 
 
@@ -40,7 +40,7 @@ class TestApiRestrictions(BaseTestCase):
         self.assertEqual(26, len(entries))
 
     @patch('restriccion_scl.crawlers.uoct.moment.now')
-    def test_get_date_entry(self, mock_moment):
+    def test_restrictions_get_date_entry(self, mock_moment):
         mock_moment.side_effect = lambda: moment.date('2015-06-22', '%Y-%m-%d')
 
         crawler = UOCT_Crawler()
@@ -67,7 +67,7 @@ class TestApiRestrictions(BaseTestCase):
             entries[0]
         )
 
-    def test_get_wrong_date_parameter(self):
+    def test_restrictions_get_wrong_date_parameter(self):
         for date in ['', 'asdf', '21-06-2015']:
             response = self.app.get('/0/restricciones?fecha=' + date)
             self.assertEqual('application/json', response.mimetype)
