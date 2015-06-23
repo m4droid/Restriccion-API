@@ -3,17 +3,11 @@ import json
 from mock import patch
 import moment
 
-from .base_tests import BaseTestCase
+from .base_tests import ApiBaseTestCase
 from restriccion_scl.crawlers.uoct import UOCT_Crawler
-from restriccion_scl.wsgi import app
 
 
-class TestApiRestrictions(BaseTestCase):
-
-    def setUp(self):
-        app.config['TESTING'] = True
-        app.config['DEBUG'] = True
-        self.app = app.test_client()
+class TestApiRestrictions(ApiBaseTestCase):
 
     def test_restrictions_get_empty_entries(self):
         response = self.app.get('/0/restricciones')

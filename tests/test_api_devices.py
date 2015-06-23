@@ -3,16 +3,10 @@ import json
 from mock import patch
 import moment
 
-from .base_tests import BaseTestCase
-from restriccion_scl.wsgi import app
+from .base_tests import ApiBaseTestCase
 
 
-class TestApiDevices(BaseTestCase):
-
-    def setUp(self):
-        app.config['TESTING'] = True
-        app.config['DEBUG'] = True
-        self.app = app.test_client()
+class TestApiDevices(ApiBaseTestCase):
 
     def test_devices_get_empty_params(self):
         params_list = ['', '?tipo=android', '?id=dummy']
@@ -48,13 +42,13 @@ class TestApiDevices(BaseTestCase):
         data_list = [{}, {'tipo': 'android'}, {'id': 'dummy'}]
 
         for data in data_list:
-            response = app.test_client().post('/0/dispositivos', data=data)
+            response = self.app.post('/0/dispositivos', data=data)
             self.assertEqual('application/json', response.mimetype)
             self.assertEqual(400, response.status_code)
             self.assertEqual('[]', response.data.decode())
 
     def test_devices_post_wrong_type(self):
-        response = app.test_client().post('/0/dispositivos', data={'tipo': 'fake', 'id': 'dummy'})
+        response = self.app.post('/0/dispositivos', data={'tipo': 'fake', 'id': 'dummy'})
         self.assertEqual('application/json', response.mimetype)
         self.assertEqual(400, response.status_code)
         self.assertEqual('[]', response.data.decode())

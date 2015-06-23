@@ -3,6 +3,7 @@ import unittest
 
 import pymongo
 from restriccion_scl import CONFIG
+from restriccion_scl.wsgi import app
 
 
 class BaseTestCase(unittest.TestCase):
@@ -23,3 +24,13 @@ class BaseTestCase(unittest.TestCase):
 
     def get_fixture_file_path(self, fixture):
         return 'file://'+ os.path.join(self.script_path, '..', 'fixtures', fixture)
+
+
+class ApiBaseTestCase(BaseTestCase):
+
+    def setUp(self):
+        super(ApiBaseTestCase, self).setUp()
+
+        app.config['TESTING'] = True
+        app.config['DEBUG'] = True
+        self.app = app.test_client()
