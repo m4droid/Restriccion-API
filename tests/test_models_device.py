@@ -8,6 +8,12 @@ from restriccion_scl.models.device import Device
 
 class TestModelsDevice(BaseTestCase):
 
+    def test_models_device_get_empty_params(self):
+        Device.insert_one(self.mongo_db, 'email', 'dummy@email.com')
+        self.assertEqual(0, len(Device.get(self.mongo_db)))
+        self.assertEqual(0, len(Device.get(self.mongo_db, type_='email')))
+        self.assertEqual(0, len(Device.get(self.mongo_db, id_='dummy@email.com')))
+
     @patch('restriccion_scl.models.device.moment.now')
     def test_models_device_insert_ok(self, mock_moment):
         mock_datetime = moment.date('2015-06-22', '%Y-%m-%d')

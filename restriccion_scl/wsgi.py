@@ -48,10 +48,15 @@ def restrictions_get():
 
 @app.route("/0/dispositivos", methods=['GET'])
 def devices_get():
+    '''This method is only intended for devices with a "long"
+    ID to check if they are registered'''
+
     device_type = request.args.get('tipo', '').strip()
     device_id = request.args.get('id', '').strip()
+    delete_flag = request.args.get('borrar', '0')
 
-    if '' in [device_type, device_id]:
+    # Avoid getting emails database using bruteforce
+    if '' in [device_type, device_id] or (device_type == 'email' and delete_flag == '0'):
         return json_response([], 404)
 
     devices = Device.get(mongo_db, device_type, device_id)
@@ -59,7 +64,7 @@ def devices_get():
     if len(devices) == 0:
         return json_response(devices, 404)
 
-    if request.args.get('borrar', '0') == '1':
+    if delete_flag == '1':
         # Only emails allowed to do this
         if device_type == 'email' and validate_email(device_id):
             Device.delete_one(mongo_db, devices[0])

@@ -42,6 +42,13 @@ class TestApiDevices(ApiBaseTestCase):
         self.assertEqual(list, type(data))
         self.assertEqual(expected_device, data[0])
 
+    def test_devices_get_email_without_delete_param(self):
+        response = self.app.get('/0/dispositivos?tipo=email&id=dummy@email.com')
+
+        self.assertEqual('application/json', response.mimetype)
+        self.assertEqual(404, response.status_code)
+        self.assertEqual('[]', response.data.decode())
+
     def test_devices_post_empty_params(self):
         expected_response = {'mensaje': 'Faltan parámetros.', 'status': 'error'}
         data_list = [{}, {'tipo': 'android'}, {'id': 'dummy'}]
