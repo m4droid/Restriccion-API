@@ -25,6 +25,7 @@ setup(
         'pymongo>=3.0.2',
         'pyquery>=1.2.9',
         'moment>=0.2.2',
+        'validate_email>=1.3',
     ],
     tests_require=['nose', 'mock', 'coverage'],
     test_suite="tests",

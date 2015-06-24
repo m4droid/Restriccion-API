@@ -1,14 +1,16 @@
+# -*- coding: utf-8 -*-
 import json
 
 from flask import Flask, request, Response
 from flask.ext.cors import CORS
 import moment
 import pymongo
+from validate_email import validate_email
 
 from restriccion_scl import CONFIG
 
 
-ALLOWED_DEVICE_TYPES = ['android']
+ALLOWED_DEVICE_TYPES = ['email', 'android']
 EMPTY_VALUES = [None, '']
 
 
@@ -17,6 +19,7 @@ db = client[CONFIG['pymongo']['database']]
 
 app = Flask(__name__)
 cors = CORS(app)
+
 
 def json_response(data, status_code=200):
     response = Response(response=json.dumps(data), mimetype='application/json')
@@ -52,10 +55,19 @@ def devices_get():
         or device_id in EMPTY_VALUES:
         return json_response([], 400)
 
-    row = db.devices.find_one({'tipo': device_type.strip(), 'id': device_id.strip()}, {'_id': 0})
+    query = {'tipo': device_type.strip(), 'id': device_id.strip()}
+    row = db.devices.find_one(query, {'_id': 0})
 
     if row is None:
         return json_response([], 404)
+
+    if request.args.get('borrar', '0') == '1':
+        # Only emails allowed to do this
+        if device_type == 'email' and validate_email(device_id):
+            db.devices.delete_one(query)
+            row['mensaje'] = 'El dispositivo ha sido borrado con éxito'
+        else:
+            return json_response([], 400)
 
     return json_response([row])
 
@@ -66,6 +78,9 @@ def devices_post():
 
     if device_type not in ALLOWED_DEVICE_TYPES \
         or device_id in EMPTY_VALUES:
+        return json_response([], 400)
+
+    if device_type == 'email' and not validate_email(device_id):
         return json_response([], 400)
 
     query = {'tipo': device_type.strip(), 'id': device_id.strip()}
