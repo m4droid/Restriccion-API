@@ -5,7 +5,7 @@ from .base_tests import BaseTestCase
 from restriccion_scl.libs.notifications import send_to_email_addresses
 
 
-class TestLibsNotifications(BaseTestCase):
+class TestLibsNotificationsEmail(BaseTestCase):
 
     def test_libs_notifications_send_emails_empty_params(self):
         self.assertEqual([], send_to_email_addresses(None, None))

@@ -57,7 +57,7 @@ class TestUoct_Crawler(BaseTestCase):
         self.assertEqual(27, self.mongo_db.restrictions.count())
 
     @patch('restriccion_scl.crawlers.uoct.moment.now')
-    def test_crawler_uoct_data_integrity(self, mock_moment):
+    def test_crawler_uoct_parse_data_integrity(self, mock_moment):
         mock_moment.side_effect = lambda: moment.date('2015-06-22', '%Y-%m-%d')
 
         crawler = UOCT_Crawler()

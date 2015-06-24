@@ -8,14 +8,14 @@ import pymongo
 from validate_email import validate_email
 
 from restriccion_scl import CONFIG
+from restriccion_scl.models.device import Device
 
 
-ALLOWED_DEVICE_TYPES = ['email', 'android']
 EMPTY_VALUES = [None, '']
 
 
-client = pymongo.MongoClient(**CONFIG['pymongo']['client'])
-db = client[CONFIG['pymongo']['database']]
+mongo_client = pymongo.MongoClient(**CONFIG['pymongo']['client'])
+mongo_db = mongo_client[CONFIG['pymongo']['database']]
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -39,7 +39,7 @@ def restrictions_get():
         except ValueError:
             return json_response(data, status_code=400)
 
-    rows = db.restrictions.find({'$query': query, '$orderby': {'fecha' : -1}}, {'_id': 0}, limit=10)
+    rows = mongo_db.restrictions.find({'$query': query, '$orderby': {'fecha' : -1}}, {'_id': 0}, limit=10)
 
     for row in rows:
         data.append(row)
@@ -48,50 +48,37 @@ def restrictions_get():
 
 @app.route("/0/dispositivos", methods=['GET'])
 def devices_get():
-    device_type = request.args.get('tipo', None)
-    device_id = request.args.get('id', None)
+    device_type = request.args.get('tipo', '').strip()
+    device_id = request.args.get('id', '').strip()
 
-    if device_type not in ALLOWED_DEVICE_TYPES \
-        or device_id in EMPTY_VALUES:
-        return json_response([], 400)
-
-    query = {'tipo': device_type.strip(), 'id': device_id.strip()}
-    row = db.devices.find_one(query, {'_id': 0})
-
-    if row is None:
+    if '' in [device_type, device_id]:
         return json_response([], 404)
+
+    devices = Device.get(mongo_db, device_type, device_id)
+
+    if len(devices) == 0:
+        return json_response(devices, 404)
 
     if request.args.get('borrar', '0') == '1':
         # Only emails allowed to do this
         if device_type == 'email' and validate_email(device_id):
-            db.devices.delete_one(query)
-            row['mensaje'] = 'El dispositivo ha sido borrado con éxito'
+            Device.delete_one(mongo_db, devices[0])
+            devices[0]['mensaje'] = 'El dispositivo ha sido borrado con éxito'
         else:
             return json_response([], 400)
 
-    return json_response([row])
+    return json_response(devices[0:1])
 
 @app.route("/0/dispositivos", methods=['POST'])
 def devices_post():
-    device_type = request.form.get('tipo', None)
-    device_id = request.form.get('id', None)
+    device_type = request.form.get('tipo', '').strip()
+    device_id = request.form.get('id', '').strip()
 
-    if device_type not in ALLOWED_DEVICE_TYPES \
-        or device_id in EMPTY_VALUES:
-        return json_response([], 400)
+    if '' in [device_type, device_id]:
+        return json_response({'status': 'error', 'mensaje': 'Faltan parámetros.'}, 400)
 
-    if device_type == 'email' and not validate_email(device_id):
-        return json_response([], 400)
-
-    query = {'tipo': device_type.strip(), 'id': device_id.strip()}
-    row = db.devices.find_one(query, {'_id': 0})
-
-    data = dict(query)
-    data['fecha_registro'] = moment.now().isoformat()
-    if row is None:
-        db.devices.insert_one(data)
+    model_response = Device.insert_one(mongo_db, device_type, device_id)
+    if model_response['status'] == 'ok':
+        return json_response(model_response['data'])
     else:
-        db.devices.update_one(query, {'$set': data})
-    if '_id' in data:
-        del data['_id']
-    return json_response([data], 200)
+        return json_response(model_response, 400)

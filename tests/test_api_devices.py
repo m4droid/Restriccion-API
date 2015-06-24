@@ -1,9 +1,11 @@
+# -*- coding: utf-8 -*-
 import json
 
 from mock import patch
 import moment
 
 from .base_tests import ApiBaseTestCase
+from restriccion_scl.models.device import Device
 
 
 class TestApiDevices(ApiBaseTestCase):
@@ -14,7 +16,7 @@ class TestApiDevices(ApiBaseTestCase):
         for params in params_list:
             response = self.app.get('/0/dispositivos' + params)
             self.assertEqual('application/json', response.mimetype)
-            self.assertEqual(400, response.status_code)
+            self.assertEqual(404, response.status_code)
             self.assertEqual('[]', response.data.decode())
 
     def test_devices_get_not_found(self):
@@ -23,9 +25,13 @@ class TestApiDevices(ApiBaseTestCase):
         self.assertEqual(404, response.status_code)
         self.assertEqual('[]', response.data.decode())
 
-    def test_devices_get_ok(self):
-        expected_device = {'tipo': 'android', 'id': 'dummy', 'fecha_registro': moment.now().isoformat()}
-        self.mongo_db.devices.insert_one(expected_device)
+    @patch('restriccion_scl.models.device.moment.now')
+    def test_devices_get_ok(self, mock_moment):
+        mock_datetime = moment.date('2015-06-22', '%Y-%m-%d')
+        mock_moment.side_effect = lambda: mock_datetime
+
+        expected_device = {'tipo': 'android', 'id': 'dummy', 'fecha_registro': mock_datetime.isoformat()}
+        Device.insert_one(self.mongo_db, 'android', 'dummy')
 
         response = self.app.get('/0/dispositivos?tipo=android&id=dummy')
         self.assertEqual('application/json', response.mimetype)
@@ -34,44 +40,24 @@ class TestApiDevices(ApiBaseTestCase):
         data = json.loads(response.data.decode())
 
         self.assertEqual(list, type(data))
-
-        del expected_device['_id']
         self.assertEqual(expected_device, data[0])
 
     def test_devices_post_empty_params(self):
+        expected_response = {'mensaje': 'Faltan parámetros.', 'status': 'error'}
         data_list = [{}, {'tipo': 'android'}, {'id': 'dummy'}]
 
         for data in data_list:
             response = self.app.post('/0/dispositivos', data=data)
             self.assertEqual('application/json', response.mimetype)
             self.assertEqual(400, response.status_code)
-            self.assertEqual('[]', response.data.decode())
+            self.assertEqual(expected_response, json.loads(response.data.decode()))
 
     def test_devices_post_wrong_type(self):
+        expected_response = {'status': 'error', 'mensaje': 'Tipo de dispositivo no permitido.'}
         response = self.app.post('/0/dispositivos', data={'tipo': 'fake', 'id': 'dummy'})
         self.assertEqual('application/json', response.mimetype)
         self.assertEqual(400, response.status_code)
-        self.assertEqual('[]', response.data.decode())
-
-
-    @patch('restriccion_scl.wsgi.moment.now')
-    def test_devices_post_ok(self, mock_moment):
-        mock_datetime = moment.date('2015-06-22', '%Y-%m-%d')
-        mock_moment.side_effect = lambda: mock_datetime
-
-        expected_device = {'tipo': 'android', 'id': 'dummy'}
-
-        response = self.app.post('/0/dispositivos', data=expected_device)
-
-        self.assertEqual('application/json', response.mimetype)
-        self.assertEqual(200, response.status_code)
-
-        data = json.loads(response.data.decode())
-
-        self.assertEqual(list, type(data))
-
-        expected_device['fecha_registro'] = mock_datetime.isoformat()
-        self.assertEqual(expected_device, data[0])
+        self.assertEqual(expected_response, json.loads(response.data.decode()))
 
     @patch('restriccion_scl.wsgi.moment.now')
     def test_devices_post_ok(self, mock_moment):
@@ -87,10 +73,10 @@ class TestApiDevices(ApiBaseTestCase):
 
         data = json.loads(response.data.decode())
 
-        self.assertEqual(list, type(data))
+        self.assertEqual(dict, type(data))
 
         expected_device['fecha_registro'] = mock_datetime.isoformat()
-        self.assertEqual(expected_device, data[0])
+        self.assertEqual(expected_device, data)
 
     @patch('restriccion_scl.wsgi.moment.now')
     def test_devices_post_existing(self, mock_moment):
@@ -102,8 +88,8 @@ class TestApiDevices(ApiBaseTestCase):
             'id': 'dummy',
             'fecha_registro': moment.date('2015-06-21', '%Y-%m-%d').isoformat()
         }
-        self.mongo_db.devices.insert_one(expected_device)
-        del expected_device['_id']
+
+        Device.insert_one(self.mongo_db, 'android', 'dummy')
 
         response = self.app.post('/0/dispositivos', data={'tipo': 'android', 'id': 'dummy'})
 
@@ -112,13 +98,13 @@ class TestApiDevices(ApiBaseTestCase):
 
         data = json.loads(response.data.decode())
 
-        self.assertEqual(list, type(data))
+        self.assertEqual(dict, type(data))
 
-        self.assertNotEqual(expected_device['fecha_registro'], data[0]['fecha_registro'])
+        self.assertNotEqual(expected_device['fecha_registro'], data['fecha_registro'])
         del expected_device['fecha_registro']
-        del data[0]['fecha_registro']
+        del data['fecha_registro']
 
-        self.assertEqual(expected_device, data[0])
+        self.assertEqual(expected_device, data)
 
     @patch('restriccion_scl.wsgi.moment.now')
     def test_devices_post_email_ok(self, mock_moment):
@@ -141,21 +127,18 @@ class TestApiDevices(ApiBaseTestCase):
 
         data = json.loads(response.data.decode())
 
-        self.assertEqual(list, type(data))
+        self.assertEqual(dict, type(data))
 
         expected_device['fecha_registro'] = mock_datetime.isoformat()
-        self.assertEqual(expected_device, data[0])
+        self.assertEqual(expected_device, data)
 
     def test_devices_post_email_invalid(self):
-        expected_device = {
-            'tipo': 'email',
-            'id': 'invalid$email',
-        }
+        expected_response = {'mensaje': 'Email inválido', 'status': 'error'}
 
-        response = self.app.post('/0/dispositivos', data=expected_device)
+        response = self.app.post('/0/dispositivos', data={'tipo': 'email', 'id': 'invalid$email'})
         self.assertEqual('application/json', response.mimetype)
         self.assertEqual(400, response.status_code)
-        self.assertEqual('[]', response.data.decode())
+        self.assertEqual(expected_response, json.loads(response.data.decode()))
 
     def test_devices_delete_email_with_get(self):
         expected_devices = [
