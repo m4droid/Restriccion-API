@@ -1,9 +1,64 @@
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+import os
+import smtplib
+
 from gcm import GCM
+import jinja2
 import moment
 import pymongo
 
 from restriccion_scl import CONFIG
 
+
+def send_to_email_addresses(emails_list, data):
+    if len(emails_list or []) == 0 or (data or {}) == {}:
+        return []
+
+    templates_path = os.path.join(
+        os.path.dirname(os.path.realpath(__file__)),
+        '../../templates'
+    )
+
+    templates_loader = jinja2.FileSystemLoader(searchpath=templates_path)
+    templates_env = jinja2.Environment(loader=templates_loader)
+
+    template = templates_env.get_template(CONFIG['notifications']['email']['template'])
+
+    login_info = CONFIG['notifications']['email']['server'].get('login')
+
+    sent_emails = []
+
+    service = smtplib.SMTP(*CONFIG['notifications']['email']['server']['host'])
+    service.starttls()
+    service.ehlo()
+
+    if login_info is not None:
+        service.login(*login_info)
+
+    for email_to in emails_list:
+        new_data = dict(data)
+        new_data['email_to'] = email_to
+        html = template.render(**data)
+
+        email_from = CONFIG['notifications']['email']['from']
+
+        msg = MIMEMultipart('alternative')
+        msg['Subject'] = CONFIG['notifications']['email']['subject']
+        msg['From'] = email_from
+        msg['To'] = email_to
+
+        part = MIMEText(html.encode('utf-8'), 'html', 'utf-8')
+        msg.attach(part)
+
+        try:
+            service.sendmail(email_from, email_to, msg.as_string())
+            sent_emails.append(email_to)
+        except:
+            pass
+    service.quit()
+
+    return sent_emails
 
 def send_to_android_devices(device_list, data):
     if len(device_list or []) == 0 or (data or {}) == {}:

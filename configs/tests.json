@@ -9,6 +9,15 @@
 	"notifications": {
 		"gcm": {
 			"api_key": "dummy_gcm_key"
+		},
+		"email": {
+			"template": "template_email_test.html",
+			"server": {
+				"host": ["localhost"],
+				"login": ["user", "pass"]
+			},
+			"from": "test@test.com",
+			"subject": "Test"
 		}
 	},
 	"crawlers_urls": {
