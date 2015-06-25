@@ -5,6 +5,7 @@ import moment
 
 from .base_tests import ApiBaseTestCase
 from restriccion_scl.crawlers.uoct import UOCT_Crawler
+from restriccion_scl.models.restriction import Restriction
 
 
 class TestApiRestrictions(ApiBaseTestCase):
@@ -16,14 +17,14 @@ class TestApiRestrictions(ApiBaseTestCase):
         self.assertEqual(200, response.status_code)
         self.assertEqual('[]', response.data.decode())
 
-    @patch('restriccion_scl.crawlers.uoct.moment.now')
-    def test_restrictions_get_all_entries(self, mock_moment):
+    @patch('restriccion_scl.models.restriction.moment.now')
+    def test_restrictions_get_all(self, mock_moment):
         mock_moment.side_effect = lambda: moment.date('2015-06-22', '%Y-%m-%d')
 
 
         crawler = UOCT_Crawler()
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_0.html')
-        crawler.parse()
+        Restriction.insert_many(self.mongo_db, crawler.parse())
 
         response = self.app.get('/0/restricciones')
         self.assertEqual('application/json', response.mimetype)
@@ -33,13 +34,13 @@ class TestApiRestrictions(ApiBaseTestCase):
 
         self.assertEqual(10, len(entries))
 
-    @patch('restriccion_scl.crawlers.uoct.moment.now')
-    def test_restrictions_get_date_entry(self, mock_moment):
+    @patch('restriccion_scl.models.restriction.moment.now')
+    def test_restrictions_get_with_date_param(self, mock_moment):
         mock_moment.side_effect = lambda: moment.date('2015-06-22', '%Y-%m-%d')
 
         crawler = UOCT_Crawler()
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_0.html')
-        crawler.parse()
+        Restriction.insert_many(self.mongo_db, crawler.parse())
 
         response = self.app.get('/0/restricciones?fecha=2015-06-21')
         self.assertEqual('application/json', response.mimetype)

@@ -9,6 +9,7 @@ from validate_email import validate_email
 
 from restriccion_scl import CONFIG
 from restriccion_scl.models.device import Device
+from restriccion_scl.models.restriction import Restriction
 
 
 EMPTY_VALUES = [None, '']
@@ -39,12 +40,7 @@ def restrictions_get():
         except ValueError:
             return json_response(data, status_code=400)
 
-    rows = mongo_db.restrictions.find({'$query': query, '$orderby': {'fecha' : -1}}, {'_id': 0}, limit=10)
-
-    for row in rows:
-        data.append(row)
-
-    return json_response(data)
+    return json_response(Restriction.get(mongo_db, query))
 
 @app.route("/0/dispositivos", methods=['GET'])
 def devices_get():
