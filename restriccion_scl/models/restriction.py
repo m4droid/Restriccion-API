@@ -5,7 +5,10 @@ import moment
 class Restriction(object):
 
     @staticmethod
-    def get(mongo_db, query={}, limit=10):
+    def get(mongo_db, query=None, limit=10):
+        if query is None:
+            query = {}
+
         mongo_query = {'$query': query, '$orderby': {'fecha' : -1}}
 
         restrictions = []
