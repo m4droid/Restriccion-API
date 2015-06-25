@@ -3,7 +3,13 @@
 [![Coverage Status](https://coveralls.io/repos/m4droid/Restriccion-SCL-API/badge.svg?branch=master)](https://coveralls.io/r/m4droid/Restriccion-SCL-API?branch=master)
 [![Code Health](https://landscape.io/github/m4droid/Restriccion-SCL-API/master/landscape.svg?style=flat)](https://landscape.io/github/m4droid/Restriccion-SCL-API/master)
 
-#### REQUIRED PACKAGES TO RUN THE TESTS
+## Instructions
+
+#### INSTALL DATABASE
+    # OS X
+    brew install mongodb
+
+#### INSTALL REQUIRED PACKAGES TO RUN THE TESTS
     pip install nose
     pip install mock
     pip install coverage
@@ -19,5 +25,11 @@
     cp configs/localhost.json{.default,}
     vim configs/localhost.json
 
-#### RUN WEB SERVICE
+#### RUN TESTS
+    ./runtests.sh
+
+#### RUN LOCAL WEB SERVICE
     python scripts/serve.py
+
+## License
+MIT
