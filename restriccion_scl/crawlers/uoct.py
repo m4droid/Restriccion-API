@@ -30,6 +30,7 @@ class UOCT_Crawler(object):
                 'fecha': moment.date(row.find('td[3]').text.strip(), '%d-%m-%Y').format('YYYY-M-D'),
                 'sin_sello_verde': self.clean_digits_string(row.find('td[4]').text),
                 'con_sello_verde': self.clean_digits_string(row.find('td[5]').text),
+                'fuente': 'http://www.uoct.cl/restriccion-vehicular/',
             }
 
             # Clear empty data

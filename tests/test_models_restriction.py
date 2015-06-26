@@ -27,6 +27,7 @@ class TestModelsRestriction(BaseTestCase):
                 'sin_sello_verde': '3-4-5-6-7-8',
                 'con_sello_verde': '0-9',
                 'actualizacion': mock_datetime.isoformat(),
+                'fuente': 'http://www.uoct.cl/restriccion-vehicular/',
             },
             restrictions[0]
         )
@@ -92,6 +93,7 @@ class TestModelsRestriction(BaseTestCase):
                 'sin_sello_verde': '0-1-2-5-6-7-8-9',
                 'con_sello_verde': '1-2-3-4',
                 'actualizacion': mock_datetime.isoformat(),
+                'fuente': 'http://www.uoct.cl/restriccion-vehicular/',
             },
             second_entries[0]
         )
@@ -125,11 +127,8 @@ class TestModelsRestriction(BaseTestCase):
         self.assertEqual(first_entries[2:], second_entries[2:])
 
         # Check updated
-        self.assertEqual(first_entries[1]['_id'], second_entries[1]['_id'])
-        self.assertEqual(first_entries[1]['fecha'], second_entries[1]['fecha'])
-        self.assertEqual(first_entries[1]['estado'], second_entries[1]['estado'])
-        self.assertEqual(first_entries[1]['sin_sello_verde'], second_entries[1]['sin_sello_verde'])
+        for key in ['_id', 'fecha', 'estado', 'sin_sello_verde', 'fuente']:
+            self.assertEqual(first_entries[1][key], second_entries[1][key])
 
-        self.assertNotEqual(first_entries[1]['hash'], second_entries[1]['hash'])
-        self.assertNotEqual(first_entries[1]['con_sello_verde'], second_entries[1]['con_sello_verde'])
-        self.assertNotEqual(first_entries[1]['actualizacion'], second_entries[1]['actualizacion'])
+        for key in ['hash', 'con_sello_verde', 'actualizacion']:
+            self.assertNotEqual(first_entries[1][key], second_entries[1][key])

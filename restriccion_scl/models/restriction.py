@@ -27,7 +27,8 @@ class Restriction(object):
             'estado': 1,
             'sin_sello_verde': 1,
             'con_sello_verde': 1,
-            'hash': 1
+            'hash': 1,
+            'fuente': 1,
         }
 
         for restriction in restrictions_list:

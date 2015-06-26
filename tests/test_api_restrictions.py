@@ -58,6 +58,7 @@ class TestApiRestrictions(ApiBaseTestCase):
                 'sin_sello_verde': '3-4-5-6-7-8',
                 'con_sello_verde': '0-9',
                 'actualizacion': '2015-06-22T00:00:00',
+                'fuente': 'http://www.uoct.cl/restriccion-vehicular/',
             },
             entries[0]
         )

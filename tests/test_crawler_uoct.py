@@ -65,6 +65,7 @@ class TestUoct_Crawler(BaseTestCase):
                 'estado': 'Preemergencia Ambiental',
                 'sin_sello_verde': '3-4-5-6-7-8',
                 'con_sello_verde': '0-9',
+                'fuente': 'http://www.uoct.cl/restriccion-vehicular/',
             },
             new_restrictions[0]
         )
