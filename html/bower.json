@@ -1,0 +1,21 @@
+{
+  "name": "Restriccion-SCL",
+  "version": "0.0.0",
+  "homepage": "https://github.com/m4droid/Restriccion-SCL-API",
+  "authors": [
+    "Francisco Madrid <fjmadrid@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-material": "~0.10.0",
+    "roboto-fontface": "~0.4.2",
+    "momentjs": "~2.10.3"
+  }
+}

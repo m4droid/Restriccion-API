@@ -1,0 +1,62 @@
+.md-toolbar-tools h1 {
+  font-size: inherit;
+  font-weight: inherit;
+  margin: inherit;
+}
+
+.seal {
+  color: white;
+  text-align: center;
+}
+
+.seal.red > md-card-content {
+  background-color: #F44336;
+}
+
+.seal.green > md-card-content {
+  background-color: #689F38;
+}
+
+.seal.air_quality > md-card-content {
+  background-color: #0288D1;
+}
+
+.seal.info > md-card-content {
+  color: black;
+}
+
+.seal > md-card-content > h2 {
+  font-size: 2em;
+  margin: 5px 20px 15px;
+}
+
+.seal > md-card-content div {
+  margin: 5px;
+  font-weight: bold;
+}
+
+.seal > md-card-content div.digits_today {
+  text-align: left;
+  font-size: 1.7em;
+}
+
+.seal > md-card-content div.digits_tomorrow {
+  text-align: left;
+  font-size: 1.5em;
+}
+
+.seal > md-card-content div.info_today {
+  font-size: 1.4em;
+}
+
+.seal > md-card-content div.info_update {
+  font-size: 1.2em;
+}
+
+.seal > md-card-content div.info_source {
+  font-size: 0.9em;
+}
+
+.info {
+  text-align: center;
+}
