@@ -3,12 +3,12 @@ import moment
 from validate_email import validate_email
 
 from restriccion_scl import CONFIG
-from restriccion_scl.libs.notifications import send_to_android_devices, send_to_email_addresses
+from restriccion_scl.libs.notifications import send_to_gcm, send_to_email_addresses
 
 
 class Device(object):
 
-    ALLOWED_TYPES = ['email', 'android']
+    ALLOWED_TYPES = ['email', 'gcm']
 
     @staticmethod
     def get(mongo_db, type_=None, id_=None):
@@ -50,7 +50,7 @@ class Device(object):
 
     @staticmethod
     def notify(mongo_db, data):
-        Device._notify_to_android_devices(mongo_db, data)
+        Device._notify_to_gcm(mongo_db, data)
         Device._notify_to_email_addresses(mongo_db, data)
 
     @staticmethod
@@ -62,19 +62,19 @@ class Device(object):
         send_to_email_addresses(devices, data)
 
     @staticmethod
-    def _notify_to_android_devices(mongo_db, data):
+    def _notify_to_gcm(mongo_db, data):
         devices = []
-        rows = mongo_db.devices.find({'tipo': 'android'}, {'_id': 0, 'id': 1})
+        rows = mongo_db.devices.find({'tipo': 'gcm'}, {'_id': 0, 'id': 1})
         for row in rows:
             devices.append(row['id'])
-        devices_ok, devices_to_remove = send_to_android_devices(devices, data)
+        devices_ok, devices_to_remove = send_to_gcm(devices, data)
 
-        mongo_db.devices.delete_many({'tipo': 'android', 'id': {'$in': devices_to_remove}})
+        mongo_db.devices.delete_many({'tipo': 'gcm', 'id': {'$in': devices_to_remove}})
 
         for device_ok_id in devices_ok:
-            row = mongo_db.devices.find_one({'tipo': 'android', 'id': device_ok_id})
+            row = mongo_db.devices.find_one({'tipo': 'gcm', 'id': device_ok_id})
 
             if row is None:
-                Device.insert_one(mongo_db, 'android', device_ok_id)
+                Device.insert_one(mongo_db, 'gcm', device_ok_id)
 
         return True

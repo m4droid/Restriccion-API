@@ -12,7 +12,7 @@ from restriccion_scl.models.device import Device
 class TestApiDevices(ApiBaseTestCase):
 
     def test_devices_get_empty_params(self):
-        params_list = ['', '?tipo=android', '?id=dummy']
+        params_list = ['', '?tipo=gcm', '?id=dummy']
 
         for params in params_list:
             response = self.app.get('/0/dispositivos' + params)
@@ -21,7 +21,7 @@ class TestApiDevices(ApiBaseTestCase):
             self.assertEqual('[]', response.data.decode())
 
     def test_devices_get_not_found(self):
-        response = self.app.get('0/dispositivos?tipo=android&id=dummy')
+        response = self.app.get('0/dispositivos?tipo=gcm&id=dummy')
         self.assertEqual('application/json', response.mimetype)
         self.assertEqual(404, response.status_code)
         self.assertEqual('[]', response.data.decode())
@@ -31,10 +31,10 @@ class TestApiDevices(ApiBaseTestCase):
         mock_datetime = moment.utc('2015-06-22', '%Y-%m-%d').timezone(CONFIG['moment']['timezone'])
         mock_moment.side_effect = lambda: mock_datetime
 
-        expected_device = {'tipo': 'android', 'id': 'dummy', 'fecha_registro': mock_datetime.isoformat()}
-        Device.insert_one(self.mongo_db, 'android', 'dummy')
+        expected_device = {'tipo': 'gcm', 'id': 'dummy', 'fecha_registro': mock_datetime.isoformat()}
+        Device.insert_one(self.mongo_db, 'gcm', 'dummy')
 
-        response = self.app.get('/0/dispositivos?tipo=android&id=dummy')
+        response = self.app.get('/0/dispositivos?tipo=gcm&id=dummy')
         self.assertEqual('application/json', response.mimetype)
         self.assertEqual(200, response.status_code)
 
@@ -52,7 +52,7 @@ class TestApiDevices(ApiBaseTestCase):
 
     def test_devices_post_empty_params(self):
         expected_response = {'mensaje': 'Faltan parámetros.', 'status': 'error'}
-        data_list = [{}, {'tipo': 'android'}, {'id': 'dummy'}]
+        data_list = [{}, {'tipo': 'gcm'}, {'id': 'dummy'}]
 
         for data in data_list:
             response = self.app.post('/0/dispositivos', data=data)
@@ -72,7 +72,7 @@ class TestApiDevices(ApiBaseTestCase):
         mock_datetime = moment.date('2015-06-22', '%Y-%m-%d')
         mock_moment.side_effect = lambda: mock_datetime
 
-        expected_device = {'tipo': 'android', 'id': 'dummy'}
+        expected_device = {'tipo': 'gcm', 'id': 'dummy'}
 
         response = self.app.post('/0/dispositivos', data=expected_device)
 
@@ -92,14 +92,14 @@ class TestApiDevices(ApiBaseTestCase):
         mock_moment.side_effect = lambda: mock_datetime
 
         expected_device = {
-            'tipo': 'android',
+            'tipo': 'gcm',
             'id': 'dummy',
             'fecha_registro': moment.date('2015-06-21', '%Y-%m-%d').isoformat()
         }
 
-        Device.insert_one(self.mongo_db, 'android', 'dummy')
+        Device.insert_one(self.mongo_db, 'gcm', 'dummy')
 
-        response = self.app.post('/0/dispositivos', data={'tipo': 'android', 'id': 'dummy'})
+        response = self.app.post('/0/dispositivos', data={'tipo': 'gcm', 'id': 'dummy'})
 
         self.assertEqual('application/json', response.mimetype)
         self.assertEqual(200, response.status_code)
@@ -151,7 +151,7 @@ class TestApiDevices(ApiBaseTestCase):
     def test_devices_delete_email_with_get(self):
         expected_devices = [
             {
-                'tipo': 'android',
+                'tipo': 'gcm',
                 'id': 'dummy',
                 'fecha_registro': moment.utcnow().isoformat()
             },
@@ -176,10 +176,10 @@ class TestApiDevices(ApiBaseTestCase):
 
         self.assertEqual(1, self.mongo_db.devices.count())
 
-    def test_devices_delete_android_with_get(self):
+    def test_devices_delete_gcm_with_get(self):
         expected_devices = [
             {
-                'tipo': 'android',
+                'tipo': 'gcm',
                 'id': 'dummy',
                 'fecha_registro': moment.utcnow().isoformat()
             },
@@ -191,7 +191,7 @@ class TestApiDevices(ApiBaseTestCase):
         ]
         self.mongo_db.devices.insert_many(expected_devices)
 
-        response = self.app.get('/0/dispositivos?tipo=android&id=dummy&borrar=1')
+        response = self.app.get('/0/dispositivos?tipo=gcm&id=dummy&borrar=1')
 
         self.assertEqual('application/json', response.mimetype)
         self.assertEqual(400, response.status_code)

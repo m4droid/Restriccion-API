@@ -58,7 +58,7 @@ def send_to_email_addresses(emails_list, data):
 
     return sent_emails
 
-def send_to_android_devices(device_list, data):
+def send_to_gcm(device_list, data):
     if len(device_list or []) == 0 or (data or {}) == {}:
         return ([], [])
 

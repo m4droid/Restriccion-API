@@ -81,7 +81,7 @@ class TestModelsDevice(BaseTestCase):
     @patch('restriccion_scl.libs.notifications.smtplib.SMTP')
     @patch('restriccion_scl.models.device.moment.utcnow')
     @patch('restriccion_scl.libs.notifications.GCM')
-    def test_models_device_notify_android_unregistered_or_invalid_ids(self, mock_gcm, mock_moment, mock_smtp):
+    def test_models_device_notify_gcm_unregistered_or_invalid_ids(self, mock_gcm, mock_moment, mock_smtp):
         mock_datetime = moment.utc('2015-06-22', '%Y-%m-%d').timezone(CONFIG['moment']['timezone'])
         mock_moment.side_effect = lambda: mock_datetime
 
@@ -95,18 +95,18 @@ class TestModelsDevice(BaseTestCase):
         mock_gcm.side_effect = lambda *a, **ka: mock_method
 
         Device.insert_one(self.mongo_db, 'email', 'email@to_remain.com')
-        Device.insert_one(self.mongo_db, 'android', 'gcm_not_registered')
-        Device.insert_one(self.mongo_db, 'android', 'gcm_invalid_registration')
+        Device.insert_one(self.mongo_db, 'gcm', 'gcm_not_registered')
+        Device.insert_one(self.mongo_db, 'gcm', 'gcm_invalid_registration')
 
         Device.notify(self.mongo_db, {'fake': 'data'})
 
         self.assertEqual(1, self.mongo_db.devices.find({'tipo': 'email'}).count())
-        self.assertEqual(0, self.mongo_db.devices.find({'tipo': 'android'}).count())
+        self.assertEqual(0, self.mongo_db.devices.find({'tipo': 'gcm'}).count())
 
     @patch('restriccion_scl.libs.notifications.smtplib.SMTP')
     @patch('restriccion_scl.models.device.moment.utcnow')
     @patch('restriccion_scl.libs.notifications.GCM')
-    def test_models_device_notify_android_canonical_ids_response(self, mock_gcm, mock_moment, mock_smtp):
+    def test_models_device_notify_gcm_canonical_ids_response(self, mock_gcm, mock_moment, mock_smtp):
         mock_datetime = moment.utc('2015-06-22', '%Y-%m-%d').timezone(CONFIG['moment']['timezone'])
         mock_moment.side_effect = lambda: mock_datetime
 
@@ -120,14 +120,14 @@ class TestModelsDevice(BaseTestCase):
         mock_gcm.side_effect = lambda *a, **ka: mock_method
 
         Device.insert_one(self.mongo_db, 'email', 'email@to_remain.com')
-        Device.insert_one(self.mongo_db, 'android', 'gcm_to_remain_1')
-        Device.insert_one(self.mongo_db, 'android', 'gcm_to_remain_2')
-        Device.insert_one(self.mongo_db, 'android', 'gcm_id_to_remove_1')
-        Device.insert_one(self.mongo_db, 'android', 'gcm_id_to_remove_2')
+        Device.insert_one(self.mongo_db, 'gcm', 'gcm_to_remain_1')
+        Device.insert_one(self.mongo_db, 'gcm', 'gcm_to_remain_2')
+        Device.insert_one(self.mongo_db, 'gcm', 'gcm_id_to_remove_1')
+        Device.insert_one(self.mongo_db, 'gcm', 'gcm_id_to_remove_2')
 
         Device.notify(self.mongo_db, {'fake': 'data'})
 
         self.assertEqual(1, self.mongo_db.devices.find({'tipo': 'email'}).count())
 
-        query = {'tipo': 'android', 'id': {'$not': {'$in': ['gcm_id_to_remove_1', 'gcm_id_to_remove_1']}}}
+        query = {'tipo': 'gcm', 'id': {'$not': {'$in': ['gcm_id_to_remove_1', 'gcm_id_to_remove_1']}}}
         self.assertEqual(3, self.mongo_db.devices.find(query).count())
