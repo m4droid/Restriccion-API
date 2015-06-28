@@ -17,7 +17,7 @@
     </div>
   </md-toolbar>
 
-  <div layout="row" layout-sm="column" layout-align="center" layout-margin>
+  <div layout="row" layout-sm="column" layout-align="center">
     <div layout="column" flex>
       <md-card class="seal red" class="md-padding">
         <md-card-content>
@@ -50,7 +50,7 @@
     </div>
   </div>
 
-  <div layout="row" layout-sm="column" layout-align="center" layout-margin>
+  <div layout="row" layout-sm="column" layout-align="center">
     <div layout="column" flex>
       <md-card class="seal air_quality" class="md-padding">
         <md-card-content>
@@ -68,18 +68,13 @@
     </div>
   </div>
 
-  <div layout="row" layout-sm="column" layout-align="center" layout-margin>
+  <div layout="row" layout-sm="column" layout-align="center">
     <div layout="column" flex>
       <md-card class="seal info" class="md-padding">
         <md-card-content>
           <h2>Información</h2>
-          <div class="info_today" layout="row" layout-sm="column" layout-align-sm="start start" layout-align-gt-sm="center start">
-            <div>{{today.format('dddd DD MMMM YYYY')}}</div>
-          </div>
-          <div class="info_update" layout="row" layout-align-sm="start start" layout-align-gt-sm="center start">
-            <div>Actualización</div>
-            <div>{{info.update_tomorrow.fromNow() || info.update_today.fromNow() || 'No disponible'}}</div>
-          </div>
+          <div class="info_today">{{today.format('dddd DD MMMM YYYY')}}</div>
+          <div class="info_update">Actualización {{info.update_tomorrow.fromNow() || info.update_today.fromNow() || 'No disponible'}}</div>
           <div class="info_source" layout="row" layout-sm="column" layout-align-sm="start start" layout-align-gt-sm="center start">
             <div>Fuente</div>
             <div>
