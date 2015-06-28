@@ -8,7 +8,7 @@ from restriccion_scl.models.restriction import Restriction
 
 class TestModelsRestriction(BaseTestCase):
 
-    @patch('restriccion_scl.models.restriction.moment.now')
+    @patch('restriccion_scl.models.restriction.moment.utcnow')
     def test_models_device_get(self, mock_moment):
         mock_datetime = moment.date('2015-06-22', '%Y-%m-%d')
         mock_moment.side_effect = lambda: mock_datetime
@@ -39,7 +39,7 @@ class TestModelsRestriction(BaseTestCase):
 
         self.assertEqual(26, len(Restriction.get(self.mongo_db, limit=30)))
 
-    @patch('restriccion_scl.models.restriction.moment.now')
+    @patch('restriccion_scl.models.restriction.moment.utcnow')
     def test_models_device_insert_many(self, mock_moment):
         mock_datetime = moment.date('2015-06-22', '%Y-%m-%d')
         mock_moment.side_effect = lambda: mock_datetime
@@ -58,7 +58,7 @@ class TestModelsRestriction(BaseTestCase):
             new_restrictions[i]['actualizacion'] = mock_datetime.isoformat()
             self.assertEqual(new_restrictions[i], rows[i])
 
-    @patch('restriccion_scl.models.restriction.moment.now')
+    @patch('restriccion_scl.models.restriction.moment.utcnow')
     def test_models_device_insert_many_keep_old_data(self, mock_moment):
         mock_datetime = moment.date('2015-06-22', '%Y-%m-%d')
         mock_moment.side_effect = lambda: mock_datetime
@@ -98,7 +98,7 @@ class TestModelsRestriction(BaseTestCase):
             second_entries[0]
         )
 
-    @patch('restriccion_scl.models.restriction.moment.now')
+    @patch('restriccion_scl.models.restriction.moment.utcnow')
     def test_models_device_insert_many_updated_data(self, mock_moment):
         # First data
         mock_moment.side_effect = lambda: moment.date('2015-06-22T00:00:00', '%Y-%m-%dT%H:%M:%S')

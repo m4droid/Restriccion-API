@@ -2,6 +2,7 @@
 import moment
 from validate_email import validate_email
 
+from restriccion_scl import CONFIG
 from restriccion_scl.libs.notifications import send_to_android_devices, send_to_email_addresses
 
 
@@ -32,7 +33,7 @@ class Device(object):
             data = {
                 'tipo': type_,
                 'id': id_,
-                'fecha_registro': moment.now().isoformat()
+                'fecha_registro': moment.utcnow().timezone(CONFIG['moment']['timezone']).isoformat()
             }
             mongo_db.devices.insert_one(data)
         else:

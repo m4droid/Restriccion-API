@@ -6,6 +6,9 @@
 		},
 		"database": "restriccion_scl"
 	},
+	"moment": {
+		"timezone": "America/Santiago"
+	},
 	"notifications": {
 		"gcm": {
 			"api_key": "dummy_gcm_key"

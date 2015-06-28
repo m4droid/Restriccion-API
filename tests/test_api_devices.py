@@ -5,6 +5,7 @@ from mock import patch
 import moment
 
 from .base_tests import ApiBaseTestCase
+from restriccion_scl import CONFIG
 from restriccion_scl.models.device import Device
 
 
@@ -25,9 +26,9 @@ class TestApiDevices(ApiBaseTestCase):
         self.assertEqual(404, response.status_code)
         self.assertEqual('[]', response.data.decode())
 
-    @patch('restriccion_scl.models.device.moment.now')
+    @patch('restriccion_scl.models.device.moment.utcnow')
     def test_devices_get_ok(self, mock_moment):
-        mock_datetime = moment.date('2015-06-22', '%Y-%m-%d')
+        mock_datetime = moment.utc('2015-06-22', '%Y-%m-%d').timezone(CONFIG['moment']['timezone'])
         mock_moment.side_effect = lambda: mock_datetime
 
         expected_device = {'tipo': 'android', 'id': 'dummy', 'fecha_registro': mock_datetime.isoformat()}
@@ -66,7 +67,7 @@ class TestApiDevices(ApiBaseTestCase):
         self.assertEqual(400, response.status_code)
         self.assertEqual(expected_response, json.loads(response.data.decode()))
 
-    @patch('restriccion_scl.wsgi.moment.now')
+    @patch('restriccion_scl.wsgi.moment.utcnow')
     def test_devices_post_ok(self, mock_moment):
         mock_datetime = moment.date('2015-06-22', '%Y-%m-%d')
         mock_moment.side_effect = lambda: mock_datetime
@@ -85,9 +86,9 @@ class TestApiDevices(ApiBaseTestCase):
         expected_device['fecha_registro'] = mock_datetime.isoformat()
         self.assertEqual(expected_device, data)
 
-    @patch('restriccion_scl.wsgi.moment.now')
+    @patch('restriccion_scl.wsgi.moment.utcnow')
     def test_devices_post_existing(self, mock_moment):
-        mock_datetime = moment.date('2015-06-22', '%Y-%m-%d')
+        mock_datetime = moment.utc('2015-06-22', '%Y-%m-%d').timezone(CONFIG['moment']['timezone'])
         mock_moment.side_effect = lambda: mock_datetime
 
         expected_device = {
@@ -113,9 +114,9 @@ class TestApiDevices(ApiBaseTestCase):
 
         self.assertEqual(expected_device, data)
 
-    @patch('restriccion_scl.wsgi.moment.now')
+    @patch('restriccion_scl.wsgi.moment.utcnow')
     def test_devices_post_email_ok(self, mock_moment):
-        mock_datetime = moment.date('2015-06-22', '%Y-%m-%d')
+        mock_datetime = moment.utc('2015-06-22', '%Y-%m-%d').timezone(CONFIG['moment']['timezone'])
         mock_moment.side_effect = lambda: mock_datetime
 
         expected_device = {
@@ -152,12 +153,12 @@ class TestApiDevices(ApiBaseTestCase):
             {
                 'tipo': 'android',
                 'id': 'dummy',
-                'fecha_registro': moment.now().isoformat()
+                'fecha_registro': moment.utcnow().isoformat()
             },
             {
                 'tipo': 'email',
                 'id': 'dummy@email.com',
-                'fecha_registro': moment.now().isoformat()
+                'fecha_registro': moment.utcnow().isoformat()
             }
         ]
         self.mongo_db.devices.insert_many(expected_devices)
@@ -180,12 +181,12 @@ class TestApiDevices(ApiBaseTestCase):
             {
                 'tipo': 'android',
                 'id': 'dummy',
-                'fecha_registro': moment.now().isoformat()
+                'fecha_registro': moment.utcnow().isoformat()
             },
             {
                 'tipo': 'email',
                 'id': 'dummy@email.com',
-                'fecha_registro': moment.now().isoformat()
+                'fecha_registro': moment.utcnow().isoformat()
             }
         ]
         self.mongo_db.devices.insert_many(expected_devices)

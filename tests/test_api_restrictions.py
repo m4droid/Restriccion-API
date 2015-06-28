@@ -4,6 +4,7 @@ from mock import patch
 import moment
 
 from .base_tests import ApiBaseTestCase
+from restriccion_scl import CONFIG
 from restriccion_scl.crawlers.uoct import UOCT_Crawler
 from restriccion_scl.models.restriction import Restriction
 
@@ -17,9 +18,9 @@ class TestApiRestrictions(ApiBaseTestCase):
         self.assertEqual(200, response.status_code)
         self.assertEqual('[]', response.data.decode())
 
-    @patch('restriccion_scl.models.restriction.moment.now')
+    @patch('restriccion_scl.models.restriction.moment.utcnow')
     def test_restrictions_get_all(self, mock_moment):
-        mock_moment.side_effect = lambda: moment.date('2015-06-22', '%Y-%m-%d')
+        mock_moment.side_effect = lambda: moment.utc('2015-06-22', '%Y-%m-%d').timezone(CONFIG['moment']['timezone'])
 
 
         crawler = UOCT_Crawler()
@@ -34,9 +35,10 @@ class TestApiRestrictions(ApiBaseTestCase):
 
         self.assertEqual(10, len(entries))
 
-    @patch('restriccion_scl.models.restriction.moment.now')
+    @patch('restriccion_scl.models.restriction.moment.utcnow')
     def test_restrictions_get_with_date_param(self, mock_moment):
-        mock_moment.side_effect = lambda: moment.date('2015-06-22', '%Y-%m-%d')
+        mock_datetime = moment.utc('2015-06-22', '%Y-%m-%d').timezone(CONFIG['moment']['timezone'])
+        mock_moment.side_effect = lambda: mock_datetime
 
         crawler = UOCT_Crawler()
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_0.html')
@@ -57,7 +59,7 @@ class TestApiRestrictions(ApiBaseTestCase):
                 'estado': 'Preemergencia Ambiental',
                 'sin_sello_verde': '3-4-5-6-7-8',
                 'con_sello_verde': '0-9',
-                'actualizacion': '2015-06-22T00:00:00',
+                'actualizacion': mock_datetime.isoformat(),
                 'fuente': 'http://www.uoct.cl/restriccion-vehicular/',
             },
             entries[0]

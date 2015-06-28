@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import moment
 
+from restriccion_scl import CONFIG
+
 
 class Restriction(object):
 
@@ -19,7 +21,7 @@ class Restriction(object):
 
     @staticmethod
     def insert_many(mongo_db, restrictions_list):
-        update_time = moment.now().isoformat()
+        update_time = moment.utcnow().timezone(CONFIG['moment']['timezone']).isoformat()
 
         projection = {
             '_id': 0,
