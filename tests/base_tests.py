@@ -23,7 +23,7 @@ class BaseTestCase(unittest.TestCase):
         self.mongo_client.close()
 
     def get_fixture_file_path(self, fixture):
-        return 'file://'+ os.path.join(self.script_path, '..', 'fixtures', fixture)
+        return 'file://'+ os.path.join(self.script_path, 'fixtures', fixture)
 
 
 class ApiBaseTestCase(BaseTestCase):
