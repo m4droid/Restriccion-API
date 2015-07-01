@@ -23,10 +23,10 @@
         <md-card-content>
           <h2>Sin sello verde</h2>
           <div class="digits_today" layout="row" layout-sm="column" layout-align-sm="start start" layout-align-gt-sm="center start">
-            <div>Hoy</div>
+            <div ng-show="info.without_green_seal_tomorrow">Hoy</div>
             <div>{{info.without_green_seal_today || 'Sin restricción'}}</div>
           </div>
-          <div class="digits_tomorrow" layout="row" layout-sm="column" layout-align-sm="start start" layout-align-gt-sm="center start">
+          <div class="digits_tomorrow" layout="row" layout-sm="column" layout-align-sm="start start" layout-align-gt-sm="center start" ng-show="info.without_green_seal_tomorrow">
             <div>Mañana</div>
             <div>{{info.without_green_seal_tomorrow || 'Sin información'}}</div>
          </div>
@@ -38,10 +38,10 @@
         <md-card-content>
           <h2>Con sello verde</h2>
           <div class="digits_today" layout="row" layout-sm="column" layout-align-sm="start start" layout-align-gt-sm="center start">
-            <div>Hoy</div>
+            <div ng-show="info.with_green_seal_tomorrow">Hoy</div>
             <div>{{info.with_green_seal_today || 'Sin restricción'}}</div>
           </div>
-          <div class="digits_tomorrow" layout="row" layout-sm="column" layout-align-sm="start start" layout-align-gt-sm="center start">
+          <div class="digits_tomorrow" layout="row" layout-sm="column" layout-align-sm="start start" layout-align-gt-sm="center start" ng-show="info.with_green_seal_tomorrow">
             <div>Mañana</div>
             <div>{{info.with_green_seal_tomorrow || 'Sin información'}}</div>
          </div>
@@ -54,12 +54,12 @@
     <div layout="column" flex>
       <md-card class="seal air_quality" class="md-padding">
         <md-card-content>
-          <h2>Calidad del aire</h2>
+          <h2>Condición del aire</h2>
           <div class="digits_today" layout="row" layout-sm="column" layout-align-sm="start start" layout-align-gt-sm="center start">
-            <div>Hoy</div>
+            <div ng-show="info.air_quality_tomorrow">Hoy</div>
             <div>{{info.air_quality_today || 'Sin información'}}</div>
           </div>
-          <div class="digits_tomorrow" layout="row" layout-sm="column" layout-align-sm="start start" layout-align-gt-sm="center start">
+          <div class="digits_tomorrow" layout="row" layout-sm="column" layout-align-sm="start start" layout-align-gt-sm="center start" ng-show="info.air_quality_tomorrow">
             <div>Mañana</div>
             <div>{{info.air_quality_tomorrow || 'Sin información'}}</div>
          </div>
