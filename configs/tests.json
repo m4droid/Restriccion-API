@@ -14,7 +14,7 @@
 			"api_key": "dummy_gcm_key"
 		},
 		"email": {
-			"enabled": "true",
+			"enabled": true,
 			"template": "template_email_test.html",
 			"server": {
 				"host": ["localhost"],
