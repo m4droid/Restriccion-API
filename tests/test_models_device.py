@@ -125,7 +125,7 @@ class TestModelsDevice(BaseTestCase):
         Device.insert_one(self.mongo_db, 'gcm', 'gcm_id_to_remove_1')
         Device.insert_one(self.mongo_db, 'gcm', 'gcm_id_to_remove_2')
 
-        Device.notify(self.mongo_db, {'fake': 'data'})
+        Device.notify(self.mongo_db, {'fake': 'data'}, collapse_key='fake_type')
 
         self.assertEqual(1, self.mongo_db.devices.find({'tipo': 'email'}).count())
 

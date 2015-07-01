@@ -26,3 +26,8 @@ class TestLibsNotificationsEmail(BaseTestCase):
 
         expected_emails = ["fake@email.com"]
         self.assertEqual([], send_to_email_addresses(expected_emails, {"text": "test_template"}))
+
+    @patch('restriccion_scl.libs.notifications.CONFIG', new={'notifications': {'email': {'enabled': False}}})
+    def test_libs_notifications_send_emails_disabled(self):
+        expected_emails = ["fake@email.com"]
+        self.assertEqual([], send_to_email_addresses(expected_emails, {"text": "test_template"}))

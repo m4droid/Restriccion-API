@@ -10,6 +10,9 @@ from restriccion_scl import CONFIG
 
 
 def send_to_email_addresses(emails_list, data):
+    if not CONFIG['notifications'].get('email', {}).get('enabled', False):
+        return []
+
     if len(emails_list or []) == 0 or (data or {}) == {}:
         return []
 
@@ -58,12 +61,22 @@ def send_to_email_addresses(emails_list, data):
 
     return sent_emails
 
-def send_to_gcm(device_list, data):
+def send_to_gcm(device_list, data, collapse_key=None, ttl=43200):
     if len(device_list or []) == 0 or (data or {}) == {}:
         return ([], [])
 
     gcm = GCM(CONFIG['notifications']['gcm']['api_key'])
-    response = gcm.json_request(registration_ids=device_list, data=data)
+
+    kargs = {
+        'registration_ids': device_list,
+        'data': data,
+        'time_to_live': ttl
+    }
+
+    if collapse_key is not None:
+        kargs['collapse_key'] = collapse_key
+
+    response = gcm.json_request(**kargs)
 
     devices_ok = []
     devices_to_remove = []

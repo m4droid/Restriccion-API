@@ -3,6 +3,7 @@ import moment
 from validate_email import validate_email
 
 from restriccion_scl import CONFIG
+from restriccion_scl.libs.misc import list_chunks_generator
 from restriccion_scl.libs.notifications import send_to_gcm, send_to_email_addresses
 
 
@@ -49,8 +50,8 @@ class Device(object):
         mongo_db.devices.delete_one({'tipo': device_data['tipo'], 'id': device_data['id']})
 
     @staticmethod
-    def notify(mongo_db, data):
-        Device._notify_to_gcm(mongo_db, data)
+    def notify(mongo_db, data, collapse_key=None):
+        Device._notify_to_gcm(mongo_db, data, collapse_key=collapse_key)
         Device._notify_to_email_addresses(mongo_db, data)
 
     @staticmethod
@@ -62,12 +63,21 @@ class Device(object):
         send_to_email_addresses(devices, data)
 
     @staticmethod
-    def _notify_to_gcm(mongo_db, data):
+    def _notify_to_gcm(mongo_db, data, collapse_key=None):
         devices = []
         rows = mongo_db.devices.find({'tipo': 'gcm'}, {'_id': 0, 'id': 1})
         for row in rows:
             devices.append(row['id'])
-        devices_ok, devices_to_remove = send_to_gcm(devices, data)
+
+        devices_ok = []
+        devices_to_remove = []
+
+        # Maximum 1000 devices per request
+        devices_sublists = list(list_chunks_generator(devices, 1000))
+        for devices_sublist in devices_sublists:
+            result = send_to_gcm(devices_sublist, data, collapse_key=collapse_key)
+            devices_ok += result[0]
+            devices_to_remove += result[1]
 
         mongo_db.devices.delete_many({'tipo': 'gcm', 'id': {'$in': devices_to_remove}})
 
