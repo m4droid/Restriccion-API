@@ -9,17 +9,30 @@ from restriccion_scl.models.device import Device
 from restriccion_scl.models.restriction import Restriction
 
 
-mongo_client = pymongo.MongoClient(**CONFIG['pymongo']['client'])
-mongo_db = mongo_client[CONFIG['pymongo']['database']]
+def main(argv):
+	mongo_client = pymongo.MongoClient(**CONFIG['pymongo']['client'])
+	mongo_db = mongo_client[CONFIG['pymongo']['database']]
 
-crawler = UOCT_Crawler()
-restrictions = crawler.parse()
+	current_restrictions = Restriction.get(mongo_db)
 
-Restriction.insert_many(mongo_db, restrictions)
+	crawler = UOCT_Crawler()
+	new_restrictions = crawler.parse()
 
-if '--notify' in sys.argv[1:]:
-	data = restrictions[0]
+	Restriction.insert_many(mongo_db, new_restrictions)
+
+	if '--notify' in argv[1:]:
+		_notify_to_devices(mongo_db, new_restrictions[0])
+	elif '--notify-new' in argv[1:]:
+		del current_restrictions[0]['actualizacion']
+		if new_restrictions[0] != current_restrictions[0]:
+			_notify_to_devices(mongo_db, new_restrictions[0])
+
+	mongo_client.close()
+
+def _notify_to_devices(mongo_db, data):
 	data['tipo'] = 'restricciones'
 	Device.notify(mongo_db, data, collapse_key='restricciones')
 
-mongo_client.close()
+
+if __name__ == '__main__':
+	main(sys.argv)
