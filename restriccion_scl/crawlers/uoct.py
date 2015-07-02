@@ -56,7 +56,8 @@ class UOCT_Crawler(object):
         if string is None:
             return string
 
-        string = re.sub('-+', '-', string.strip())
+        string = re.sub(' ', '', string)
+        string = re.sub('-+', '-', string)
         string = string.strip('-')
         string = '-'.join(sorted(string.split('-')))
 

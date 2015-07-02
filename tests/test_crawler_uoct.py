@@ -32,6 +32,9 @@ class TestUoct_Crawler(BaseTestCase):
     def test_crawler_uoct_clean_digits_string_order(self):
         self.assertEqual('1-2-3', UOCT_Crawler.clean_digits_string('2-1-3'))
 
+    def test_crawler_uoct_clean_digits_string_with_spaces(self):
+        self.assertEqual('0-1-2-7-8-9', UOCT_Crawler.clean_digits_string('7-8-9-0 -1-2'))
+
     def test_crawler_uoct_parse_file(self):
         crawler = UOCT_Crawler()
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_0.html')
