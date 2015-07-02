@@ -39,7 +39,7 @@ app.controller('AppCtrl', ['$scope', '$mdSidenav', '$http', function ($scope, $m
       }
     });
 
-  $http.get('http://restriccion-scl.m4droid.com/api/0/restricciones?fecha=' + $scope.today.add(1, 'days').format('YYYY-MM-DD')).
+  $http.get('http://restriccion-scl.m4droid.com/api/0/restricciones?fecha=' + moment().add(1, 'days').format('YYYY-MM-DD')).
     success(function (data, status, headers, config) {
       if (data.length < 1) return;
 
