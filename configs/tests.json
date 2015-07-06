@@ -7,7 +7,7 @@
 		"database": "restriccion_scl_tests"
 	},
 	"moment": {
-		"timezone": "America/Santiago"
+		"timezone": "UTC"
 	},
 	"notifications": {
 		"gcm": {
@@ -23,8 +23,5 @@
 			"from": "test@test.com",
 			"subject": "Test"
 		}
-	},
-	"crawlers_urls": {
-		"uoct": "http://www.uoct.cl/restriccion-vehicular/"
 	}
 }

@@ -1,10 +1,37 @@
 # -*- coding: utf-8 -*-
+import hashlib
+
 import moment
 
 from restriccion_scl import CONFIG
 
 
 class Restriction(object):
+
+    @staticmethod
+    def dict(status, date, with_green_seal, without_green_seal, source):
+        data = {
+            'estado': status,
+            'fecha': date,
+            'sin_sello_verde': with_green_seal,
+            'con_sello_verde': without_green_seal,
+            'fuente': source,
+        }
+
+        # Clear empty data
+        for key in ['sin_sello_verde', 'con_sello_verde']:
+            if data[key] is None or data[key] == '':
+                del data[key]
+
+        # Hash data to detect changes
+        sha1_message = hashlib.sha1()
+        for key in ['fecha', 'estado', 'sin_sello_verde', 'con_sello_verde']:
+            if key not in data.keys():
+                continue
+            sha1_message.update(data[key].encode('utf-8'))
+
+        data['hash'] = sha1_message.hexdigest()
+        return data
 
     @staticmethod
     def get(mongo_db, query=None, limit=10):

@@ -7,7 +7,7 @@
 		"database": "restriccion_scl"
 	},
 	"moment": {
-		"timezone": "America/Santiago"
+		"timezone": "UTC-3"
 	},
 	"notifications": {
 		"gcm": {
@@ -23,8 +23,5 @@
 			"from": "dummy@email.com",
 			"subject": "Dummy email"
 		}
-	},
-	"crawlers_urls": {
-		"uoct": "http://www.uoct.cl/restriccion-vehicular/"
 	}
 }

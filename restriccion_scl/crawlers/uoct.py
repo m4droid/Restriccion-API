@@ -1,4 +1,3 @@
-import hashlib
 import re
 
 import moment
@@ -6,12 +5,15 @@ import pymongo
 from pyquery import PyQuery as pq
 
 from restriccion_scl import CONFIG
+from restriccion_scl.models.restriction import Restriction
 
 
 class UOCT_Crawler(object):
 
+    url = 'http://www.uoct.cl/restriccion-vehicular/'
+
     def __init__(self):
-        self.url = CONFIG['crawlers_urls']['uoct']
+        self.url = UOCT_Crawler.url
         self.mongo_client = pymongo.MongoClient(**CONFIG['pymongo']['client'])
         self.mongo_db = self.mongo_client[CONFIG['pymongo']['database']]
 
@@ -21,33 +23,39 @@ class UOCT_Crawler(object):
         else:
             document = pq(url=self.url)
 
-        rows = document('.selecthistory #table-2015 tbody tr')
+        current_year = moment.utcnow().timezone(CONFIG['moment']['timezone']).format('YYYY')
+        rows = document('.selecthistory #table-%s tbody tr' % current_year)
 
         raw_data = []
         for row in rows[2:]:
-            data = {
-                'estado': row.find('td[1]').text.strip(),
-                'fecha': moment.date(row.find('td[3]').text.strip(), '%d-%m-%Y').format('YYYY-M-D'),
-                'sin_sello_verde': self.clean_digits_string(row.find('td[4]').text),
-                'con_sello_verde': self.clean_digits_string(row.find('td[5]').text),
-                'fuente': 'http://www.uoct.cl/restriccion-vehicular/',
-            }
+            raw_data.append(Restriction.dict(
+                row.find('td[1]').text.strip(),
+                moment.date(row.find('td[3]').text.strip(), '%d-%m-%Y').format('YYYY-M-D'),
+                self.clean_digits_string(row.find('td[4]').text),
+                self.clean_digits_string(row.find('td[5]').text),
+                UOCT_Crawler.url
+            ))
 
-            # Clear empty data
-            for key in ['sin_sello_verde', 'con_sello_verde']:
-                if data[key] is None or data[key] == '':
-                    del data[key]
+        raw_data.sort(key=lambda r: r['fecha'], reverse=True)
 
-            # Hash data to detect changes
-            sha1_message = hashlib.sha1()
-            for key in ['fecha', 'estado', 'sin_sello_verde', 'con_sello_verde']:
-                if key not in data.keys():
-                    continue
-                sha1_message.update(data[key].encode('utf-8'))
+        # Current day info
+        info = document('.eventslist .restriction h3')
+        if len(info) != 2:
+            return raw_data
 
-            data['hash'] = sha1_message.hexdigest()
+        data = Restriction.dict(
+            'Normal',
+            moment.utcnow().timezone(CONFIG['moment']['timezone']).format('YYYY-M-D'),
+            self.clean_digits_string(info[0].text),
+            self.clean_digits_string(info[1].text),
+            UOCT_Crawler.url
+        )
 
-            raw_data.append(data)
+        if len([r for r in raw_data if r['fecha'] == data['fecha']]) == 0:
+            for i in range(len(raw_data)):
+                if raw_data[i]['fecha'] < data['fecha']:
+                    raw_data.insert(i, data)
+                    break
 
         return raw_data
 
@@ -56,8 +64,8 @@ class UOCT_Crawler(object):
         if string is None:
             return string
 
-        string = re.sub(' ', '', string)
-        string = re.sub('-+', '-', string)
+        string = re.sub(r'[^-\d]', '', string)
+        string = re.sub(r'-+', '-', string)
         string = string.strip('-')
         string = '-'.join(sorted(string.split('-')))
 

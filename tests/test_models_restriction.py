@@ -10,7 +10,7 @@ class TestModelsRestriction(BaseTestCase):
 
     @patch('restriccion_scl.models.restriction.moment.utcnow')
     def test_models_device_get(self, mock_moment):
-        mock_datetime = moment.date('2015-06-22', '%Y-%m-%d')
+        mock_datetime = moment.utc('2015-06-21', '%Y-%m-%d')
         mock_moment.side_effect = lambda: mock_datetime
 
         crawler = UOCT_Crawler()
@@ -32,7 +32,10 @@ class TestModelsRestriction(BaseTestCase):
             restrictions[0]
         )
 
-    def test_models_device_get_limit(self):
+    @patch('restriccion_scl.models.restriction.moment.utcnow')
+    def test_models_device_get_limit(self, mock_moment):
+        mock_moment.side_effect = lambda: moment.utc('2015-06-21', '%Y-%m-%d')
+
         crawler = UOCT_Crawler()
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_0.html')
         Restriction.insert_many(self.mongo_db, crawler.parse())
@@ -41,7 +44,7 @@ class TestModelsRestriction(BaseTestCase):
 
     @patch('restriccion_scl.models.restriction.moment.utcnow')
     def test_models_device_insert_many(self, mock_moment):
-        mock_datetime = moment.date('2015-06-22', '%Y-%m-%d')
+        mock_datetime = moment.utc('2015-06-22', '%Y-%m-%d')
         mock_moment.side_effect = lambda: mock_datetime
 
         crawler = UOCT_Crawler()
@@ -60,8 +63,7 @@ class TestModelsRestriction(BaseTestCase):
 
     @patch('restriccion_scl.models.restriction.moment.utcnow')
     def test_models_device_insert_many_keep_old_data(self, mock_moment):
-        mock_datetime = moment.date('2015-06-22', '%Y-%m-%d')
-        mock_moment.side_effect = lambda: mock_datetime
+        mock_moment.side_effect = lambda: moment.utc('2015-06-21', '%Y-%m-%d')
 
         crawler = UOCT_Crawler()
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_0.html')
@@ -72,6 +74,9 @@ class TestModelsRestriction(BaseTestCase):
         rows = self.mongo_db.restrictions.find({'$query': {}, '$orderby': {'fecha' : -1}}, {'_id': 0})
         for row in rows:
             first_entries.append(row)
+
+        mock_datetime = moment.utc('2015-06-22', '%Y-%m-%d')
+        mock_moment.side_effect = lambda: mock_datetime
 
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_1.html')
         new_restrictions = crawler.parse()
@@ -101,7 +106,8 @@ class TestModelsRestriction(BaseTestCase):
     @patch('restriccion_scl.models.restriction.moment.utcnow')
     def test_models_device_insert_many_updated_data(self, mock_moment):
         # First data
-        mock_moment.side_effect = lambda: moment.date('2015-06-22T00:00:00', '%Y-%m-%dT%H:%M:%S')
+        mock_moment.side_effect = lambda: moment.utc('2015-06-22T00:00:00', '%Y-%m-%dT%H:%M:%S')
+
         crawler = UOCT_Crawler()
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_1.html')
         Restriction.insert_many(self.mongo_db, crawler.parse())
@@ -112,7 +118,7 @@ class TestModelsRestriction(BaseTestCase):
             first_entries.append(row)
 
         # Modified data
-        mock_moment.side_effect = lambda: moment.date('2015-06-22T01:00:00', '%Y-%m-%dT%H:%M:%S')
+        mock_moment.side_effect = lambda: moment.utc('2015-06-22T01:00:00', '%Y-%m-%dT%H:%M:%S')
         crawler = UOCT_Crawler()
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_2.html')
         Restriction.insert_many(self.mongo_db, crawler.parse())
