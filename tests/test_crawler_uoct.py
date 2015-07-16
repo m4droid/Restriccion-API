@@ -37,6 +37,9 @@ class TestUoct_Crawler(BaseTestCase):
     def test_crawler_uoct_clean_digits_string_with_spaces(self):
         self.assertEqual('0-1-2-7-8-9', UOCT_Crawler.clean_digits_string('7-8-9-0 -1-2'))
 
+    def test_crawler_uoct_clean_digits_string_repeated_digits(self):
+        self.assertEqual('0-7-8-9', UOCT_Crawler.clean_digits_string('7-8-9-0-7-8'))
+
     def test_crawler_uoct_clean_digits_string_text(self):
         self.assertEqual('', UOCT_Crawler.clean_digits_string('Sin restricción'))
 

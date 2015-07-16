@@ -67,6 +67,6 @@ class UOCT_Crawler(object):
         string = re.sub(r'[^-\d]', '', string)
         string = re.sub(r'-+', '-', string)
         string = string.strip('-')
-        string = '-'.join(sorted(string.split('-')))
+        string = '-'.join(sorted(set(string.split('-'))))
 
         return string
