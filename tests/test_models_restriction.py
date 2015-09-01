@@ -22,10 +22,9 @@ class TestModelsRestriction(BaseTestCase):
         self.assertEqual(
             {
                 'fecha': '2015-06-21',
-                'hash': '5e15b0168c9978cb5a50ad4c27c8065942d7fd30',
-                'estado': 'Preemergencia Ambiental',
-                'sin_sello_verde': '3-4-5-6-7-8',
-                'con_sello_verde': '0-9',
+                'hash': 'b9404006aa20e542bac244b83d6511f019eeccf1',
+                'sin_sello_verde': ['3', '4', '5', '6', '7', '8'],
+                'con_sello_verde': ['0', '9'],
                 'actualizacion': mock_datetime.isoformat(),
                 'fuente': 'http://www.uoct.cl/restriccion-vehicular/',
             },
@@ -93,10 +92,9 @@ class TestModelsRestriction(BaseTestCase):
         self.assertEqual(
             {
                 'fecha': '2015-06-22',
-                'hash': '1abfb85af96da8080510d2c051a70edf5093da48',
-                'estado': 'Emergencia Ambiental',
-                'sin_sello_verde': '0-1-2-5-6-7-8-9',
-                'con_sello_verde': '1-2-3-4',
+                'hash': '428ba55573b21f3f85be57f237915b8c585a92ae',
+                'sin_sello_verde': ['0', '1', '2', '5', '6', '7', '8', '9'],
+                'con_sello_verde': ['1', '2', '3', '4'],
                 'actualizacion': mock_datetime.isoformat(),
                 'fuente': 'http://www.uoct.cl/restriccion-vehicular/',
             },
@@ -133,7 +131,7 @@ class TestModelsRestriction(BaseTestCase):
         self.assertEqual(first_entries[2:], second_entries[2:])
 
         # Check updated
-        for key in ['_id', 'fecha', 'estado', 'sin_sello_verde', 'fuente']:
+        for key in ['_id', 'fecha', 'sin_sello_verde', 'fuente']:
             self.assertEqual(first_entries[1][key], second_entries[1][key])
 
         for key in ['hash', 'con_sello_verde', 'actualizacion']:

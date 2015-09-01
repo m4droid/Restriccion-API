@@ -55,10 +55,9 @@ class TestApiRestrictions(ApiBaseTestCase):
         self.assertEqual(
             {
                 'fecha': '2015-06-21',
-                'hash': '5e15b0168c9978cb5a50ad4c27c8065942d7fd30',
-                'estado': 'Preemergencia Ambiental',
-                'sin_sello_verde': '3-4-5-6-7-8',
-                'con_sello_verde': '0-9',
+                'hash': 'b9404006aa20e542bac244b83d6511f019eeccf1',
+                'sin_sello_verde': ['3', '4', '5', '6', '7', '8'],
+                'con_sello_verde': ['0', '9'],
                 'actualizacion': mock_datetime.isoformat(),
                 'fuente': 'http://www.uoct.cl/restriccion-vehicular/',
             },

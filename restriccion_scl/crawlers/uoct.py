@@ -27,7 +27,6 @@ class UOCT_Crawler(object):
         raw_data = []
         for row in rows[2:]:
             raw_data.append(Restriction.dict(
-                row.find('td[1]').text.strip(),
                 moment.date(row.find('td[3]').text.strip(), '%d-%m-%Y').format('YYYY-M-D'),
                 self.clean_digits_string(row.find('td[4]').text),
                 self.clean_digits_string(row.find('td[5]').text),
@@ -42,7 +41,6 @@ class UOCT_Crawler(object):
             return raw_data
 
         data = Restriction.dict(
-            'Normal',
             moment.utcnow().timezone(CONFIG['moment']['timezone']).format('YYYY-M-D'),
             self.clean_digits_string(info[0].text),
             self.clean_digits_string(info[1].text),
@@ -60,11 +58,13 @@ class UOCT_Crawler(object):
     @staticmethod
     def clean_digits_string(string):
         if string is None:
-            return string
+            return []
 
         string = re.sub(r'[^-\d]', '', string)
         string = re.sub(r'-+', '-', string)
         string = string.strip('-')
-        string = '-'.join(sorted(set(string.split('-'))))
 
-        return string
+        if string == '':
+            return []
+
+        return sorted(set(string.split('-')))
