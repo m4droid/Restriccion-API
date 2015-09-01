@@ -14,8 +14,6 @@ class UOCT_Crawler(object):
 
     def __init__(self):
         self.url = UOCT_Crawler.url
-        self.mongo_client = pymongo.MongoClient(**CONFIG['pymongo']['client'])
-        self.mongo_db = self.mongo_client[CONFIG['pymongo']['database']]
 
     def parse(self):
         if self.url.startswith('file://'):
