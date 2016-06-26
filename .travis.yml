@@ -5,6 +5,7 @@ services:
   - mongodb
 # command to install dependencies
 install:
+  - pip install -U setuptools pip
   - python setup.py develop
   - pip install coveralls
 # command to run tests
