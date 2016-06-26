@@ -2,7 +2,7 @@
 import json
 
 from flask import Flask, request, Response
-from flask.ext.cors import CORS
+from flask_cors import CORS
 import moment
 import pymongo
 from validate_email import validate_email

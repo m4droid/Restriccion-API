@@ -2,6 +2,7 @@ import os
 import unittest
 
 import pymongo
+
 from restriccion import CONFIG
 from restriccion.wsgi import app
 
@@ -17,8 +18,13 @@ class BaseTestCase(unittest.TestCase):
         self.mongo_db = self.mongo_client[CONFIG['pymongo']['database']]
 
     def tearDown(self):
-        self.mongo_db.restrictions.drop()
-        self.mongo_db.devices.drop()
+        collections = [
+            'reports_restriction',
+            'reports_air_quality',
+            'devices'
+        ]
+        for collection in collections:
+            self.mongo_db[collection].drop()
 
         self.mongo_client.close()
 

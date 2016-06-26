@@ -78,7 +78,7 @@ class TestUoct_Crawler(BaseTestCase):
             {
                 'ciudad': 'Santiago',
                 'fecha': '2015-06-21',
-                'hash': 'f693c1f77758d75401a664fbf7bd8f22440c8496',
+                'hash': 'ed55bf3ea8e18f328eb03471874be28e5779424b',
                 'sin_sello_verde': ['3', '4', '5', '6', '7', '8'],
                 'con_sello_verde': ['0', '9'],
                 'fuente': 'http://www.uoct.cl/restriccion-vehicular/',
@@ -98,7 +98,7 @@ class TestUoct_Crawler(BaseTestCase):
             {
                 'ciudad': 'Santiago',
                 'fecha': '2015-07-05',
-                'hash': '7eb705852b3cdc23df53e6a45072250a237ecc8b',
+                'hash': '1627f5903717ecec8e1baa40955e69a63b01039f',
                 'con_sello_verde': [],
                 'sin_sello_verde': ['3', '4'],
                 'fuente': 'http://www.uoct.cl/restriccion-vehicular/',
@@ -113,7 +113,7 @@ class TestUoct_Crawler(BaseTestCase):
             {
                 'ciudad': 'Santiago',
                 'fecha': '2015-07-06',
-                'hash': 'fafac835207a3b3da02d4e4002744ab76a1084f8',
+                'hash': 'e892e6bd7198fefdbbc420f963db0fab3fb971a3',
                 'con_sello_verde': [],
                 'sin_sello_verde': ['5', '6', '7', '8'],
                 'fuente': 'http://www.uoct.cl/restriccion-vehicular/',
@@ -133,7 +133,7 @@ class TestUoct_Crawler(BaseTestCase):
             {
                 'ciudad': 'Santiago',
                 'fecha': '2016-06-26',
-                'hash': 'b9c9abe889ddb3431ff46d2c2de97b80ebb5ea8e',
+                'hash': 'b7125cce59b6612ba64e6b5dbd78a94f7f143bfe',
                 'con_sello_verde': ['6', '7'],
                 'sin_sello_verde': ['3', '4', '5', '6', '7', '8'],
                 'fuente': 'http://www.uoct.cl/restriccion-vehicular/',
@@ -148,7 +148,7 @@ class TestUoct_Crawler(BaseTestCase):
             {
                 'ciudad': 'Santiago',
                 'fecha': '2016-06-26',
-                'hash': 'b9c9abe889ddb3431ff46d2c2de97b80ebb5ea8e',
+                'hash': 'b7125cce59b6612ba64e6b5dbd78a94f7f143bfe',
                 'con_sello_verde': ['6', '7'],
                 'sin_sello_verde': ['3', '4', '5', '6', '7', '8'],
                 'fuente': 'http://www.uoct.cl/restriccion-vehicular/',

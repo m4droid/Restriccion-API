@@ -26,11 +26,13 @@ class UOCT_Crawler(object):
         raw_data = []
         for row in rows[2:]:
             raw_data.append(Restriction.dict(
-                'Santiago',
-                moment.date(row.find('td[3]').text.strip(), '%d-%m-%Y').format('YYYY-M-D'),
-                self.clean_digits_string(row.find('td[4]').text),
-                self.clean_digits_string(row.find('td[5]').text),
-                UOCT_Crawler.url
+                UOCT_Crawler.url,
+                {
+                    'ciudad': 'Santiago',
+                    'fecha': moment.date(row.find('td[3]').text.strip(), '%d-%m-%Y').format('YYYY-M-D'),
+                    'sin_sello_verde': self.clean_digits_string(row.find('td[4]').text),
+                    'con_sello_verde': self.clean_digits_string(row.find('td[5]').text),
+                }
             ))
 
         raw_data.sort(key=lambda r: r['fecha'], reverse=True)
@@ -41,11 +43,13 @@ class UOCT_Crawler(object):
             return raw_data
 
         data = Restriction.dict(
-            'Santiago',
-            moment.utcnow().timezone(CONFIG['moment']['timezone']).format('YYYY-M-D'),
-            self.clean_digits_string(info[0].text),
-            self.clean_digits_string(info[1].text),
-            UOCT_Crawler.url
+            UOCT_Crawler.url,
+            {
+                'ciudad': 'Santiago',
+                'fecha': moment.utcnow().timezone(CONFIG['moment']['timezone']).format('YYYY-M-D'),
+                'sin_sello_verde': self.clean_digits_string(info[0].text),
+                'con_sello_verde': self.clean_digits_string(info[1].text),
+            }
         )
 
         if len([r for r in raw_data if r['fecha'] == data['fecha']]) == 0:

@@ -18,7 +18,7 @@ class TestApiRestrictions(ApiBaseTestCase):
         self.assertEqual(200, response.status_code)
         self.assertEqual('[]', response.data.decode())
 
-    @patch('restriccion.models.restriction.moment.utcnow')
+    @patch('restriccion.models.base_report.moment.utcnow')
     def test_restrictions_get_all(self, mock_moment):
         mock_moment.side_effect = lambda: moment.utc('2015-06-22', '%Y-%m-%d').timezone(CONFIG['moment']['timezone'])
 
@@ -34,7 +34,7 @@ class TestApiRestrictions(ApiBaseTestCase):
 
         self.assertEqual(10, len(entries))
 
-    @patch('restriccion.models.restriction.moment.utcnow')
+    @patch('restriccion.models.base_report.moment.utcnow')
     def test_restrictions_get_with_date_param(self, mock_moment):
         mock_datetime = moment.utc('2015-06-22', '%Y-%m-%d').timezone(CONFIG['moment']['timezone'])
         mock_moment.side_effect = lambda: mock_datetime
@@ -55,7 +55,7 @@ class TestApiRestrictions(ApiBaseTestCase):
             {
                 'ciudad': 'Santiago',
                 'fecha': '2015-06-21',
-                'hash': 'f693c1f77758d75401a664fbf7bd8f22440c8496',
+                'hash': 'ed55bf3ea8e18f328eb03471874be28e5779424b',
                 'sin_sello_verde': ['3', '4', '5', '6', '7', '8'],
                 'con_sello_verde': ['0', '9'],
                 'actualizacion': mock_datetime.isoformat(),
