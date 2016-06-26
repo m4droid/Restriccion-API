@@ -117,3 +117,36 @@ class TestUoct_Crawler(BaseTestCase):
             },
             new_restrictions[0]
         )
+
+    @patch('restriccion.crawlers.uoct.moment.utcnow')
+    def test_crawler_uoct_parse_current_date_data_2016_06_26(self, mock_moment):
+        mock_moment.side_effect = lambda: moment.utc('2016-06-25', '%Y-%m-%d')
+
+        crawler = UOCT_Crawler()
+        crawler.url = self.get_fixture_file_path('date/uoct.cl_restriccion-vehicular_2016_06_26.html')
+        new_restrictions = crawler.parse()
+
+        self.assertEqual(
+            {
+                'fecha': '2016-06-26',
+                'hash': '8e0dc04cebcff1b6ebf03bd4025d45e43f009ac7',
+                'con_sello_verde': ['6', '7'],
+                'sin_sello_verde': ['3', '4', '5', '6', '7', '8'],
+                'fuente': 'http://www.uoct.cl/restriccion-vehicular/',
+            },
+            new_restrictions[0]
+        )
+
+        mock_moment.side_effect = lambda: moment.utc('2016-06-26', '%Y-%m-%d')
+        new_restrictions = crawler.parse()
+
+        self.assertEqual(
+            {
+                'fecha': '2016-06-26',
+                'hash': '8e0dc04cebcff1b6ebf03bd4025d45e43f009ac7',
+                'con_sello_verde': ['6', '7'],
+                'sin_sello_verde': ['3', '4', '5', '6', '7', '8'],
+                'fuente': 'http://www.uoct.cl/restriccion-vehicular/',
+            },
+            new_restrictions[0]
+        )
