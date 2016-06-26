@@ -24,7 +24,7 @@ class TestApiRestrictions(ApiBaseTestCase):
 
         crawler = UOCT_Crawler()
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_0.html')
-        Restriction.insert_many(self.mongo_db, crawler.parse())
+        Restriction.insert_many(self.mongo_db, crawler.parse()['restrictions'])
 
         response = self.app.get('/0/restricciones')
         self.assertEqual('application/json', response.mimetype)
@@ -41,7 +41,7 @@ class TestApiRestrictions(ApiBaseTestCase):
 
         crawler = UOCT_Crawler()
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_0.html')
-        Restriction.insert_many(self.mongo_db, crawler.parse())
+        Restriction.insert_many(self.mongo_db, crawler.parse()['restrictions'])
 
         response = self.app.get('/0/restricciones?fecha=2015-06-21')
         self.assertEqual('application/json', response.mimetype)

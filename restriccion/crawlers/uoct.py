@@ -4,6 +4,7 @@ import moment
 from pyquery import PyQuery as pq
 
 from restriccion import CONFIG
+from ..models.air_quality import AirQuality
 from ..models.restriction import Restriction
 
 
@@ -15,6 +16,8 @@ class UOCT_Crawler(object):
         self.url = UOCT_Crawler.url
 
     def parse(self):
+        reports = {'restrictions': [], 'air_quality': []}
+
         if self.url.startswith('file://'):
             document = pq(filename=self.url.replace('file://', ''))
         else:
@@ -23,42 +26,67 @@ class UOCT_Crawler(object):
         current_year = moment.utcnow().timezone(CONFIG['moment']['timezone']).format('YYYY')
         rows = document('.selecthistory #table-%s tbody tr' % current_year)
 
-        raw_data = []
         for row in rows[2:]:
-            raw_data.append(Restriction.dict(
+            date_ = moment.date(row.find('td[3]').text.strip(), '%d-%m-%Y').format('YYYY-M-D')
+            reports['air_quality'].append(AirQuality.dict(
                 UOCT_Crawler.url,
                 {
                     'ciudad': 'Santiago',
-                    'fecha': moment.date(row.find('td[3]').text.strip(), '%d-%m-%Y').format('YYYY-M-D'),
+                    'fecha': date_,
+                    'estado': row.find('td[1]').text.strip()
+                }
+            ))
+
+            reports['restrictions'].append(Restriction.dict(
+                UOCT_Crawler.url,
+                {
+                    'ciudad': 'Santiago',
+                    'fecha': date_,
                     'sin_sello_verde': self.clean_digits_string(row.find('td[4]').text),
                     'con_sello_verde': self.clean_digits_string(row.find('td[5]').text),
                 }
             ))
 
-        raw_data.sort(key=lambda r: r['fecha'], reverse=True)
+        reports['restrictions'].sort(key=lambda r: r['fecha'], reverse=True)
 
         # Current day info
         info = document('.eventslist .restriction h3')
         if len(info) != 2:
-            return raw_data
+            return reports
 
-        data = Restriction.dict(
+        date_ = moment.utcnow().timezone(CONFIG['moment']['timezone']).format('YYYY-M-D')
+
+        air_quality = AirQuality.dict(
             UOCT_Crawler.url,
             {
                 'ciudad': 'Santiago',
-                'fecha': moment.utcnow().timezone(CONFIG['moment']['timezone']).format('YYYY-M-D'),
+                'fecha': date_,
+                'estado': 'Normal'
+            }
+        )
+        self.insert_report_in_position(reports['air_quality'], air_quality)
+
+        restriction = Restriction.dict(
+            UOCT_Crawler.url,
+            {
+                'ciudad': 'Santiago',
+                'fecha': date_,
                 'sin_sello_verde': self.clean_digits_string(info[0].text),
                 'con_sello_verde': self.clean_digits_string(info[1].text),
             }
         )
+        self.insert_report_in_position(reports['restrictions'], restriction)
 
-        if len([r for r in raw_data if r['fecha'] == data['fecha']]) == 0:
-            for i in range(len(raw_data)):
-                if raw_data[i]['fecha'] < data['fecha']:
-                    raw_data.insert(i, data)
+        return reports
+
+    @staticmethod
+    def insert_report_in_position(reports_list, report):
+        # If not in list by date
+        if len([r for r in reports_list if r['fecha'] == report['fecha']]) == 0:
+            for i in range(len(reports_list)):
+                if reports_list[i]['fecha'] < report['fecha']:
+                    reports_list.insert(i, report)
                     break
-
-        return raw_data
 
     @staticmethod
     def clean_digits_string(string):

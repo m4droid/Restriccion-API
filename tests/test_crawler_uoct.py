@@ -49,9 +49,14 @@ class TestUoct_Crawler(BaseTestCase):
         crawler = UOCT_Crawler()
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_0.html')
 
-        new_restrictions = crawler.parse()
-        self.assertEqual(list, type(new_restrictions))
-        self.assertEqual(26, len(new_restrictions))
+        reports = crawler.parse()
+        self.assertEqual(dict, type(reports))
+
+        self.assertEqual(list, type(reports['restrictions']))
+        self.assertEqual(26, len(reports['restrictions']))
+
+        self.assertEqual(list, type(reports['air_quality']))
+        self.assertEqual(26, len(reports['air_quality']))
 
     @patch('restriccion.crawlers.uoct.moment.utcnow')
     @patch('restriccion.crawlers.uoct.pq')
@@ -62,9 +67,13 @@ class TestUoct_Crawler(BaseTestCase):
             filename=self.get_fixture_file_path('uoct.cl_restriccion-vehicular_1.html').replace('file://', '')
         )
 
-        new_restrictions = UOCT_Crawler().parse()
-        self.assertEqual(list, type(new_restrictions))
-        self.assertEqual(27, len(new_restrictions))
+        reports = UOCT_Crawler().parse()
+
+        self.assertEqual(list, type(reports['restrictions']))
+        self.assertEqual(27, len(reports['restrictions']))
+
+        self.assertEqual(list, type(reports['air_quality']))
+        self.assertEqual(27, len(reports['air_quality']))
 
     @patch('restriccion.crawlers.uoct.moment.utcnow')
     def test_crawler_uoct_parse_data_integrity(self, mock_moment):
@@ -72,7 +81,7 @@ class TestUoct_Crawler(BaseTestCase):
 
         crawler = UOCT_Crawler()
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_0.html')
-        new_restrictions = crawler.parse()
+        reports = crawler.parse()
 
         self.assertEqual(
             {
@@ -83,7 +92,18 @@ class TestUoct_Crawler(BaseTestCase):
                 'con_sello_verde': ['0', '9'],
                 'fuente': 'http://www.uoct.cl/restriccion-vehicular/',
             },
-            new_restrictions[0]
+            reports['restrictions'][0]
+        )
+
+        self.assertEqual(
+            {
+                'ciudad': 'Santiago',
+                'fecha': '2015-06-21',
+                'estado': 'Preemergencia Ambiental',
+                'hash': '81ec93a759e6d309a135fa7af1b87bdff77b5459',
+                'fuente': 'http://www.uoct.cl/restriccion-vehicular/',
+            },
+            reports['air_quality'][0]
         )
 
     @patch('restriccion.crawlers.uoct.moment.utcnow')
@@ -92,7 +112,7 @@ class TestUoct_Crawler(BaseTestCase):
 
         crawler = UOCT_Crawler()
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_3.html')
-        new_restrictions = crawler.parse()
+        reports = crawler.parse()
 
         self.assertEqual(
             {
@@ -103,11 +123,22 @@ class TestUoct_Crawler(BaseTestCase):
                 'sin_sello_verde': ['3', '4'],
                 'fuente': 'http://www.uoct.cl/restriccion-vehicular/',
             },
-            new_restrictions[0]
+            reports['restrictions'][0]
+        )
+
+        self.assertEqual(
+            {
+                'ciudad': 'Santiago',
+                'fecha': '2015-07-05',
+                'estado': 'Alerta Ambiental',
+                'hash': '11bdf05f554d6e98b4ddbc7851322e4612441bcc',
+                'fuente': 'http://www.uoct.cl/restriccion-vehicular/',
+            },
+            reports['air_quality'][0]
         )
 
         mock_moment.side_effect = lambda: moment.utc('2015-07-06', '%Y-%m-%d')
-        new_restrictions = crawler.parse()
+        reports = crawler.parse()
 
         self.assertEqual(
             {
@@ -118,7 +149,18 @@ class TestUoct_Crawler(BaseTestCase):
                 'sin_sello_verde': ['5', '6', '7', '8'],
                 'fuente': 'http://www.uoct.cl/restriccion-vehicular/',
             },
-            new_restrictions[0]
+            reports['restrictions'][0]
+        )
+
+        self.assertEqual(
+            {
+                'ciudad': 'Santiago',
+                'fecha': '2015-07-06',
+                'estado': 'Normal',
+                'hash': '9bf487f4b4af1a6b312af84f7062f380bab40c54',
+                'fuente': 'http://www.uoct.cl/restriccion-vehicular/',
+            },
+            reports['air_quality'][0]
         )
 
     @patch('restriccion.crawlers.uoct.moment.utcnow')
@@ -127,7 +169,7 @@ class TestUoct_Crawler(BaseTestCase):
 
         crawler = UOCT_Crawler()
         crawler.url = self.get_fixture_file_path('date/uoct.cl_restriccion-vehicular_2016_06_26.html')
-        new_restrictions = crawler.parse()
+        reports = crawler.parse()
 
         self.assertEqual(
             {
@@ -138,11 +180,22 @@ class TestUoct_Crawler(BaseTestCase):
                 'sin_sello_verde': ['3', '4', '5', '6', '7', '8'],
                 'fuente': 'http://www.uoct.cl/restriccion-vehicular/',
             },
-            new_restrictions[0]
+            reports['restrictions'][0]
+        )
+
+        self.assertEqual(
+            {
+                'ciudad': 'Santiago',
+                'fecha': '2016-06-26',
+                'estado': 'Preemergencia Ambiental',
+                'hash': 'c5ca5deeec466adb6a9dbd2e9f6c36aa18fcdc85',
+                'fuente': 'http://www.uoct.cl/restriccion-vehicular/',
+            },
+            reports['air_quality'][0]
         )
 
         mock_moment.side_effect = lambda: moment.utc('2016-06-26', '%Y-%m-%d')
-        new_restrictions = crawler.parse()
+        reports['restrictions'] = crawler.parse()['restrictions']
 
         self.assertEqual(
             {
@@ -153,5 +206,16 @@ class TestUoct_Crawler(BaseTestCase):
                 'sin_sello_verde': ['3', '4', '5', '6', '7', '8'],
                 'fuente': 'http://www.uoct.cl/restriccion-vehicular/',
             },
-            new_restrictions[0]
+            reports['restrictions'][0]
+        )
+
+        self.assertEqual(
+            {
+                'ciudad': 'Santiago',
+                'fecha': '2016-06-26',
+                'estado': 'Preemergencia Ambiental',
+                'hash': 'c5ca5deeec466adb6a9dbd2e9f6c36aa18fcdc85',
+                'fuente': 'http://www.uoct.cl/restriccion-vehicular/',
+            },
+            reports['air_quality'][0]
         )
