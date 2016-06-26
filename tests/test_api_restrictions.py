@@ -18,13 +18,13 @@ class TestApiRestrictions(ApiBaseTestCase):
         self.assertEqual(200, response.status_code)
         self.assertEqual('[]', response.data.decode())
 
-    @patch('restriccion.models.restriction.moment.utcnow')
+    @patch('restriccion.models.base_report.moment.utcnow')
     def test_restrictions_get_all(self, mock_moment):
         mock_moment.side_effect = lambda: moment.utc('2015-06-22', '%Y-%m-%d').timezone(CONFIG['moment']['timezone'])
 
         crawler = UOCT_Crawler()
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_0.html')
-        Restriction.insert_many(self.mongo_db, crawler.parse())
+        Restriction.insert_many(self.mongo_db, crawler.parse()['restrictions'])
 
         response = self.app.get('/0/restricciones')
         self.assertEqual('application/json', response.mimetype)
@@ -34,14 +34,14 @@ class TestApiRestrictions(ApiBaseTestCase):
 
         self.assertEqual(10, len(entries))
 
-    @patch('restriccion.models.restriction.moment.utcnow')
+    @patch('restriccion.models.base_report.moment.utcnow')
     def test_restrictions_get_with_date_param(self, mock_moment):
         mock_datetime = moment.utc('2015-06-22', '%Y-%m-%d').timezone(CONFIG['moment']['timezone'])
         mock_moment.side_effect = lambda: mock_datetime
 
         crawler = UOCT_Crawler()
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_0.html')
-        Restriction.insert_many(self.mongo_db, crawler.parse())
+        Restriction.insert_many(self.mongo_db, crawler.parse()['restrictions'])
 
         response = self.app.get('/0/restricciones?fecha=2015-06-21')
         self.assertEqual('application/json', response.mimetype)
@@ -53,8 +53,9 @@ class TestApiRestrictions(ApiBaseTestCase):
 
         self.assertEqual(
             {
+                'ciudad': 'Santiago',
                 'fecha': '2015-06-21',
-                'hash': 'b9404006aa20e542bac244b83d6511f019eeccf1',
+                'hash': 'ed55bf3ea8e18f328eb03471874be28e5779424b',
                 'sin_sello_verde': ['3', '4', '5', '6', '7', '8'],
                 'con_sello_verde': ['0', '9'],
                 'actualizacion': mock_datetime.isoformat(),
