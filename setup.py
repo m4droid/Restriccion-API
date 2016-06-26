@@ -27,9 +27,9 @@ setup(
         'python-gcm==0.4',
     ],
     tests_require=[
-        'nose==1.3.7',
-        'mock==2.0.0',
-        'coverage==4.1',
+        'nose',
+        'mock',
+        'coverage',
     ],
     test_suite="tests",
     entry_points={},
