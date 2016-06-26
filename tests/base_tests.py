@@ -2,15 +2,15 @@ import os
 import unittest
 
 import pymongo
-from restriccion_scl import CONFIG
-from restriccion_scl.wsgi import app
+from restriccion import CONFIG
+from restriccion.wsgi import app
 
 
 class BaseTestCase(unittest.TestCase):
 
     def __init__(self, *args, **kwargs):
         super(BaseTestCase, self).__init__(*args, **kwargs)
-        
+
         self.script_path = os.path.dirname(os.path.realpath(__file__))
 
         self.mongo_client = pymongo.MongoClient(**CONFIG['pymongo']['client'])
@@ -23,7 +23,7 @@ class BaseTestCase(unittest.TestCase):
         self.mongo_client.close()
 
     def get_fixture_file_path(self, fixture):
-        return 'file://'+ os.path.join(self.script_path, 'fixtures', fixture)
+        return 'file://' + os.path.join(self.script_path, 'fixtures', fixture)
 
 
 class ApiBaseTestCase(BaseTestCase):

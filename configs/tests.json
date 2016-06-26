@@ -4,7 +4,7 @@
 			"host": "localhost",
 			"port": 27017
 		},
-		"database": "restriccion_scl_tests"
+		"database": "restriccion_tests"
 	},
 	"moment": {
 		"timezone": "UTC"

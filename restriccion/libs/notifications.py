@@ -6,7 +6,7 @@ import smtplib
 from gcm import GCM
 import jinja2
 
-from restriccion_scl import CONFIG
+from restriccion import CONFIG
 
 
 def send_to_email_addresses(emails_list, data):
@@ -60,6 +60,7 @@ def send_to_email_addresses(emails_list, data):
     service.quit()
 
     return sent_emails
+
 
 def send_to_gcm(device_list, data, collapse_key=None, ttl=43200):
     if len(device_list or []) == 0 or (data or {}) == {}:

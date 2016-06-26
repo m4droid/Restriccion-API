@@ -7,9 +7,9 @@ import moment
 import pymongo
 from validate_email import validate_email
 
-from restriccion_scl import CONFIG
-from restriccion_scl.models.device import Device
-from restriccion_scl.models.restriction import Restriction
+from restriccion import CONFIG
+from restriccion.models.device import Device
+from restriccion.models.restriction import Restriction
 
 
 EMPTY_VALUES = [None, '']
@@ -27,6 +27,7 @@ def json_response(data, status_code=200):
     response.status_code = status_code
     return response
 
+
 @app.route("/0/restricciones", methods=['GET'])
 def restrictions_get():
     date = request.args.get('fecha', None)
@@ -41,6 +42,7 @@ def restrictions_get():
             return json_response(data, status_code=400)
 
     return json_response(Restriction.get(mongo_db, query))
+
 
 @app.route("/0/dispositivos", methods=['GET'])
 def devices_get():
@@ -69,6 +71,7 @@ def devices_get():
             return json_response([], 400)
 
     return json_response(devices[0:1])
+
 
 @app.route("/0/dispositivos", methods=['POST'])
 def devices_post():

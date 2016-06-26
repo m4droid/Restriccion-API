@@ -4,7 +4,7 @@ import moment
 from pyquery import PyQuery as pq
 
 from .base_tests import BaseTestCase
-from restriccion_scl.crawlers.uoct import UOCT_Crawler
+from restriccion.crawlers.uoct import UOCT_Crawler
 
 
 class TestUoct_Crawler(BaseTestCase):
@@ -42,7 +42,7 @@ class TestUoct_Crawler(BaseTestCase):
     def test_crawler_uoct_clean_digits_string_text(self):
         self.assertEqual([], UOCT_Crawler.clean_digits_string('Sin restricción'))
 
-    @patch('restriccion_scl.crawlers.uoct.moment.utcnow')
+    @patch('restriccion.crawlers.uoct.moment.utcnow')
     def test_crawler_uoct_parse_file(self, mock_moment):
         mock_moment.side_effect = lambda: moment.utc('2015-06-21', '%Y-%m-%d')
 
@@ -53,8 +53,8 @@ class TestUoct_Crawler(BaseTestCase):
         self.assertEqual(list, type(new_restrictions))
         self.assertEqual(26, len(new_restrictions))
 
-    @patch('restriccion_scl.crawlers.uoct.moment.utcnow')
-    @patch('restriccion_scl.crawlers.uoct.pq')
+    @patch('restriccion.crawlers.uoct.moment.utcnow')
+    @patch('restriccion.crawlers.uoct.pq')
     def test_crawler_uoct_parse_url(self, mock_pyquery, mock_moment):
         mock_moment.side_effect = lambda: moment.utc('2015-06-21', '%Y-%m-%d')
 
@@ -66,7 +66,7 @@ class TestUoct_Crawler(BaseTestCase):
         self.assertEqual(list, type(new_restrictions))
         self.assertEqual(27, len(new_restrictions))
 
-    @patch('restriccion_scl.crawlers.uoct.moment.utcnow')
+    @patch('restriccion.crawlers.uoct.moment.utcnow')
     def test_crawler_uoct_parse_data_integrity(self, mock_moment):
         mock_moment.side_effect = lambda: moment.utc('2015-06-21', '%Y-%m-%d')
 
@@ -85,7 +85,7 @@ class TestUoct_Crawler(BaseTestCase):
             new_restrictions[0]
         )
 
-    @patch('restriccion_scl.crawlers.uoct.moment.utcnow')
+    @patch('restriccion.crawlers.uoct.moment.utcnow')
     def test_crawler_uoct_parse_current_date_data(self, mock_moment):
         mock_moment.side_effect = lambda: moment.utc('2015-07-05', '%Y-%m-%d')
 

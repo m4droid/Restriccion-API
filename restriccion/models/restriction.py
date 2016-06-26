@@ -3,7 +3,7 @@ import hashlib
 
 import moment
 
-from restriccion_scl import CONFIG
+from restriccion import CONFIG
 
 
 class Restriction(object):
@@ -36,7 +36,7 @@ class Restriction(object):
         if query is None:
             query = {}
 
-        mongo_query = {'$query': query, '$orderby': {'fecha' : -1}}
+        mongo_query = {'$query': query, '$orderby': {'fecha': -1}}
 
         restrictions = []
         rows = mongo_db.restrictions.find(mongo_query, {'_id': 0}, limit=limit)

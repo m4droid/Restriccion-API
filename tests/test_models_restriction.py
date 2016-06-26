@@ -2,13 +2,13 @@ from mock import patch
 import moment
 
 from .base_tests import BaseTestCase
-from restriccion_scl.crawlers.uoct import UOCT_Crawler
-from restriccion_scl.models.restriction import Restriction
+from restriccion.crawlers.uoct import UOCT_Crawler
+from restriccion.models.restriction import Restriction
 
 
 class TestModelsRestriction(BaseTestCase):
 
-    @patch('restriccion_scl.models.restriction.moment.utcnow')
+    @patch('restriccion.models.restriction.moment.utcnow')
     def test_models_device_get(self, mock_moment):
         mock_datetime = moment.utc('2015-06-21', '%Y-%m-%d')
         mock_moment.side_effect = lambda: mock_datetime
@@ -31,7 +31,7 @@ class TestModelsRestriction(BaseTestCase):
             restrictions[0]
         )
 
-    @patch('restriccion_scl.models.restriction.moment.utcnow')
+    @patch('restriccion.models.restriction.moment.utcnow')
     def test_models_device_get_limit(self, mock_moment):
         mock_moment.side_effect = lambda: moment.utc('2015-06-21', '%Y-%m-%d')
 
@@ -41,7 +41,7 @@ class TestModelsRestriction(BaseTestCase):
 
         self.assertEqual(26, len(Restriction.get(self.mongo_db, limit=30)))
 
-    @patch('restriccion_scl.models.restriction.moment.utcnow')
+    @patch('restriccion.models.restriction.moment.utcnow')
     def test_models_device_insert_many(self, mock_moment):
         mock_datetime = moment.utc('2015-06-22', '%Y-%m-%d')
         mock_moment.side_effect = lambda: mock_datetime
@@ -52,7 +52,7 @@ class TestModelsRestriction(BaseTestCase):
         new_restrictions = crawler.parse()
 
         Restriction.insert_many(self.mongo_db, new_restrictions)
-            
+
         self.assertEqual(len(new_restrictions), self.mongo_db.restrictions.count())
 
         rows = self.mongo_db.restrictions.find({}, {'_id': 0})
@@ -60,7 +60,7 @@ class TestModelsRestriction(BaseTestCase):
             new_restrictions[i]['actualizacion'] = mock_datetime.isoformat()
             self.assertEqual(new_restrictions[i], rows[i])
 
-    @patch('restriccion_scl.models.restriction.moment.utcnow')
+    @patch('restriccion.models.restriction.moment.utcnow')
     def test_models_device_insert_many_keep_old_data(self, mock_moment):
         mock_moment.side_effect = lambda: moment.utc('2015-06-21', '%Y-%m-%d')
 
@@ -70,7 +70,7 @@ class TestModelsRestriction(BaseTestCase):
         self.assertEqual(26, self.mongo_db.restrictions.count())
 
         first_entries = []
-        rows = self.mongo_db.restrictions.find({'$query': {}, '$orderby': {'fecha' : -1}}, {'_id': 0})
+        rows = self.mongo_db.restrictions.find({'$query': {}, '$orderby': {'fecha': -1}}, {'_id': 0})
         for row in rows:
             first_entries.append(row)
 
@@ -83,7 +83,7 @@ class TestModelsRestriction(BaseTestCase):
         self.assertEqual(len(new_restrictions), self.mongo_db.restrictions.count())
 
         second_entries = []
-        rows = self.mongo_db.restrictions.find({'$query': {}, '$orderby': {'fecha' : -1}}, {'_id': 0})
+        rows = self.mongo_db.restrictions.find({'$query': {}, '$orderby': {'fecha': -1}}, {'_id': 0})
         for row in rows:
             second_entries.append(row)
 
@@ -101,7 +101,7 @@ class TestModelsRestriction(BaseTestCase):
             second_entries[0]
         )
 
-    @patch('restriccion_scl.models.restriction.moment.utcnow')
+    @patch('restriccion.models.restriction.moment.utcnow')
     def test_models_device_insert_many_updated_data(self, mock_moment):
         # First data
         mock_moment.side_effect = lambda: moment.utc('2015-06-22T00:00:00', '%Y-%m-%dT%H:%M:%S')
@@ -111,7 +111,7 @@ class TestModelsRestriction(BaseTestCase):
         Restriction.insert_many(self.mongo_db, crawler.parse())
 
         first_entries = []
-        rows = self.mongo_db.restrictions.find({'$query': {}, '$orderby': {'fecha' : -1}})
+        rows = self.mongo_db.restrictions.find({'$query': {}, '$orderby': {'fecha': -1}})
         for row in rows:
             first_entries.append(row)
 
@@ -122,7 +122,7 @@ class TestModelsRestriction(BaseTestCase):
         Restriction.insert_many(self.mongo_db, crawler.parse())
 
         second_entries = []
-        rows = self.mongo_db.restrictions.find({'$query': {}, '$orderby': {'fecha' : -1}})
+        rows = self.mongo_db.restrictions.find({'$query': {}, '$orderby': {'fecha': -1}})
         for row in rows:
             second_entries.append(row)
 

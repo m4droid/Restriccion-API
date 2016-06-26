@@ -1,8 +1,7 @@
 from mock import Mock, patch
-import moment
 
 from .base_tests import BaseTestCase
-from restriccion_scl.libs.notifications import send_to_email_addresses
+from restriccion.libs.notifications import send_to_email_addresses
 
 
 class TestLibsNotificationsEmail(BaseTestCase):
@@ -13,12 +12,12 @@ class TestLibsNotificationsEmail(BaseTestCase):
         self.assertEqual([], send_to_email_addresses(None, {}))
         self.assertEqual([], send_to_email_addresses('', {}))
 
-    @patch('restriccion_scl.libs.notifications.smtplib.SMTP')
+    @patch('restriccion.libs.notifications.smtplib.SMTP')
     def test_libs_notifications_send_emails_ok(self, mock_smtp):
         expected_emails = ["fake@email.com"]
         self.assertEqual(expected_emails, send_to_email_addresses(expected_emails, {"text": "test_template"}))
 
-    @patch('restriccion_scl.libs.notifications.smtplib')
+    @patch('restriccion.libs.notifications.smtplib')
     def test_libs_notifications_send_emails_error(self, mock_smtplib):
         mock_class = Mock()
         mock_class.sendmail = Mock(side_effect=Exception())
@@ -27,7 +26,7 @@ class TestLibsNotificationsEmail(BaseTestCase):
         expected_emails = ["fake@email.com"]
         self.assertEqual([], send_to_email_addresses(expected_emails, {"text": "test_template"}))
 
-    @patch('restriccion_scl.libs.notifications.CONFIG', new={'notifications': {'email': {'enabled': False}}})
+    @patch('restriccion.libs.notifications.CONFIG', new={'notifications': {'email': {'enabled': False}}})
     def test_libs_notifications_send_emails_disabled(self):
         expected_emails = ["fake@email.com"]
         self.assertEqual([], send_to_email_addresses(expected_emails, {"text": "test_template"}))

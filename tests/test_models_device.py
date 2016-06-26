@@ -3,8 +3,8 @@ from mock import Mock, patch
 import moment
 
 from .base_tests import BaseTestCase
-from restriccion_scl import CONFIG
-from restriccion_scl.models.device import Device
+from restriccion import CONFIG
+from restriccion.models.device import Device
 
 
 class TestModelsDevice(BaseTestCase):
@@ -15,7 +15,7 @@ class TestModelsDevice(BaseTestCase):
         self.assertEqual(0, len(Device.get(self.mongo_db, type_='email')))
         self.assertEqual(0, len(Device.get(self.mongo_db, id_='dummy@email.com')))
 
-    @patch('restriccion_scl.models.device.moment.utcnow')
+    @patch('restriccion.models.device.moment.utcnow')
     def test_models_device_insert_ok(self, mock_moment):
         mock_datetime = moment.utc('2015-06-22', '%Y-%m-%d').timezone(CONFIG['moment']['timezone'])
         mock_moment.side_effect = lambda: mock_datetime
@@ -35,7 +35,7 @@ class TestModelsDevice(BaseTestCase):
         self.assertEqual('ok', response['status'])
         self.assertEqual(expected_data, response['data'])
 
-    @patch('restriccion_scl.models.device.moment.utcnow')
+    @patch('restriccion.models.device.moment.utcnow')
     def test_models_device_insert_existing(self, mock_moment):
         mock_datetime = moment.utc('2015-06-22', '%Y-%m-%d').timezone(CONFIG['moment']['timezone'])
         mock_moment.side_effect = lambda: mock_datetime
@@ -78,9 +78,9 @@ class TestModelsDevice(BaseTestCase):
         self.assertEqual('error', response['status'])
         self.assertEqual('Email inválido', response['mensaje'])
 
-    @patch('restriccion_scl.libs.notifications.smtplib.SMTP')
-    @patch('restriccion_scl.models.device.moment.utcnow')
-    @patch('restriccion_scl.libs.notifications.GCM')
+    @patch('restriccion.libs.notifications.smtplib.SMTP')
+    @patch('restriccion.models.device.moment.utcnow')
+    @patch('restriccion.libs.notifications.GCM')
     def test_models_device_notify_gcm_unregistered_or_invalid_ids(self, mock_gcm, mock_moment, mock_smtp):
         mock_datetime = moment.utc('2015-06-22', '%Y-%m-%d').timezone(CONFIG['moment']['timezone'])
         mock_moment.side_effect = lambda: mock_datetime
@@ -103,9 +103,9 @@ class TestModelsDevice(BaseTestCase):
         self.assertEqual(1, self.mongo_db.devices.find({'tipo': 'email'}).count())
         self.assertEqual(0, self.mongo_db.devices.find({'tipo': 'gcm'}).count())
 
-    @patch('restriccion_scl.libs.notifications.smtplib.SMTP')
-    @patch('restriccion_scl.models.device.moment.utcnow')
-    @patch('restriccion_scl.libs.notifications.GCM')
+    @patch('restriccion.libs.notifications.smtplib.SMTP')
+    @patch('restriccion.models.device.moment.utcnow')
+    @patch('restriccion.libs.notifications.GCM')
     def test_models_device_notify_gcm_canonical_ids_response(self, mock_gcm, mock_moment, mock_smtp):
         mock_datetime = moment.utc('2015-06-22', '%Y-%m-%d').timezone(CONFIG['moment']['timezone'])
         mock_moment.side_effect = lambda: mock_datetime

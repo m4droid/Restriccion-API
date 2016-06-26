@@ -4,9 +4,9 @@ from mock import patch
 import moment
 
 from .base_tests import ApiBaseTestCase
-from restriccion_scl import CONFIG
-from restriccion_scl.crawlers.uoct import UOCT_Crawler
-from restriccion_scl.models.restriction import Restriction
+from restriccion import CONFIG
+from restriccion.crawlers.uoct import UOCT_Crawler
+from restriccion.models.restriction import Restriction
 
 
 class TestApiRestrictions(ApiBaseTestCase):
@@ -18,10 +18,9 @@ class TestApiRestrictions(ApiBaseTestCase):
         self.assertEqual(200, response.status_code)
         self.assertEqual('[]', response.data.decode())
 
-    @patch('restriccion_scl.models.restriction.moment.utcnow')
+    @patch('restriccion.models.restriction.moment.utcnow')
     def test_restrictions_get_all(self, mock_moment):
         mock_moment.side_effect = lambda: moment.utc('2015-06-22', '%Y-%m-%d').timezone(CONFIG['moment']['timezone'])
-
 
         crawler = UOCT_Crawler()
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_0.html')
@@ -35,7 +34,7 @@ class TestApiRestrictions(ApiBaseTestCase):
 
         self.assertEqual(10, len(entries))
 
-    @patch('restriccion_scl.models.restriction.moment.utcnow')
+    @patch('restriccion.models.restriction.moment.utcnow')
     def test_restrictions_get_with_date_param(self, mock_moment):
         mock_datetime = moment.utc('2015-06-22', '%Y-%m-%d').timezone(CONFIG['moment']['timezone'])
         mock_moment.side_effect = lambda: mock_datetime
