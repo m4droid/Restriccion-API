@@ -6,6 +6,7 @@ import pymongo
 from restriccion import CONFIG
 from restriccion.crawlers.uoct import UOCT_Crawler
 from restriccion.models.device import Device
+from restriccion.models.air_quality import AirQuality
 from restriccion.models.restriction import Restriction
 
 
@@ -16,16 +17,17 @@ def main(argv):
     current_restrictions = Restriction.get(mongo_db)
 
     crawler = UOCT_Crawler()
-    new_restrictions = crawler.parse()
+    new_reports = crawler.parse()
 
-    Restriction.insert_many(mongo_db, new_restrictions)
+    AirQuality.insert_many(mongo_db, new_reports['air_quality'])
+    Restriction.insert_many(mongo_db, new_reports['restrictions'])
 
     if '--notify' in argv[1:]:
-        _notify_to_devices(mongo_db, new_restrictions[0])
+        _notify_to_devices(mongo_db, new_reports['restrictions'][0])
     elif '--notify-new' in argv[1:]:
         del current_restrictions[0]['actualizacion']
-        if new_restrictions[0] != current_restrictions[0]:
-            _notify_to_devices(mongo_db, new_restrictions[0])
+        if new_reports['restrictions'][0] != current_restrictions[0]:
+            _notify_to_devices(mongo_db, new_reports['restrictions'][0])
 
     mongo_client.close()
 

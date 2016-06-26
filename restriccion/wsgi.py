@@ -9,6 +9,7 @@ from validate_email import validate_email
 
 from restriccion import CONFIG
 from restriccion.models.device import Device
+from restriccion.models.air_quality import AirQuality
 from restriccion.models.restriction import Restriction
 
 
@@ -28,8 +29,7 @@ def json_response(data, status_code=200):
     return response
 
 
-@app.route("/0/restricciones", methods=['GET'])
-def restrictions_get():
+def get_model_list(model):
     date = request.args.get('fecha', None)
 
     data = []
@@ -41,7 +41,17 @@ def restrictions_get():
         except ValueError:
             return json_response(data, status_code=400)
 
-    return json_response(Restriction.get(mongo_db, query))
+    return json_response(model.get(mongo_db, query))
+
+
+@app.route("/0/restricciones", methods=['GET'])
+def restrictions_get():
+    return get_model_list(Restriction)
+
+
+@app.route("/0/calidad_aire", methods=['GET'])
+def air_quality_get():
+    return get_model_list(AirQuality)
 
 
 @app.route("/0/dispositivos", methods=['GET'])
