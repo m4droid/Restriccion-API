@@ -1,14 +1,13 @@
 language: python
 python:
-  - "3.4"
+  - "3.5"
 services:
   - mongodb
 # command to install dependencies
 install:
-  - pip install coverage
-  - pip install coveralls
-  - pip install git+https://github.com/wonderpush/python3-gcm.git
+  - pip install -U setuptools pip
   - python setup.py develop
+  - pip install coveralls
 # command to run tests
 script: ./runtests.sh
 after_success:

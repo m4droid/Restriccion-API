@@ -1,11 +1,10 @@
 import re
 
 import moment
-import pymongo
 from pyquery import PyQuery as pq
 
-from restriccion_scl import CONFIG
-from restriccion_scl.models.restriction import Restriction
+from restriccion import CONFIG
+from ..models.restriction import Restriction
 
 
 class UOCT_Crawler(object):

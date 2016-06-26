@@ -1,8 +1,7 @@
 from mock import Mock, patch
-import moment
 
 from .base_tests import BaseTestCase
-from restriccion_scl.libs.notifications import send_to_gcm
+from restriccion.libs.notifications import send_to_gcm
 
 
 class TestLibsNotificationsGcm(BaseTestCase):
@@ -13,7 +12,7 @@ class TestLibsNotificationsGcm(BaseTestCase):
         self.assertEqual(([], []), send_to_gcm(None, {}))
         self.assertEqual(([], []), send_to_gcm([], {}))
 
-    @patch('restriccion_scl.libs.notifications.GCM')
+    @patch('restriccion.libs.notifications.GCM')
     def test_libs_notifications_send_to_gcm_empty_response(self, mock_gcm):
         mock_method = Mock()
         mock_method.json_request = Mock(return_value={})
@@ -21,7 +20,7 @@ class TestLibsNotificationsGcm(BaseTestCase):
 
         self.assertEqual(([], []), send_to_gcm(['fake_gcm_id'], {'payload': 'asdf'}))
 
-    @patch('restriccion_scl.libs.notifications.GCM')
+    @patch('restriccion.libs.notifications.GCM')
     def test_libs_notifications_send_to_gcm_unregistered_or_invalid_devices(self, mock_gcm):
         mock_method = Mock()
         mock_method.json_request = Mock(return_value={
@@ -39,7 +38,7 @@ class TestLibsNotificationsGcm(BaseTestCase):
 
         self.assertEqual(expected_value, send_to_gcm(['fake_gcm_id'], {'payload': 'asdf'}))
 
-    @patch('restriccion_scl.libs.notifications.GCM')
+    @patch('restriccion.libs.notifications.GCM')
     def test_libs_notifications_send_to_gcm_receiving_canonical_ids_response(self, mock_gcm):
         mock_method = Mock()
         mock_method.json_request = Mock(return_value={

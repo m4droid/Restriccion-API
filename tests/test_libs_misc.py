@@ -1,8 +1,5 @@
-from mock import Mock, patch
-import moment
-
 from .base_tests import BaseTestCase
-from restriccion_scl.libs.misc import list_chunks_generator
+from restriccion.libs.misc import list_chunks_generator
 
 
 class TestLibsMisc(BaseTestCase):

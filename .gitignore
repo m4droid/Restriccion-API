@@ -1,5 +1,6 @@
 .DS_Store
 
+.eggs
 *.egg-info
 *.pyc
 __pycache__
