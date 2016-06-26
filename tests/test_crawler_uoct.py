@@ -76,8 +76,9 @@ class TestUoct_Crawler(BaseTestCase):
 
         self.assertEqual(
             {
+                'ciudad': 'Santiago',
                 'fecha': '2015-06-21',
-                'hash': 'b9404006aa20e542bac244b83d6511f019eeccf1',
+                'hash': 'f693c1f77758d75401a664fbf7bd8f22440c8496',
                 'sin_sello_verde': ['3', '4', '5', '6', '7', '8'],
                 'con_sello_verde': ['0', '9'],
                 'fuente': 'http://www.uoct.cl/restriccion-vehicular/',
@@ -95,8 +96,9 @@ class TestUoct_Crawler(BaseTestCase):
 
         self.assertEqual(
             {
+                'ciudad': 'Santiago',
                 'fecha': '2015-07-05',
-                'hash': '202458c43bb7d6b7ce9b9a6f34ff7d2f88387580',
+                'hash': '7eb705852b3cdc23df53e6a45072250a237ecc8b',
                 'con_sello_verde': [],
                 'sin_sello_verde': ['3', '4'],
                 'fuente': 'http://www.uoct.cl/restriccion-vehicular/',
@@ -109,8 +111,9 @@ class TestUoct_Crawler(BaseTestCase):
 
         self.assertEqual(
             {
+                'ciudad': 'Santiago',
                 'fecha': '2015-07-06',
-                'hash': '8aec9e65a0d5073f8b472bbd38b73eba89c42548',
+                'hash': 'fafac835207a3b3da02d4e4002744ab76a1084f8',
                 'con_sello_verde': [],
                 'sin_sello_verde': ['5', '6', '7', '8'],
                 'fuente': 'http://www.uoct.cl/restriccion-vehicular/',
@@ -128,8 +131,9 @@ class TestUoct_Crawler(BaseTestCase):
 
         self.assertEqual(
             {
+                'ciudad': 'Santiago',
                 'fecha': '2016-06-26',
-                'hash': '8e0dc04cebcff1b6ebf03bd4025d45e43f009ac7',
+                'hash': 'b9c9abe889ddb3431ff46d2c2de97b80ebb5ea8e',
                 'con_sello_verde': ['6', '7'],
                 'sin_sello_verde': ['3', '4', '5', '6', '7', '8'],
                 'fuente': 'http://www.uoct.cl/restriccion-vehicular/',
@@ -142,8 +146,9 @@ class TestUoct_Crawler(BaseTestCase):
 
         self.assertEqual(
             {
+                'ciudad': 'Santiago',
                 'fecha': '2016-06-26',
-                'hash': '8e0dc04cebcff1b6ebf03bd4025d45e43f009ac7',
+                'hash': 'b9c9abe889ddb3431ff46d2c2de97b80ebb5ea8e',
                 'con_sello_verde': ['6', '7'],
                 'sin_sello_verde': ['3', '4', '5', '6', '7', '8'],
                 'fuente': 'http://www.uoct.cl/restriccion-vehicular/',

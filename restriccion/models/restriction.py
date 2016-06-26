@@ -9,8 +9,9 @@ from restriccion import CONFIG
 class Restriction(object):
 
     @staticmethod
-    def dict(date, with_green_seal, without_green_seal, source):
+    def dict(city, date, with_green_seal, without_green_seal, source):
         data = {
+            'ciudad': city,
             'fecha': date,
             'sin_sello_verde': with_green_seal,
             'con_sello_verde': without_green_seal,
@@ -24,6 +25,7 @@ class Restriction(object):
 
         # Hash data to detect changes
         sha1_message = hashlib.sha1()
+        sha1_message.update(data['ciudad'].encode('utf-8'))
         sha1_message.update(data['fecha'].encode('utf-8'))
         sha1_message.update('-'.join(data['sin_sello_verde']).encode('utf-8'))
         sha1_message.update('-'.join(data['con_sello_verde']).encode('utf-8'))
@@ -55,10 +57,17 @@ class Restriction(object):
             'con_sello_verde': 1,
             'hash': 1,
             'fuente': 1,
+            'ciudad': 1,
         }
 
         for restriction in restrictions_list:
-            row = mongo_db.restrictions.find_one({'fecha': restriction['fecha']}, projection)
+            row = mongo_db.restrictions.find_one(
+                {
+                    'ciudad': restriction['ciudad'],
+                    'fecha': restriction['fecha']
+                },
+                projection
+            )
 
             if row == restriction:
                 continue
@@ -68,7 +77,13 @@ class Restriction(object):
             if row is None:
                 mongo_db.restrictions.insert_one(restriction)
             else:
-                mongo_db.restrictions.update_one({'fecha': row['fecha']}, {'$set': restriction})
+                mongo_db.restrictions.update_one(
+                    {
+                        'ciudad': row['ciudad'],
+                        'fecha': row['fecha']
+                    },
+                    {'$set': restriction}
+                )
 
             if '_id' in restriction:
                 del restriction['_id']

@@ -53,8 +53,9 @@ class TestApiRestrictions(ApiBaseTestCase):
 
         self.assertEqual(
             {
+                'ciudad': 'Santiago',
                 'fecha': '2015-06-21',
-                'hash': 'b9404006aa20e542bac244b83d6511f019eeccf1',
+                'hash': 'f693c1f77758d75401a664fbf7bd8f22440c8496',
                 'sin_sello_verde': ['3', '4', '5', '6', '7', '8'],
                 'con_sello_verde': ['0', '9'],
                 'actualizacion': mock_datetime.isoformat(),
