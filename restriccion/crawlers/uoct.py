@@ -6,7 +6,7 @@ from pyquery import PyQuery as pq
 from restriccion import CONFIG
 
 from ..models.air_quality import AirQualityReport
-from ..models.restriction import Restriction
+from ..models.restriction import RestrictionReport
 
 
 class UOCT_Crawler(object):
@@ -38,7 +38,7 @@ class UOCT_Crawler(object):
                 }
             ))
 
-            reports['restriction'].append(Restriction.dict(
+            reports['restriction'].append(RestrictionReport.dict(
                 UOCT_Crawler.url,
                 {
                     'ciudad': 'Santiago',
@@ -67,7 +67,7 @@ class UOCT_Crawler(object):
         )
         self.insert_report_in_position(reports['air_quality'], air_quality_report)
 
-        restriction_report = Restriction.dict(
+        restriction_report = RestrictionReport.dict(
             UOCT_Crawler.url,
             {
                 'ciudad': 'Santiago',

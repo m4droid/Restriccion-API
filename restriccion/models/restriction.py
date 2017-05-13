@@ -2,7 +2,7 @@
 from .base_report import BaseReport
 
 
-class Restriction(BaseReport):
+class RestrictionReport(BaseReport):
 
     @classmethod
     def get_mongo_collection(cls):

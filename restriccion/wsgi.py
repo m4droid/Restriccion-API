@@ -10,7 +10,7 @@ from validate_email import validate_email
 from restriccion import CONFIG
 from restriccion.models.device import Device
 from restriccion.models.air_quality import AirQualityReport
-from restriccion.models.restriction import Restriction
+from restriccion.models.restriction import RestrictionReport
 
 
 EMPTY_VALUES = [None, '']
@@ -50,7 +50,7 @@ def report_restrictions_get():
     if query is None:
         return json_response([], status_code=400)
 
-    return json_response(Restriction.get(mongo_db, query))
+    return json_response(RestrictionReport.get(mongo_db, query))
 
 
 @app.route("/0/calidad-aire", methods=['GET'])

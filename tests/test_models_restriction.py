@@ -5,7 +5,7 @@ import moment
 from .base_tests import BaseTestCase
 
 from restriccion.crawlers.uoct import UOCT_Crawler
-from restriccion.models.restriction import Restriction
+from restriccion.models.restriction import RestrictionReport
 
 
 class TestModelsRestriction(BaseTestCase):
@@ -17,9 +17,9 @@ class TestModelsRestriction(BaseTestCase):
 
         crawler = UOCT_Crawler()
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_0.html')
-        Restriction.insert_many(self.mongo_db, crawler.parse()['restriction'])
+        RestrictionReport.insert_many(self.mongo_db, crawler.parse()['restriction'])
 
-        restrictions = Restriction.get(self.mongo_db)
+        restrictions = RestrictionReport.get(self.mongo_db)
         self.assertEqual(10, len(restrictions))
         self.assertEqual(
             {
@@ -40,9 +40,9 @@ class TestModelsRestriction(BaseTestCase):
 
         crawler = UOCT_Crawler()
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_0.html')
-        Restriction.insert_many(self.mongo_db, crawler.parse()['restriction'])
+        RestrictionReport.insert_many(self.mongo_db, crawler.parse()['restriction'])
 
-        self.assertEqual(26, len(Restriction.get(self.mongo_db, limit=30)))
+        self.assertEqual(26, len(RestrictionReport.get(self.mongo_db, limit=30)))
 
     @patch('restriccion.models.base_report.moment.utcnow')
     def test_models_restriction_insert_many(self, mock_moment):
@@ -54,11 +54,11 @@ class TestModelsRestriction(BaseTestCase):
 
         new_restrictions = crawler.parse()['restriction']
 
-        Restriction.insert_many(self.mongo_db, new_restrictions)
+        RestrictionReport.insert_many(self.mongo_db, new_restrictions)
 
-        self.assertEqual(len(new_restrictions), self.mongo_db[Restriction.get_mongo_collection()].count())
+        self.assertEqual(len(new_restrictions), self.mongo_db[RestrictionReport.get_mongo_collection()].count())
 
-        rows = self.mongo_db[Restriction.get_mongo_collection()].find({}, {'_id': 0})
+        rows = self.mongo_db[RestrictionReport.get_mongo_collection()].find({}, {'_id': 0})
         for i in range(len(new_restrictions)):
             new_restrictions[i]['actualizacion'] = mock_datetime.isoformat()
             self.assertEqual(new_restrictions[i], rows[i])
@@ -69,11 +69,11 @@ class TestModelsRestriction(BaseTestCase):
 
         crawler = UOCT_Crawler()
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_0.html')
-        Restriction.insert_many(self.mongo_db, crawler.parse()['restriction'])
-        self.assertEqual(26, self.mongo_db[Restriction.get_mongo_collection()].count())
+        RestrictionReport.insert_many(self.mongo_db, crawler.parse()['restriction'])
+        self.assertEqual(26, self.mongo_db[RestrictionReport.get_mongo_collection()].count())
 
         first_entries = []
-        rows = self.mongo_db[Restriction.get_mongo_collection()].find(
+        rows = self.mongo_db[RestrictionReport.get_mongo_collection()].find(
             {'$query': {}, '$orderby': {'fecha': -1}}, {'_id': 0}
         )
         for row in rows:
@@ -84,11 +84,11 @@ class TestModelsRestriction(BaseTestCase):
 
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_1.html')
         new_restrictions = crawler.parse()['restriction']
-        Restriction.insert_many(self.mongo_db, new_restrictions)
-        self.assertEqual(len(new_restrictions), self.mongo_db[Restriction.get_mongo_collection()].count())
+        RestrictionReport.insert_many(self.mongo_db, new_restrictions)
+        self.assertEqual(len(new_restrictions), self.mongo_db[RestrictionReport.get_mongo_collection()].count())
 
         second_entries = []
-        rows = self.mongo_db[Restriction.get_mongo_collection()].find(
+        rows = self.mongo_db[RestrictionReport.get_mongo_collection()].find(
             {'$query': {}, '$orderby': {'fecha': -1}}, {'_id': 0}
         )
         for row in rows:
@@ -116,10 +116,10 @@ class TestModelsRestriction(BaseTestCase):
 
         crawler = UOCT_Crawler()
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_1.html')
-        Restriction.insert_many(self.mongo_db, crawler.parse()['restriction'])
+        RestrictionReport.insert_many(self.mongo_db, crawler.parse()['restriction'])
 
         first_entries = []
-        rows = self.mongo_db[Restriction.get_mongo_collection()].find({'$query': {}, '$orderby': {'fecha': -1}})
+        rows = self.mongo_db[RestrictionReport.get_mongo_collection()].find({'$query': {}, '$orderby': {'fecha': -1}})
         for row in rows:
             first_entries.append(row)
 
@@ -127,10 +127,10 @@ class TestModelsRestriction(BaseTestCase):
         mock_moment.side_effect = lambda: moment.utc('2015-06-22T01:00:00', '%Y-%m-%dT%H:%M:%S')
         crawler = UOCT_Crawler()
         crawler.url = self.get_fixture_file_path('uoct.cl_restriccion-vehicular_2.html')
-        Restriction.insert_many(self.mongo_db, crawler.parse()['restriction'])
+        RestrictionReport.insert_many(self.mongo_db, crawler.parse()['restriction'])
 
         second_entries = []
-        rows = self.mongo_db[Restriction.get_mongo_collection()].find({'$query': {}, '$orderby': {'fecha': -1}})
+        rows = self.mongo_db[RestrictionReport.get_mongo_collection()].find({'$query': {}, '$orderby': {'fecha': -1}})
         for row in rows:
             second_entries.append(row)
 
