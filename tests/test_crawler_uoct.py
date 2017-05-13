@@ -53,8 +53,8 @@ class TestUoct_Crawler(BaseTestCase):
         reports = crawler.parse()
         self.assertEqual(dict, type(reports))
 
-        self.assertEqual(list, type(reports['restrictions']))
-        self.assertEqual(26, len(reports['restrictions']))
+        self.assertEqual(list, type(reports['restriction']))
+        self.assertEqual(26, len(reports['restriction']))
 
         self.assertEqual(list, type(reports['air_quality']))
         self.assertEqual(26, len(reports['air_quality']))
@@ -70,8 +70,8 @@ class TestUoct_Crawler(BaseTestCase):
 
         reports = UOCT_Crawler().parse()
 
-        self.assertEqual(list, type(reports['restrictions']))
-        self.assertEqual(27, len(reports['restrictions']))
+        self.assertEqual(list, type(reports['restriction']))
+        self.assertEqual(27, len(reports['restriction']))
 
         self.assertEqual(list, type(reports['air_quality']))
         self.assertEqual(27, len(reports['air_quality']))
@@ -93,7 +93,7 @@ class TestUoct_Crawler(BaseTestCase):
                 'con_sello_verde': ['0', '9'],
                 'fuente': 'http://www.uoct.cl/restriccion-vehicular/',
             },
-            reports['restrictions'][0]
+            reports['restriction'][0]
         )
 
         self.assertEqual(
@@ -124,7 +124,7 @@ class TestUoct_Crawler(BaseTestCase):
                 'sin_sello_verde': ['3', '4'],
                 'fuente': 'http://www.uoct.cl/restriccion-vehicular/',
             },
-            reports['restrictions'][0]
+            reports['restriction'][0]
         )
 
         self.assertEqual(
@@ -150,7 +150,7 @@ class TestUoct_Crawler(BaseTestCase):
                 'sin_sello_verde': ['5', '6', '7', '8'],
                 'fuente': 'http://www.uoct.cl/restriccion-vehicular/',
             },
-            reports['restrictions'][0]
+            reports['restriction'][0]
         )
 
         self.assertEqual(
@@ -181,7 +181,7 @@ class TestUoct_Crawler(BaseTestCase):
                 'sin_sello_verde': ['3', '4', '5', '6', '7', '8'],
                 'fuente': 'http://www.uoct.cl/restriccion-vehicular/',
             },
-            reports['restrictions'][0]
+            reports['restriction'][0]
         )
 
         self.assertEqual(
@@ -196,7 +196,7 @@ class TestUoct_Crawler(BaseTestCase):
         )
 
         mock_moment.side_effect = lambda: moment.utc('2016-06-26', '%Y-%m-%d')
-        reports['restrictions'] = crawler.parse()['restrictions']
+        reports['restriction'] = crawler.parse()['restriction']
 
         self.assertEqual(
             {
@@ -207,7 +207,7 @@ class TestUoct_Crawler(BaseTestCase):
                 'sin_sello_verde': ['3', '4', '5', '6', '7', '8'],
                 'fuente': 'http://www.uoct.cl/restriccion-vehicular/',
             },
-            reports['restrictions'][0]
+            reports['restriction'][0]
         )
 
         self.assertEqual(
@@ -219,4 +219,58 @@ class TestUoct_Crawler(BaseTestCase):
                 'fuente': 'http://www.uoct.cl/restriccion-vehicular/',
             },
             reports['air_quality'][0]
+        )
+
+    @patch('restriccion.crawlers.uoct.moment.utcnow')
+    def test_crawler_uoct_parse_air_quality_report_only(self, mock_moment):
+        mock_moment.side_effect = lambda: moment.utc('2017-05-13', '%Y-%m-%d')
+
+        crawler = UOCT_Crawler()
+        crawler.url = self.get_fixture_file_path('date/uoct.cl_restriccion-vehicular_2017_05_13.html')
+        reports = crawler.parse()
+
+        self.assertEqual(2, len(reports['restriction']))
+        self.assertEquals(
+            {
+                'ciudad': 'Santiago',
+                'fecha': '2017-05-13',
+                'sin_sello_verde': [],
+                'con_sello_verde': [],
+                'hash': 'ff44f9f3dccc362b10b0d578699757eae8491777',
+                'fuente': 'http://www.uoct.cl/restriccion-vehicular/'
+            },
+            reports['restriction'][0]
+        )
+        self.assertEquals(
+            {
+                'ciudad': 'Santiago',
+                'fecha': '2017-05-09',
+                'sin_sello_verde': [],
+                'con_sello_verde': [],
+                'hash': '26ea0a1f20a66ae6ffd3ed2f1e0fd468f7c2f234',
+                'fuente': 'http://www.uoct.cl/restriccion-vehicular/'
+            },
+            reports['restriction'][1]
+        )
+
+        self.assertEqual(2, len(reports['air_quality']))
+        self.assertEqual(
+            {
+                'ciudad': 'Santiago',
+                'fecha': '2017-05-13',
+                'estado': 'Normal',
+                'hash': '4bf3326dca181c2a8d9b64a060fed8c71e03d656',
+                'fuente': 'http://www.uoct.cl/restriccion-vehicular/'
+            },
+            reports['air_quality'][0]
+        )
+        self.assertEqual(
+            {
+                'ciudad': 'Santiago',
+                'fecha': '2017-05-09',
+                'estado': 'Alerta Ambiental',
+                'hash': '3568e7fdef8bbea2fb09aa7c5aa271bf6c18921f',
+                'fuente': 'http://www.uoct.cl/restriccion-vehicular/'
+            },
+            reports['air_quality'][1]
         )

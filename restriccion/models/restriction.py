@@ -10,8 +10,8 @@ class Restriction(BaseReport):
 
     @classmethod
     def get_fields(cls):
-        return ['ciudad', 'fecha', 'sin_sello_verde', 'con_sello_verde']
+        return ('ciudad', 'fecha', 'sin_sello_verde', 'con_sello_verde',)
 
     @classmethod
     def get_unique_fields(cls):
-        return ['ciudad', 'fecha']
+        return ('ciudad', 'fecha',)

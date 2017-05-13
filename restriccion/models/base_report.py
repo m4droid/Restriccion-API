@@ -72,7 +72,7 @@ class BaseReport(object):
             '_id': 0,
             'hash': 1,
         }
-        for field in ['hash', 'fuente'] + cls.get_fields():
+        for field in ['hash', 'fuente'] + list(cls.get_fields()):
             projection[field] = 1
 
         class_collection = cls.get_mongo_collection()

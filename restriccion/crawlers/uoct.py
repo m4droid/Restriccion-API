@@ -4,7 +4,8 @@ import moment
 from pyquery import PyQuery as pq
 
 from restriccion import CONFIG
-from ..models.air_quality import AirQuality
+
+from ..models.air_quality import AirQualityReport
 from ..models.restriction import Restriction
 
 
@@ -16,7 +17,7 @@ class UOCT_Crawler(object):
         self.url = UOCT_Crawler.url
 
     def parse(self):
-        reports = {'restrictions': [], 'air_quality': []}
+        reports = {'restriction': [], 'air_quality': []}
 
         if self.url.startswith('file://'):
             document = pq(filename=self.url.replace('file://', ''))
@@ -28,7 +29,7 @@ class UOCT_Crawler(object):
 
         for row in rows[2:]:
             date_ = moment.date(row.find('td[3]').text.strip(), '%d-%m-%Y').format('YYYY-M-D')
-            reports['air_quality'].append(AirQuality.dict(
+            reports['air_quality'].append(AirQualityReport.dict(
                 UOCT_Crawler.url,
                 {
                     'ciudad': 'Santiago',
@@ -37,7 +38,7 @@ class UOCT_Crawler(object):
                 }
             ))
 
-            reports['restrictions'].append(Restriction.dict(
+            reports['restriction'].append(Restriction.dict(
                 UOCT_Crawler.url,
                 {
                     'ciudad': 'Santiago',
@@ -47,7 +48,7 @@ class UOCT_Crawler(object):
                 }
             ))
 
-        reports['restrictions'].sort(key=lambda r: r['fecha'], reverse=True)
+        reports['restriction'].sort(key=lambda r: r['fecha'], reverse=True)
 
         # Current day info
         info = document('.eventslist .restriction h3')
@@ -56,7 +57,7 @@ class UOCT_Crawler(object):
 
         date_ = moment.utcnow().timezone(CONFIG['moment']['timezone']).format('YYYY-M-D')
 
-        air_quality = AirQuality.dict(
+        air_quality_report = AirQualityReport.dict(
             UOCT_Crawler.url,
             {
                 'ciudad': 'Santiago',
@@ -64,9 +65,9 @@ class UOCT_Crawler(object):
                 'estado': 'Normal'
             }
         )
-        self.insert_report_in_position(reports['air_quality'], air_quality)
+        self.insert_report_in_position(reports['air_quality'], air_quality_report)
 
-        restriction = Restriction.dict(
+        restriction_report = Restriction.dict(
             UOCT_Crawler.url,
             {
                 'ciudad': 'Santiago',
@@ -75,7 +76,7 @@ class UOCT_Crawler(object):
                 'con_sello_verde': self.clean_digits_string(info[1].text),
             }
         )
-        self.insert_report_in_position(reports['restrictions'], restriction)
+        self.insert_report_in_position(reports['restriction'], restriction_report)
 
         return reports
 
