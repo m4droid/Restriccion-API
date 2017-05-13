@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
-from mock import Mock, patch
+from unittest.mock import Mock, patch
+
 import moment
 
 from .base_tests import BaseTestCase
+
 from restriccion import CONFIG
 from restriccion.models.device import Device
 

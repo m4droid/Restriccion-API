@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import json
+from unittest.mock import patch
 
-from mock import patch
 import moment
 
 from .base_tests import ApiBaseTestCase

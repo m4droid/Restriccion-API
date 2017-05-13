@@ -1,7 +1,9 @@
-from mock import patch
+from unittest.mock import patch
+
 import moment
 
 from .base_tests import BaseTestCase
+
 from restriccion.crawlers.uoct import UOCT_Crawler
 from restriccion.models.restriction import Restriction
 
