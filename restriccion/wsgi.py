@@ -9,6 +9,7 @@ from validate_email import validate_email
 
 from restriccion import CONFIG
 from restriccion.models.device import Device
+from restriccion.models.air_quality import AirQualityReport
 from restriccion.models.restriction import Restriction
 
 
@@ -28,20 +29,38 @@ def json_response(data, status_code=200):
     return response
 
 
-@app.route("/0/restricciones", methods=['GET'])
-def restrictions_get():
-    date = request.args.get('fecha', None)
+def reports_get_query():
+    date = request.args.get('fecha')
 
-    data = []
     query = {}
+
     if date is not None:
         try:
-            date = moment.date(date.strip(), '%Y-%m-%d').format('YYYY-M-D')
-            query = {'fecha': date}
+            query['fecha'] = moment.date(date.strip(), '%Y-%m-%d').format('YYYY-M-D')
         except ValueError:
-            return json_response(data, status_code=400)
+            return None
+
+    return query
+
+
+@app.route("/0/restricciones", methods=['GET'])
+def report_restrictions_get():
+    query = reports_get_query()
+
+    if query is None:
+        return json_response([], status_code=400)
 
     return json_response(Restriction.get(mongo_db, query))
+
+
+@app.route("/0/calidad-aire", methods=['GET'])
+def report_air_quality_get():
+    query = reports_get_query()
+
+    if query is None:
+        return json_response([], status_code=400)
+
+    return json_response(AirQualityReport.get(mongo_db, query))
 
 
 @app.route("/0/dispositivos", methods=['GET'])
