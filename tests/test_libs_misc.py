@@ -1,4 +1,5 @@
 from .base_tests import BaseTestCase
+
 from restriccion.libs.misc import list_chunks_generator
 
 

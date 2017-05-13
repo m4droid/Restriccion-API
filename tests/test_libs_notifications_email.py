@@ -1,6 +1,7 @@
-from mock import Mock, patch
+from unittest.mock import Mock, patch
 
 from .base_tests import BaseTestCase
+
 from restriccion.libs.notifications import send_to_email_addresses
 
 

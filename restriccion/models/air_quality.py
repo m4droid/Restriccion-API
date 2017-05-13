@@ -2,7 +2,7 @@
 from .base_report import BaseReport
 
 
-class AirQuality(BaseReport):
+class AirQualityReport(BaseReport):
 
     @staticmethod
     def get_mongo_collection():
@@ -10,8 +10,8 @@ class AirQuality(BaseReport):
 
     @staticmethod
     def get_fields():
-        return ['ciudad', 'fecha', 'estado']
+        return ('ciudad', 'fecha', 'estado',)
 
     @staticmethod
     def get_unique_fields():
-        return ['ciudad', 'fecha']
+        return ('ciudad', 'fecha',)

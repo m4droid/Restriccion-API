@@ -9,7 +9,7 @@ from ..libs.notifications import send_to_gcm, send_to_email_addresses
 
 class Device(object):
 
-    ALLOWED_TYPES = ['email', 'gcm']
+    ALLOWED_TYPES = ('email', 'gcm',)
 
     @staticmethod
     def get(mongo_db, type_=None, id_=None):
