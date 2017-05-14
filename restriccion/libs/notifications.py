@@ -55,7 +55,7 @@ def send_to_email_addresses(emails_list, data):
         try:
             service.sendmail(email_from, email_to, msg.as_string())
             sent_emails.append(email_to)
-        except:
+        except OSError:
             pass
     service.quit()
 

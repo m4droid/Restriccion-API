@@ -21,7 +21,7 @@ class TestLibsNotificationsEmail(BaseTestCase):
     @patch('restriccion.libs.notifications.smtplib')
     def test_libs_notifications_send_emails_error(self, mock_smtplib):
         mock_class = Mock()
-        mock_class.sendmail = Mock(side_effect=Exception())
+        mock_class.sendmail = Mock(side_effect=OSError())
         mock_smtplib.SMTP = lambda *a: mock_class
 
         expected_emails = ["fake@email.com"]

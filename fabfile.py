@@ -158,5 +158,5 @@ def uwsgi_stop():
     )
 
 
-def _dump_env_vars_uwsgi(vars):
-    return '\\n'.join('env = {0:s}={1:s}'.format(*var) for var in vars.items()).strip()
+def _dump_env_vars_uwsgi(vars_):
+    return '\\n'.join('env = {0:s}={1:s}'.format(*var) for var in vars_.items()).strip()

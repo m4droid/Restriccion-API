@@ -24,8 +24,7 @@ def load_env_params():
     config_path = _get_config_path('env_{0:s}.json'.format(env))
 
     if config_path is None:
-        print('ERROR: {0:s} environment config file not found'.format(env), file=sys.stderr)
-        return
+        raise Exception('ERROR: {0:s} environment config file not found'.format(env), file=sys.stderr)
 
     with open(config_path) as f:
         data = json.load(f)
