@@ -2,14 +2,14 @@
 import moment
 from validate_email import validate_email
 
-from restriccion_scl import CONFIG
-from restriccion_scl.libs.misc import list_chunks_generator
-from restriccion_scl.libs.notifications import send_to_gcm, send_to_email_addresses
+from restriccion import CONFIG
+from ..libs.misc import list_chunks_generator
+from ..libs.notifications import send_to_gcm, send_to_email_addresses
 
 
 class Device(object):
 
-    ALLOWED_TYPES = ['email', 'gcm']
+    ALLOWED_TYPES = ('email', 'gcm',)
 
     @staticmethod
     def get(mongo_db, type_=None, id_=None):

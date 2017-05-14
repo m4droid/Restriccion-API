@@ -1,0 +1,32 @@
+{
+  "pymongo": {
+    "client": {
+      "host": "localhost",
+      "port": 27017
+    },
+    "database": "restriccion"
+  },
+  "moment": {
+    "timezone": "UTC-3"
+  },
+  "notifications": {
+    "gcm": {
+      "api_key": "dummy_gcm_key"
+    },
+    "email": {
+      "enabled": false,
+      "template": "template_email_test.html",
+      "server": {
+        "host": [
+          "localhost"
+        ],
+        "login": [
+          "user",
+          "pass"
+        ]
+      },
+      "from": "dummy@email.com",
+      "subject": "Dummy email"
+    }
+  }
+}

@@ -2,14 +2,15 @@
 import json
 
 from flask import Flask, request, Response
-from flask.ext.cors import CORS
+from flask_cors import CORS
 import moment
 import pymongo
 from validate_email import validate_email
 
-from restriccion_scl import CONFIG
-from restriccion_scl.models.device import Device
-from restriccion_scl.models.restriction import Restriction
+from restriccion import CONFIG
+from restriccion.models.device import Device
+from restriccion.models.air_quality import AirQualityReport
+from restriccion.models.restriction import RestrictionReport
 
 
 EMPTY_VALUES = [None, '']
@@ -27,20 +28,40 @@ def json_response(data, status_code=200):
     response.status_code = status_code
     return response
 
-@app.route("/0/restricciones", methods=['GET'])
-def restrictions_get():
-    date = request.args.get('fecha', None)
 
-    data = []
+def reports_get_query():
+    date = request.args.get('fecha')
+
     query = {}
+
     if date is not None:
         try:
-            date = moment.date(date.strip(), '%Y-%m-%d').format('YYYY-M-D')
-            query = {'fecha': date}
+            query['fecha'] = moment.date(date.strip(), '%Y-%m-%d').format('YYYY-M-D')
         except ValueError:
-            return json_response(data, status_code=400)
+            return None
 
-    return json_response(Restriction.get(mongo_db, query))
+    return query
+
+
+@app.route("/0/restricciones", methods=['GET'])
+def report_restrictions_get():
+    query = reports_get_query()
+
+    if query is None:
+        return json_response([], status_code=400)
+
+    return json_response(RestrictionReport.get(mongo_db, query))
+
+
+@app.route("/0/calidad-aire", methods=['GET'])
+def report_air_quality_get():
+    query = reports_get_query()
+
+    if query is None:
+        return json_response([], status_code=400)
+
+    return json_response(AirQualityReport.get(mongo_db, query))
+
 
 @app.route("/0/dispositivos", methods=['GET'])
 def devices_get():
@@ -69,6 +90,7 @@ def devices_get():
             return json_response([], 400)
 
     return json_response(devices[0:1])
+
 
 @app.route("/0/dispositivos", methods=['POST'])
 def devices_post():

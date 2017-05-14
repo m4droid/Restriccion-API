@@ -1,8 +1,11 @@
 .DS_Store
 
+.eggs
 *.egg-info
 *.pyc
 __pycache__
+
 .coverage
+coverage
 
 configs/localhost.json

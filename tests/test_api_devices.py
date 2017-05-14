@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 import json
+from unittest.mock import patch
 
-from mock import patch
 import moment
 
 from .base_tests import ApiBaseTestCase
-from restriccion_scl import CONFIG
-from restriccion_scl.models.device import Device
+from restriccion import CONFIG
+from restriccion.models.device import Device
 
 
 class TestApiDevices(ApiBaseTestCase):
@@ -26,7 +26,7 @@ class TestApiDevices(ApiBaseTestCase):
         self.assertEqual(404, response.status_code)
         self.assertEqual('[]', response.data.decode())
 
-    @patch('restriccion_scl.models.device.moment.utcnow')
+    @patch('restriccion.models.device.moment.utcnow')
     def test_devices_get_ok(self, mock_moment):
         mock_datetime = moment.utc('2015-06-22', '%Y-%m-%d').timezone(CONFIG['moment']['timezone'])
         mock_moment.side_effect = lambda: mock_datetime
@@ -67,7 +67,7 @@ class TestApiDevices(ApiBaseTestCase):
         self.assertEqual(400, response.status_code)
         self.assertEqual(expected_response, json.loads(response.data.decode()))
 
-    @patch('restriccion_scl.wsgi.moment.utcnow')
+    @patch('restriccion.wsgi.moment.utcnow')
     def test_devices_post_ok(self, mock_moment):
         mock_datetime = moment.date('2015-06-22', '%Y-%m-%d')
         mock_moment.side_effect = lambda: mock_datetime
@@ -86,7 +86,7 @@ class TestApiDevices(ApiBaseTestCase):
         expected_device['fecha_registro'] = mock_datetime.isoformat()
         self.assertEqual(expected_device, data)
 
-    @patch('restriccion_scl.wsgi.moment.utcnow')
+    @patch('restriccion.wsgi.moment.utcnow')
     def test_devices_post_existing(self, mock_moment):
         mock_datetime = moment.utc('2015-06-22', '%Y-%m-%d').timezone(CONFIG['moment']['timezone'])
         mock_moment.side_effect = lambda: mock_datetime
@@ -114,7 +114,7 @@ class TestApiDevices(ApiBaseTestCase):
 
         self.assertEqual(expected_device, data)
 
-    @patch('restriccion_scl.wsgi.moment.utcnow')
+    @patch('restriccion.wsgi.moment.utcnow')
     def test_devices_post_email_ok(self, mock_moment):
         mock_datetime = moment.utc('2015-06-22', '%Y-%m-%d').timezone(CONFIG['moment']['timezone'])
         mock_moment.side_effect = lambda: mock_datetime
