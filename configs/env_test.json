@@ -1,27 +1,32 @@
 {
-	"pymongo": {
-		"client": {
-			"host": "localhost",
-			"port": 27017
-		},
-		"database": "restriccion_tests"
-	},
-	"moment": {
-		"timezone": "UTC"
-	},
-	"notifications": {
-		"gcm": {
-			"api_key": "dummy_gcm_key"
-		},
-		"email": {
-			"enabled": true,
-			"template": "template_email_test.html",
-			"server": {
-				"host": ["localhost"],
-				"login": ["user", "pass"]
-			},
-			"from": "test@test.com",
-			"subject": "Test"
-		}
-	}
+  "pymongo": {
+    "client": {
+      "host": "localhost",
+      "port": 27017
+    },
+    "database": "restriccion_tests"
+  },
+  "moment": {
+    "timezone": "UTC"
+  },
+  "notifications": {
+    "gcm": {
+      "api_key": "dummy_gcm_key"
+    },
+    "email": {
+      "enabled": true,
+      "template": "template_email_test.html",
+      "server": {
+        "host": [
+          "localhost"
+        ],
+        "login": [
+          "user",
+          "pass"
+        ]
+      },
+      "from": "test@test.com",
+      "subject": "Test"
+    }
+  }
 }

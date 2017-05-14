@@ -3,10 +3,9 @@
 [![Coverage Status](https://coveralls.io/repos/m4droid/Restriccion-API/badge.svg?branch=master)](https://coveralls.io/r/m4droid/Restriccion-API?branch=master)
 [![Code Health](https://landscape.io/github/m4droid/Restriccion-API/master/landscape.svg?style=flat)](https://landscape.io/github/m4droid/Restriccion-API/master)
 
-Page available at http://restriccion.m4droid.com/
-
-## Resources available
-* http://restriccion.m4droid.com/api/0/restricciones
+## Available endpoints
+* https://restriccion.m4droid.com/api/0/restricciones
+* https://restriccion.m4droid.com/api/0/calidad-aire
 
 ### API develop instructions
 
