@@ -11,6 +11,21 @@ from ..models.restriction import RestrictionReport
 
 class UOCT_Crawler(object):
 
+    MONTHS = [
+        'Enero',
+        'Febrero',
+        'Marzo',
+        'Abril',
+        'Mayo',
+        'Junio',
+        'Julio',
+        'Agosto',
+        'Septiembre',
+        'Octubre',
+        'Noviembre',
+        'Diciembre',
+    ]
+
     url = 'http://www.uoct.cl/restriccion-vehicular/'
 
     def __init__(self):
@@ -25,10 +40,12 @@ class UOCT_Crawler(object):
             document = pq(url=self.url)
 
         current_year = moment.utcnow().timezone(CONFIG['moment']['timezone']).format('YYYY')
-        rows = document('.selecthistory #table-%s tbody tr' % current_year)
+
+        rows = document('.selecthistory #table-{0:s} tbody tr'.format(current_year))
 
         for row in rows[2:]:
             date_ = moment.date(row.find('td[3]').text.strip(), '%d-%m-%Y').format('YYYY-M-D')
+
             reports['air_quality'].append(AirQualityReport.dict(
                 UOCT_Crawler.url,
                 {
@@ -55,13 +72,26 @@ class UOCT_Crawler(object):
         if len(info) != 2:
             return reports
 
-        date_ = moment.utcnow().timezone(CONFIG['moment']['timezone']).format('YYYY-M-D')
+        day_element = document('.events .eventstitle')
+
+        month = self.MONTHS.index(day_element.find('h5')[1].text.strip()) + 1
+        day = int(day_element.find('h4')[0].text.strip())
+
+        date = moment.utcnow().timezone(CONFIG['moment']['timezone'])
+
+        tomorrow = day_element.find('h5')[0].text.lower() == 'mañana'
+
+        if tomorrow:
+            date.add(days=1)
+
+        if month != date.month or day != date.day:
+            return reports
 
         air_quality_report = AirQualityReport.dict(
             UOCT_Crawler.url,
             {
                 'ciudad': 'Santiago',
-                'fecha': date_,
+                'fecha': date.format('YYYY-M-D'),
                 'estado': 'Normal'
             }
         )
@@ -71,7 +101,7 @@ class UOCT_Crawler(object):
             UOCT_Crawler.url,
             {
                 'ciudad': 'Santiago',
-                'fecha': date_,
+                'fecha': date.format('YYYY-M-D'),
                 'sin_sello_verde': self.clean_digits_string(info[0].text),
                 'con_sello_verde': self.clean_digits_string(info[1].text),
             }

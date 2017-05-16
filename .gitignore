@@ -8,4 +8,4 @@ __pycache__
 .coverage
 coverage
 
-configs/localhost.json
+configs/env_local.json

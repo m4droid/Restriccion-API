@@ -7,6 +7,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 
 
 def _get_config_path(filename):
+    if filename is None:
+        return None
+
     config_paths = [
         os.path.join(BASE_DIR, 'configs'),
         os.path.join(os.path.expanduser('~'), 'configs'),

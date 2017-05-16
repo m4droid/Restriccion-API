@@ -1,0 +1,27 @@
+{
+	"pymongo": {
+		"client": {
+			"host": "localhost",
+			"port": 27017
+		},
+		"database": "restriccion"
+	},
+	"moment": {
+		"timezone": "UTC-3"
+	},
+	"notifications": {
+		"gcm": {
+			"api_key": "AIzaSyAHA39FQRAnqVRxiWvKAHQOEzVrXpEKIfs"
+		},
+		"email": {
+			"enabled": "false",
+			"template": "template_email.html",
+			"server": {
+				"host": ["email-smtp.us-east-1.amazonaws.com"],
+				"login": ["AKIAIVG5DBPIHYT3232A", "AuFDeT0TMubPAoLdSGpKNTGsMNAvP2ToqNxeZS6Iw+ra"]
+			},
+			"from": "test@epistemonikos.org",
+			"subject": "Dummy email"
+		}
+	}
+}
