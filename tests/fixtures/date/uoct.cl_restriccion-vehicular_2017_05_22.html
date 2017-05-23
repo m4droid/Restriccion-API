@@ -1,0 +1,3408 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/><script type="text/javascript">window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var o=n[t]={exports:{}};e[t][0].call(o.exports,function(n){var o=e[t][1][n];return r(o||n)},o,o.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<t.length;o++)r(t[o]);return r}({1:[function(e,n,t){function r(){}function o(e,n,t){return function(){return i(e,[c.now()].concat(u(arguments)),n?null:this,t),n?void 0:this}}var i=e("handle"),a=e(2),u=e(3),f=e("ee").get("tracer"),c=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],d="api-",l=d+"ixn-";a(p,function(e,n){s[n]=o(d+n,!0,"api")}),s.addPageAction=o(d+"addPageAction",!0),s.setCurrentRouteName=o(d+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,o="function"==typeof n;return i(l+"tracer",[c.now(),e,t],r),function(){if(f.emit((o?"":"no-")+"fn-start",[c.now(),r,o],t),o)try{return n.apply(this,arguments)}finally{f.emit("fn-end",[c.now()],t)}}}};a("setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=o(l+n)}),newrelic.noticeError=function(e){"string"==typeof e&&(e=new Error(e)),i("err",[e,c.now()])}},{}],2:[function(e,n,t){function r(e,n){var t=[],r="",i=0;for(r in e)o.call(e,r)&&(t[i]=n(r,e[r]),i+=1);return t}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],3:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,o=t-n||0,i=Array(o<0?0:o);++r<o;)i[r]=e[n+r];return i}n.exports=r},{}],4:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function o(e){function n(e){return e&&e instanceof r?e:e?f(e,u,i):i()}function t(t,r,o,i){if(!d.aborted||i){e&&e(t,r,o);for(var a=n(o),u=m(t),f=u.length,c=0;c<f;c++)u[c].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function l(e,n){v[e]=m(e).concat(n)}function m(e){return v[e]||[]}function w(e){return p[e]=p[e]||o(t)}function g(e,n){c(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var v={},y={},b={on:l,emit:t,get:w,listeners:m,context:n,buffer:g,abort:a,aborted:!1};return b}function i(){return new r}function a(){(s.api||s.feature)&&(d.aborted=!0,s=d.backlog={})}var u="nr@context",f=e("gos"),c=e(2),s={},p={},d=n.exports=o();d.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(o.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return e[n]=r,r}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){o.buffer([e],r),o.emit(e,n,t)}var o=e("ee").get("handle");n.exports=r,r.ee=o},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,i,function(){return o++})}var o=1,i="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!x++){var e=h.info=NREUM.info,n=d.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();c(y,function(n,t){e[n]||(e[n]=t)}),f("mark",["onload",a()+h.offset],null,"api");var t=d.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function o(){"complete"===d.readyState&&i()}function i(){f("mark",["domContent",a()+h.offset],null,"api")}function a(){return E.exists&&performance.now?Math.round(performance.now()):(u=Math.max((new Date).getTime(),u))-h.offset}var u=(new Date).getTime(),f=e("handle"),c=e(2),s=e("ee"),p=window,d=p.document,l="addEventListener",m="attachEvent",w=p.XMLHttpRequest,g=w&&w.prototype;NREUM.o={ST:setTimeout,CT:clearTimeout,XHR:w,REQ:p.Request,EV:p.Event,PR:p.Promise,MO:p.MutationObserver};var v=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1026.min.js"},b=w&&g&&g[l]&&!/CriOS/.test(navigator.userAgent),h=n.exports={offset:u,now:a,origin:v,features:{},xhrWrappable:b};e(1),d[l]?(d[l]("DOMContentLoaded",i,!1),p[l]("load",r,!1)):(d[m]("onreadystatechange",o),p[m]("onload",r)),f("mark",["firstbyte",u],null,"api");var x=0,E=e(4)},{}]},{},["loader"]);</script><script type="text/javascript">window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var o=n[t]={exports:{}};e[t][0].call(o.exports,function(n){var o=e[t][1][n];return r(o||n)},o,o.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<t.length;o++)r(t[o]);return r}({1:[function(e,n,t){function r(){}function o(e,n,t){return function(){return i(e,[c.now()].concat(u(arguments)),n?null:this,t),n?void 0:this}}var i=e("handle"),a=e(2),u=e(3),f=e("ee").get("tracer"),c=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],d="api-",l=d+"ixn-";a(p,function(e,n){s[n]=o(d+n,!0,"api")}),s.addPageAction=o(d+"addPageAction",!0),s.setCurrentRouteName=o(d+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,o="function"==typeof n;return i(l+"tracer",[c.now(),e,t],r),function(){if(f.emit((o?"":"no-")+"fn-start",[c.now(),r,o],t),o)try{return n.apply(this,arguments)}finally{f.emit("fn-end",[c.now()],t)}}}};a("setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=o(l+n)}),newrelic.noticeError=function(e){"string"==typeof e&&(e=new Error(e)),i("err",[e,c.now()])}},{}],2:[function(e,n,t){function r(e,n){var t=[],r="",i=0;for(r in e)o.call(e,r)&&(t[i]=n(r,e[r]),i+=1);return t}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],3:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,o=t-n||0,i=Array(o<0?0:o);++r<o;)i[r]=e[n+r];return i}n.exports=r},{}],4:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function o(e){function n(e){return e&&e instanceof r?e:e?f(e,u,i):i()}function t(t,r,o,i){if(!d.aborted||i){e&&e(t,r,o);for(var a=n(o),u=m(t),f=u.length,c=0;c<f;c++)u[c].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function l(e,n){v[e]=m(e).concat(n)}function m(e){return v[e]||[]}function w(e){return p[e]=p[e]||o(t)}function g(e,n){c(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var v={},y={},b={on:l,emit:t,get:w,listeners:m,context:n,buffer:g,abort:a,aborted:!1};return b}function i(){return new r}function a(){(s.api||s.feature)&&(d.aborted=!0,s=d.backlog={})}var u="nr@context",f=e("gos"),c=e(2),s={},p={},d=n.exports=o();d.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(o.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return e[n]=r,r}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){o.buffer([e],r),o.emit(e,n,t)}var o=e("ee").get("handle");n.exports=r,r.ee=o},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,i,function(){return o++})}var o=1,i="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!x++){var e=h.info=NREUM.info,n=d.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();c(y,function(n,t){e[n]||(e[n]=t)}),f("mark",["onload",a()+h.offset],null,"api");var t=d.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function o(){"complete"===d.readyState&&i()}function i(){f("mark",["domContent",a()+h.offset],null,"api")}function a(){return E.exists&&performance.now?Math.round(performance.now()):(u=Math.max((new Date).getTime(),u))-h.offset}var u=(new Date).getTime(),f=e("handle"),c=e(2),s=e("ee"),p=window,d=p.document,l="addEventListener",m="attachEvent",w=p.XMLHttpRequest,g=w&&w.prototype;NREUM.o={ST:setTimeout,CT:clearTimeout,XHR:w,REQ:p.Request,EV:p.Event,PR:p.Promise,MO:p.MutationObserver};var v=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1026.min.js"},b=w&&g&&g[l]&&!/CriOS/.test(navigator.userAgent),h=n.exports={offset:u,now:a,origin:v,features:{},xhrWrappable:b};e(1),d[l]?(d[l]("DOMContentLoaded",i,!1),p[l]("load",r,!1)):(d[m]("onreadystatechange",o),p[m]("onload",r)),f("mark",["firstbyte",u],null,"api");var x=0,E=e(4)},{}]},{},["loader"]);</script>
+<title>Unidad Operativa de Control de Tránsito</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<link rel="shortcut icon" type="image/x-icon" href="http://www.uoct.cl/wp-content/themes/wp-uoct-responsive/img/favicon.ico">
+<link rel="stylesheet" type="text/css" href="http://www.uoct.cl/wp-content/themes/wp-uoct-responsive/grid.css">
+<link rel="stylesheet" type="text/css" href="http://www.uoct.cl/wp-content/themes/wp-uoct-responsive/style.css?315">
+<link rel="stylesheet" type="text/css" href="http://www.uoct.cl/wp-content/themes/wp-uoct-responsive/flexslider.css">
+
+<meta name="title" content="Restricción Vehicular"/>
+<meta name="description" content="Gestión de tránsito en las vías públicas de la ciudad de Santiago.	Puedes mantenerte informado sobre el estado de las vías y semáforos - Dirección: Santa Beatriz 319, Providencia. Santiago. Región Metropolitana"/>
+<meta property="og:title" content="Restricción Vehicular"/>
+<meta property="og:description" content="Gestión de tránsito en las vías públicas de la ciudad de Santiago.	Puedes mantenerte informado sobre el estado de las vías y semáforos - Dirección: Santa Beatriz 319, Providencia. Santiago. Región Metropolitana"/>
+<meta property="og:url" content="http://www.uoct.cl"/>
+<meta property="og:image" content="http://www.uoct.cl/wp-content/themes/wp-uoct-responsive/media/uoct-logo.png"/>
+<meta property="og:site_name" content="Unidad Operativa de Control de Tránsito: Santiago"/>
+<meta property="og:locale" content="es_ES"/>
+
+<script src="http://www.uoct.cl/wp-content/themes/wp-uoct-responsive/js/jquery.1.11.1.min.js"></script>
+<script src="http://www.uoct.cl/wp-content/themes/wp-uoct-responsive/js/masonry.min.js"></script>
+<script src="http://www.uoct.cl/wp-content/themes/wp-uoct-responsive/js/jquery.flexslider-min.js"></script>
+<script src="http://www.uoct.cl/wp-content/themes/wp-uoct-responsive/js/jquery.form.js"></script>
+<script src="http://www.uoct.cl/wp-content/themes/wp-uoct-responsive/js/jquery.validate.js"></script>
+<script src="http://www.uoct.cl/wp-content/themes/wp-uoct-responsive/js/additional-methods.js"></script>
+<script src="http://www.uoct.cl/wp-content/themes/wp-uoct-responsive/js/fancybox/jquery.fancybox.pack.js"></script>
+<script src="http://www.uoct.cl/wp-content/themes/wp-uoct-responsive/admin/js/serialize.min.js"></script>
+<script src="http://www.uoct.cl/wp-content/themes/wp-uoct-responsive/admin/js/unserialize.min.js"></script>
+<script src="http://www.uoct.cl/wp-content/themes/wp-uoct-responsive/js/functions.js?385"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<link rel="stylesheet" type="text/css" href="http://www.uoct.cl/wp-content/themes/wp-uoct-responsive/map_styles.css">
+<script src="http://www.uoct.cl/wp-content/themes/wp-uoct-responsive/js/leaflet/leaflet.js"></script>
+<link rel="stylesheet" type="text/css" href="http://www.uoct.cl/wp-content/themes/wp-uoct-responsive/js/leaflet/leaflet.css?v=2.0">
+<link rel="stylesheet" type="text/css" href="http://www.uoct.cl/wp-content/themes/wp-uoct-responsive/js/fancybox/jquery.fancybox.css">
+<script>
+var lat_reg = -33.477272;
+var long_reg = -70.658985;
+
+     var _gaq = _gaq || [];
+     _gaq.push(['_setAccount', 'UA-25612143-1']);
+     _gaq.push(['_setDomainName', 'uoct.cl']);
+     _gaq.push(['_trackPageview']);
+
+     (function() {
+       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+     })();
+
+</script>
+<script>
+     window.fbAsyncInit = function() {
+       FB.init({
+         appId      : '1043966078957559',
+         xfbml      : true,
+         version    : 'v2.5'
+       });
+     };
+
+     (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+</script>
+<!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+<![endif]-->
+
+
+
+</head>
+<body>
+	<script>
+
+	</script>
+<header>
+	<div class="topheader">
+		<div class="container">
+			<!--a href="http://www.uoct.cl" class="homelogo"><img src="http://www.uoct.cl/wp-content/themes/wp-uoct-responsive/img/logo.png" class="full"></a-->
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="gov-logo clear full"><span class="gov-logo-blue"></span><span class="gov-logo-red"></span></div>
+				</div>
+				<div class="col-sm-3 col-xs-6 contacttop clear">
+					<ul class="full">
+						<li class="twtop"><a href="https://twitter.com/UOCT_RM" target="_blank">Twitter</a></li>
+						<li class="mailtop"><a href="http://www.uoct.cl/#contacto">Contacto</a></li>
+					</ul>
+					<ul class="mobile">
+						<li><a href="http://www.uoct.cl/#contacto"><img src="http://www.uoct.cl/wp-content/themes/wp-uoct-responsive/img/mail@2x.png"></a></li>
+						<li><a href="https://twitter.com/UOCT_RM"><img src="http://www.uoct.cl/wp-content/themes/wp-uoct-responsive/img/tw@2x.png"></a></li>
+					</ul>
+				</div>
+				<div class="pull-right col-sm-6 cityselector full">
+					<ul>
+						<li><a href="http://antofagasta.uoct.cl">Antofagasta</a></li>
+						<li><a href="http://valparaiso.uoct.cl">Valparaíso</a></li>
+						<li><a href="/" class="active">Santiago</a></li>
+						<li><a href="http://rancagua.uoct.cl">Rancagua</a></li>
+						<li><a href="http://concepcion.uoct.cl">Concepción</a></li>
+					</ul>
+				</div>
+				<div class="col-xs-6 mobile">
+					<select name="city" id="city">
+						<option value="/">Santiago</option>
+						<option value="http://antofagasta.uoct.cl">Antofagasta</option>
+						<option value="http://valparaiso.uoct.cl/">Valparaíso</option>
+						<option value="http://rancagua.uoct.cl/">Rancagua</option>
+						<option value="http://concepcion.uoct.cl/">Concepción</option>
+					</select>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="middleheader">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 maintitle">
+					<!--a href="http://www.uoct.cl" class="homelogo"><img src="http://www.uoct.cl/wp-content/themes/wp-uoct-responsive/img/logo.png" class="mobile logo"></a-->
+					<div class="gov-logo clear mobile"><span class="gov-logo-blue"></span><span class="gov-logo-red"></span></div>
+					<h1><a href="http://www.uoct.cl">Unidad Operativa de Control de Tránsito</a></h1>
+				</div>
+				<div class="pull-right col-sm-6 middleright restrictiontop">
+					<div class="row">
+						<div class="col-sm-7 col-sm-offset-5 search full">
+							<form class="historial" id="form_search_header" name="buscador" action="http://www.uoct.cl/historial/" method="get">
+								<input type="text" name="palabras" placeholder="Presiona enter para buscar"><a href="#" class="go search"></a>
+							</form>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12 restrictiontop">
+									<a href="http://www.uoct.cl/restriccion-vehicular/" class="preemergencia">
+			<span class="preemergencia">Lunes 22 de Mayo: sin sello verde  5-6-7-8 -3-4, con sello verde 1-2</span>
+			<span class="preemergencia">Preemergencia Ambiental</span>
+		</a>
+								</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12 nav">
+				<div class="menushow">
+					<a href="#">Ver Menú <span>≡</span></a>
+				</div>
+				<nav>
+					<ul>
+						<li><a href="http://www.uoct.cl">Inicio</a></li>
+						<li><a href="http://www.uoct.cl/restriccion-vehicular/">Restricción Vehicular</a></li>
+						<li><a href="http://www.uoct.cl/historial/ultimos-eventos/">Eventos de Tránsito</a></li>
+						<li><a href="http://www.uoct.cl/camaras/">Cámaras</a></li>
+						<li><a href="http://www.uoct.cl/vias/">Vías</a></li>
+						<li><a href="http://www.uoct.cl/conoce-uoct/">Conoce UOCT</a></li>
+						<li><a href="http://www.uoct.cl/noticias/">Noticias</a></li>
+						<li><a href="http://www.uoct.cl/documentacion-tecnica/">Documentación Técnica</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
+</header>
+	<div class="container events">
+		<div class="row">
+			<div class="col-sm-12" style="background: #fff;">
+			  <div class="row">
+					<div class="col-sm-2 restr">
+						<div class="eventstitle">
+							<h3>Restricción Vehicular</h3>
+														<h5>HOY</h5>
+							<h4>22</h4>
+							<h5>Mayo</h5>
+													</div>
+					</div>
+		  					<div class="col-sm-10 eventslist restr">
+						<div class="row">
+							<div class="col-sm-12 titlerestrictions">
+								<h4>Patentes Terminadas en:</h4>
+							</div>
+							 <div class="col-sm-6"><div class="restriction"><h3> 5-6-7-8 -3-4</h3><h4 class="red">Sin sello verde</h4></div></div><div class="col-sm-6"><div class="restriction"><h3>1-2</h3><h4 class="green">Con Sello verde</h4></div></div>						</div>
+					</div>
+							</div>
+			</div>
+			<div class="col-sm-12 permanent">
+				<h4>Calendario Restricción Permanente Sin Sello Verde</h4>
+				<div class="day odd">
+					<h5>Lunes</h5>
+					<h3> 5-6-7-8</h3>
+				</div><div class="day even">
+					<h5>Martes</h5>
+					<h3>9-0-1-2</h3>
+				</div><div class="day odd">
+					<h5>Miércoles</h5>
+					<h3>3-4-5-6</h3>
+				</div><div class="day even">
+					<h5>Jueves</h5>
+					<h3>7-8-9-0</h3>
+				</div><div class="day odd">
+					<h5>Viernes</h5>
+					<h3>1-2-3-4</h3>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="restrictions">
+					<div class="row">
+						<div class="col-sm-10 col-sm-offset-1">
+							<p style="padding-left: 30px;"><span style="color: #0c6eb4;"><strong><u>Los vehículos CON sello verde (catalíticos)</u> no tendrán restricción permanente durante este año 2017, independiente de su año de fabricación o inscripción en el registro nacional de vehículos motorizados; solo se verán afectados durante los episodios de preemergencia o emergencia.</strong></span></p><p style="padding-left: 30px;"><span style="color: #0c6eb4;"><strong>Los taxis en todas sus modalidades están exentos de restricción, incluso en días con preemergencia o emergencia.</strong></span></p><p style="padding-left: 30px;"><span style="color: #0c6eb4;"><strong>La restricción para el transporte de carga regirá al interior de Américo Vespucio, entre las 10:00 y las 18:00 hrs.</strong></span></p><p style="padding-left: 30px;"><span style="color: #0c6eb4;"><strong>La restricción para los servicios de transporte privado remunerado de pasajeros regirá entre las 10:00 y las 16:00 hrs.</strong></span></p><p style="text-align: justify; padding-left: 30px;"><span style="color: #0c6eb4;"><strong>La restricción a los vehículos con sello verde (catalíticos) se aplicará de acuerdo al siguiente calendario, en forma correlativa, cuando se decrete preemergencia o emergencia ambiental.</strong></span></p><div class="col-sm-12 permanent"><h4><span style="color: #ffffff;">Calendario Vehículos CON Sello Verde en preemergencia y emergencia</span></h4><div class="day odd"><h5>Primer episodio</h5><h3><span style="color: #000000;">1-2</span></h3></div><div class="day even"><h5>Segundo episodio</h5><h3><span style="color: #000000;">3-4</span></h3></div><div class="day odd"><h5>Tercer episodio</h5><h3><span style="color: #000000;">5-6</span></h3></div><div class="day even"><h5>Cuarto episodio</h5><h3><span style="color: #000000;">7-8</span></h3></div><div class="day odd"><h5>Quinto episodio</h5><h3><span style="color: #000000;">9-0</span></h3></div></div><h4> </h4><h4>Vehículos sin convertidor catalítico (sin sello verde)</h4><p>Comenzó a regir la restricción vehicular permanente para los vehículos sin sello verde en la provincia de Santiago, más las comunas de San Bernardo y Puente Alto. La medida rige de lunes a viernes, excepto festivos, entre las <strong>07:30 y las 21:00 horas. </strong></p><p>La restricción vehicular se aplicará hasta el 31 de agosto de acuerdo a lo establecido en el siguiente cuadro:</p><div class="table1"><table style="height: 188px;" width="1288" cellspacing="0"><tbody><tr><th width="300">Tipo de vehículo</th><th>Horario</th><th>Perímetro</th></tr><tr><td>Vehículos Particulares sin sello verde</td><td>Entre las 07:30 y las 21:00 hrs.</td><td rowspan="3">La Provincia de Santiago más las comunas de San Bernardo y Puente Alto</td></tr><tr><td>Transporte de Carga sin sello verde</td><td>Entre las 10:00 y las 18:00 hrs.</td><td>Área interior delimitada por el Anillo A. Vespucio</td></tr></tbody></table></div><div class="text2"> </div><div class="text3"><h4>Vehículos exentos de la restricción vehicular:</h4><p>No se aplicará restricción en los siguientes casos:</p><p>a) Vehículos que ingresen a la Provincia  de Santiago  y la comuna  de San  Bernardo y Puente Alto, utilizando las vías que conforman las rutas o ejes que a continuación se indican, siempre que acrediten esta circunstancia por cualquier medio</p><p>&nbsp;</p><p><strong>Norte- Sur (ambos sentidos):</strong></p><p>1.-    Av.  Presidente Eduardo  Frei Montalva  - Manuel  Rodríguez  - Viel  - JJ. Prieto  - Av. Presidente Jorge Alessandri  Rodríguez  (Autopista Central).</p><p> 2.-  Av. Presidente Eduardo  Frei Montalva  - Av. Apóstol  Santiago - Joaquín  Walker Martínez   - Coronel   Robles  -Av.  Padre  Hurtado-  Av.   General   Velásquez   -  Av. Cerrillos - Av. Presidente Jorge Alessandri  Rodríguez  (Autopista Central).</p><p>&nbsp;</p><p><strong>Sur- </strong><strong>Norte (ambos sentidos):</strong></p><p>1.-  Av. Presidente Jorge  Alessandri  Rodríguez  - JJ Prieto  - Viel - Manuel  Rodríguez  - Av. Presidente Eduardo  Frei Montalva (Autopista Central).</p><p>&nbsp;</p><p>2.-  Av.  Presidente Jorge  Alessandri  Rodríguez  -    Av.  General  Velásquez  -  Coronel Robles- Av. Padre Hurtado -  Joaquín  Walker  Martínez   - Av. Apóstol  Santiago -Av. Presidente Eduardo  Frei (Autopista Central).</p><p>&nbsp;</p><p><strong>Norte- </strong><strong>Costa (Ruta 68):</strong></p><p>Av.   Presidente  Eduardo   Frei  Montalva   (Autopista  Central)  - Av.   Circunvalación Américo  Vespucio   (Autopista Vespucio  Norte) - Ruta 68.</p><p>&nbsp;</p><p><strong>Norte- </strong><strong>Costa (Autopista del Sol):</strong></p><p>Av.   Presidente  Eduardo   Frei  Montalva   (Autopista  Central)  - Av.   Circunvalación Américo  Vespucio   (Autopista Vespucio  Norte) - Autopista del Sol.</p><p>&nbsp;</p><p><strong>Sur- </strong><strong>Costa (Ruta 68):</strong></p><p>1.- Av.  Presidente Jorge  Alessandri   Rodríguez   (Autopista  Central) - Av.  General Velásquez  -  Av.  Circunvalación Américo  Vespucio    (Autopista Vespucio  Sur)  - Av. Circunvalación Américo  Vespucio   (Autopista Vespucio  Norte)  - Ruta 68.</p><p>2.-Av. Presidente Jorge Alessandri Rodríguez  (Autopista Central)  - JJ Prieto  - Viel - Manuel  Rodríguez  - Costanera  Norte  - Ruta 68.</p><p>&nbsp;</p><p><strong>Sur- </strong><strong>Costa (Autopista del Sol):</strong></p><p>Av.   Presidente  Jorge   Alessandri    Rodríguez   (Autopista  Central)  - Av.   General Velásquez   -  Av.  Circunvalación  Américo   Vespucio  (Autopista  Vespucio   Sur) Autopista del Sol.</p><p>&nbsp;</p><p><strong>Sur- </strong><strong>Costa Ruta 78 (Acceso Sur a Santiago):</strong></p><p>Av. Presidente  Jorge Alessandri  Rodríguez  (Autopista  Central)  - Autopista  Acceso Sur a Santiago  - Av. Circunvalación  Américo Vespucio   (Autopista  Vespucio Sur)  - Autopista  del Sol.</p><p>&nbsp;</p><p><strong>Nor-Oriente </strong><strong>(Acceso Nor-Oriente a Santiago)</strong></p><p>Acceso  Nor-Oriente  - Enlace  Centenario   (sector   Puente  Centenario)-  Costanera Norte-  Autopista  Los Libertadores  - Av. Circunvalación  Américo Vespucio (Autopista Vespucio Norte).</p><p>&nbsp;</p><p><strong>Sur Norte (Acceso Sur a Santiago)</strong></p><p>Ruta  5  sur  -    Acceso Sur  - Cardenal   Raúl  Silva  Henríquez  (ex  Serena)  - Av. Circunvalación  Américo Vespucio.</p><p>b) Los vehículos motorizados  livianos,   medianos  y  pesados  que  cuenten  con  el autoadhesivo  de color verde a que se refieren  los D.S. N° 211/91,  D.S. N° 54/94  y D.S. N°    55/94 respectivamente,  todos    del    Ministerio    de   Transportes     y Telecomunicaciones.</p><p style="text-align: justify;">c) Vehículos pertenecientes   a  Carabineros   de   Chile,   Investigaciones,  Cuerpo   de Bomberos, y Gendarmería de Chile, los móviles adscritos al Programa Nacional de Fiscalización de la Subsecretaría  de Transportes, que se encuentren  desempeñando labores de control,  y los vehículos de uso municipal  asignados a cumplir  labores de apoyo a la función policial, siempre que se encuentren  debidamente identificados.</p><p>d) Ambulancias de instituciones fiscales o de establecimientos  particulares.</p><p>e) Vehículos importados  por  personas  con  discapacidad  o por  personas  jurídicas  sin fines de lucro, de conformidad con el artículo 48 de la ley N° 20.422</p><p>f) Vehículos   que presten habitualmente  servicios para centros de rehabilitación, hospitales, clínicas u otros centros de salud, para el  transporte  de   personas  enfermas  o con discapacidad, lo que deberá solicitar y acreditar el centro de salud respectivo.</p><p style="text-align: justify;">g) Vehículos de uso  particular  que deban destinarse en forma habitual al transporte de personas determinadas que padezcan enfermedades que, en razón de sus tratamientos o controles,  deban concurrir frecuentemente a centros de salud, lo que deberá acreditarse detalladamente en la certificación del médico tratante o del centro de salud respectivo. </p><p style="text-align: justify;">h) Vehículos de uso particular que sirvan de único medio de transporte para una persona con discapacidad, lo que deberá acreditarse mediante la credencial de inscripción en el Registro Nacional de la Discapacidad o con la certificación de su médico tratante.</p><p style="text-align: justify;">i) Vehículos a gas que cumplan con el D. S. N° 55/98, del Ministerio de Transportes  y Telecomunicaciones  y  que  posean  revisión  técnica  autorizando   su  circulación  con ese tipo de combustible.</p></div><p style="text-align: justify;">j) Vehículos destinados habitualmente por empresas o instituciones relacionadas con la protección de la salud, para prestar directamente servicios de asistencia, consulta o rescate médico, lo que deberá solicitar y acreditar la empresa o institución correspondiente.</p><p style="text-align: justify;">k) Vehículos que presten servicio para la Comisión Chilena de Energía Nuclear en el abastecimiento de material radiactivo a hospitales  y clínicas.</p><div class="text3" style="text-align: justify;"><p style="text-align: justify;">l) Coches mortuorios.</p><p style="text-align: justify;">m) Vehículos pertenecientes  a canales  de  televisión  que  se encuentren   debidamente equipados  con antenas transmisoras  para realizar contactos en directo.</p><p style="text-align: justify;">n) Vehículos autorizados  a circular  como parte de proyectos  experimentales aprobados por la Secretaría Regional Ministerial  de Transportes  y Telecomunicaciones.</p><p>ñ) Vehículos con motor eléctrico puro o híbridos.</p><p>o) Vehículos destinados a la recolección de basura.</p><p>p) Vehículos que presten servicios de transporte público remunerado de pasajeros</p><p>q) Vehículos de misiones diplomáticas, consulares y organizaciones internacionales que circulen con placas patente de gracia, otorgadas por el Ministerio de Relaciones Exteriores, de color celeste con relieve en blanco, cuyo código alfanumérico esté compuesto de dos letras, seguido de cuatro números.</p><p>r) Vehículos destinados a la carga, como camionetas, camiones y otros similares, habilitados especial y directamente por empresas productoras y/o distribuidoras de servicios eléctricos, de agua potable, gas y de telecomunicaciones, para atender situaciones de emergencia que impliquen la interrupción total de dichos servicios para un número significativo de clientes. En estos casos la solicitud de exención solo podrá ser requerida por dichas empresas hasta por un máximo de 100 vehículos.</p><p>s) Vehículos de transporte remunerado de escolares regidos por el D.S. N°38, de 1992, del Ministerio de Transportes y Telecomunicaciones.</p><p>El que solicite  acogerse a alguna  de las excepciones  contempladas  en las letras  e), f)   g),  h),  j),  k),  m) o r)  precedentes,  deberá  obtener  autorización   previa   de  la Secretaría Regional Ministerial de Transportes y Telecomunicaciones,  la  que  se  otorgará   mediante   resolución,   debiendo acreditar el interesado  que se encuentra  en alguna  de las situaciones  que en ellas se describe.  El documento  en que conste  dicha autorización  o su copia, deberá  portarse siempre en el vehículo.</p><p>Cuando la solicitud se sustente en lo estipulado en las letras e), g) y h) solo podrá ser presentada por el propietario del vehículo respectivo.</p><p><strong>En este </strong><strong><span style="color: #0c6eb4;"><a style="color: #0c6eb4;" href="http://www.uoct.cl/wp-content/uploads/2017/03/FORMULARIO-EXENCION-RESTRICCION-VEHICULAR-2017.pdf" target="_blank" rel="noopener noreferrer">enlace </a></span> puede descargar el formulario para solicitar eximirse de la restricción, el que deberá completar y entregar en la Secretaría Regional Ministerial de Transportes y Telecomunicaciones, en Serrano 89, Santiago Centro. </strong></p><p>Las referidas  autorizaciones  estarán sujetas a los plazos y demás modalidades  que el Secretario  Regional determine  en cada caso.</p></div><p>Si quiere acceder al documento completo, puede descargar la resolución en este <span style="color: #0c6eb4;"><strong><a style="color: #0c6eb4;" href="http://www.uoct.cl/wp-content/uploads/2017/04/RES-1929-RESTRICCION-VEHICULAR.pdf" target="_blank" rel="noopener noreferrer">enlace</a></strong></span></p><div class="text3" style="text-align: justify;"><p><strong>Fuente: Secretaría Regional Ministerial de Transportes y Telecomunicaciones</strong></p><p>&nbsp;</p></div><div class="table3"><table style="height: 964px;" width="1069" cellspacing="0"><tbody><tr><th colspan="10"><p><span style="color: #ffffff;">Vehículos afectos a restricción para la declaración de Preemergencia Ambiental período 2017</span></p><p><span style="color: #ffffff;">Los taxis en todas sus modalidades están exentos de restricción incluso en preemergencia y emergencia</span></p></th></tr><tr><td><strong>Tipo de Vehículo</strong></td><td><strong>Lunes</strong></td><td><strong>Martes</strong></td><td><strong>Miércoles</strong></td><td><strong>Jueves</strong></td><td><strong>Viernes</strong></td><td><strong>Fin de Semana</strong></td><td><strong>Horario de Semana</strong></td><td><strong>Horario Sábado, Domingo y Festivos</strong></td><td><strong>Perímetro Restricción</strong></td></tr><tr><td><strong>Automóviles, Station Wagon y similares SIN SELLO VERDE</strong></td><td>5-6-7-8<br /> más dos dígitos aleatorios</td><td>9-0-1-2<br /> más dos dígitos aleatorios</td><td>3-4-5-6<br /> más dos dígitos aleatorios</td><td>7-8-9-0<br /> más dos dígitos aleatorios</td><td>1-2-3-4<br /> más dos dígitos aleatorios</td><td>Aleatorio 6 dígitos</td><td>Entre 7:30 y 21:00 hrs.</td><td>Entre las 07:30 y las 21:00 hrs.</td><td>Provincia de Stgo. más comunas de San Bernardo y Puente Alto</td></tr><tr><td><strong>Transporte de carga SIN SELLO VERDE</strong></td><td>5-6-7-8<br /> más dos dígitos aleatorios</td><td>9-0-1-2<br /> más dos dígitos aleatorios</td><td>3-4-5-6<br /> más dos dígitos aleatorios</td><td>7-8-9-0<br /> más dos dígitos aleatorios</td><td>1-2-3-4<br /> más dos dígitos aleatorios</td><td>Aleatorio 6 dígitos</td><td>Entre las 10:00 y las 18:00 hrs.</td><td>Entre las 10:00 y las 18:00 hrs.</td><td>Área interior del Perímetro de Circunvalación A. Vespucio</td></tr><tr><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td rowspan="3">Provincia de Stgo. más comunas de San Bernardo y Puente Alto</td></tr><tr><td><strong>Vehículos de transporte privado remunerado de pasajeros SIN SELLO VERDE</strong></td><td>5-6-7-8<br /> más dos dígitos aleatorios</td><td>9-0-1-2<br /> más dos dígitos aleatorios</td><td>3-4-5-6<br /> más dos dígitos aleatorios</td><td>7-8-9-0<br /> más dos dígitos aleatorios</td><td>1-2-3-4<br /> más dos dígitos aleatorios</td><td>Aleatorio 6 dígitos</td><td>Entre las 10:00 y las 16:00 hrs.</td><td>Entre 00:00 y 24:00 hrs.</td></tr><tr><td><strong>Vehículos de transporte privado remunerado de pasajeros CON SELLO VERDE</strong></td><td>2 Dígitos</td><td>2 Dígitos</td><td>2 Dígitos</td><td>2 Dígitos</td><td>2 Dígitos</td><td>2 Dígitos</td><td>Entre las 10:00 y las 16:00 hrs.</td><td>Entre 00:00 y 24:00 hrs.</td></tr><tr><td><strong>Transporte de carga CON SELLO VERDE.</strong></td><td>2 Dígitos</td><td>2 Dígitos</td><td>2 Dígitos</td><td>2 Dígitos</td><td>2 Dígitos</td><td>2 Dígitos</td><td>Entre las 10:00 y las 18:00 hrs.</td><td>Entre las 10:00 y las 17:00 hrs.</td><td>Área interior del Perímetro de Circunvalación A. Vespucio</td></tr><tr><td><strong>Automóviles, Station Wagon y similares CON SELLO VERDE</strong></td><td>2 Dígitos</td><td>2 Dígitos</td><td>2 Dígitos</td><td>2 Dígitos</td><td>2 Dígitos</td><td>2 Dígitos</td><td>Entre las 07:30 y las 21:00 hrs.</td><td>Entre las 07:30 y las 21:00 hrs.</td><td rowspan="3">Provincia de Stgo. más comunas de San Bernardo y Puente Alto</td></tr></tbody></table></div>						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="history">
+							<div class="row">
+								<div class="col-sm-9">
+									<h3>Ver cuadro histórico de episodios</h3>
+								</div>
+								<div class="col-sm-3">
+									<span>Selecciona el año:</span>
+									<select name="anio_restriccion" id="anio_restriccion">
+																				<option value="table-2017">2017</option>
+																				<option value="table-2016">2016</option>
+																				<option value="table-2015">2015</option>
+																				<option value="table-2014">2014</option>
+																				<option value="table-2013">2013</option>
+																				<option value="table-2012">2012</option>
+																				<option value="table-2011">2011</option>
+																				<option value="table-2010">2010</option>
+																				<option value="table-2009">2009</option>
+																				<option value="table-2008">2008</option>
+																				<option value="table-2007">2007</option>
+																				<option value="table-2006">2006</option>
+																				<option value="table-2005">2005</option>
+																				<option value="table-2004">2004</option>
+																				<option value="table-2003">2003</option>
+																			</select>
+								</div>
+							</div>
+						</div>
+						<div class="selecthistory">
+						          <div class="table-container" id="table-2017">
+	           <table cellspacing="0" >
+	               	<thead>
+										<tr class="head"><th colspan="5">Cuadro Histórico de Episodios de 2017</th></tr>
+	                   </thead>
+	                   <tbody>
+	                   	<tr>
+												<td align="center" rowspan="2"><b>Tipo de Episodio</b></td>
+												<td align="center" rowspan="2"><b>D&iacute;a</b></td>
+												<td align="center" rowspan="2"><b>Fecha</b></td>
+												<td align="center" colspan="2"><b>D&iacute;gitos</b></td>
+											</tr>
+											<tr>
+												<td height="18" align="center" ><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Sin sello verde</td>
+												<td height="18" align="center"><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Con sello verde</td>
+											</tr>
+								 									<tr>
+									  <td> Preemergencia Ambiental </td>
+									  <td> Lunes </td>
+									  <td> 22-05-2017 </td>
+									  <td> -3-4 </td>
+									  <td> 1-2 </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Domingo </td>
+									  <td> 21-05-2017 </td>
+									  <td> 1-2 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Martes </td>
+									  <td> 09-05-2017 </td>
+									  <td>  </td>
+									  <td>  </td>
+									</tr>
+								 	                </tbody>
+	               </table>
+							 </div>
+				   	          <div class="table-container" id="table-2016">
+	           <table cellspacing="0" >
+	               	<thead>
+										<tr class="head"><th colspan="5">Cuadro Histórico de Episodios de 2016</th></tr>
+	                   </thead>
+	                   <tbody>
+	                   	<tr>
+												<td align="center" rowspan="2"><b>Tipo de Episodio</b></td>
+												<td align="center" rowspan="2"><b>D&iacute;a</b></td>
+												<td align="center" rowspan="2"><b>Fecha</b></td>
+												<td align="center" colspan="2"><b>D&iacute;gitos</b></td>
+											</tr>
+											<tr>
+												<td height="18" align="center" ><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Sin sello verde</td>
+												<td height="18" align="center"><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Con sello verde</td>
+											</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Lunes </td>
+									  <td> 15-08-2016 </td>
+									  <td> 3-4-5-6-3-4 </td>
+									  <td> No aplica </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Martes </td>
+									  <td> 02-08-2016 </td>
+									  <td> 7-8-9-0 </td>
+									  <td> No aplica </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Jueves </td>
+									  <td> 28-07-2016 </td>
+									  <td> 5-6-7-8 </td>
+									  <td> No aplica </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Miércoles </td>
+									  <td> 27-07-2016 </td>
+									  <td> 1-2-3-4 </td>
+									  <td> No aplica </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Martes </td>
+									  <td> 26-07-2016 </td>
+									  <td> 7-8-9-0 </td>
+									  <td> No aplica </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Viernes </td>
+									  <td> 22-07-2016 </td>
+									  <td> 9-0-1-2 </td>
+									  <td> No aplica </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Martes </td>
+									  <td> 19-07-2016 </td>
+									  <td> 7-8-9-0 </td>
+									  <td> No Aplica </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Lunes </td>
+									  <td> 18-07-2016 </td>
+									  <td> 3-4-5-6 </td>
+									  <td> No aplica </td>
+									</tr>
+								 									<tr>
+									  <td> Preemergencia Ambiental </td>
+									  <td> Domingo </td>
+									  <td> 17-07-2016 </td>
+									  <td> 1-2-3-4-5-6 </td>
+									  <td> 0-1 </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Sábado </td>
+									  <td> 16-07-2016 </td>
+									  <td> 9-0 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Lunes </td>
+									  <td> 11-07-2016 </td>
+									  <td> 3-4-5-6 </td>
+									  <td> No aplica </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Domingo </td>
+									  <td> 10-07-2016 </td>
+									  <td> 1-2 </td>
+									  <td> No aplica </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Sábado </td>
+									  <td> 09-07-2016 </td>
+									  <td> 9-0 </td>
+									  <td> No Aplica </td>
+									</tr>
+								 									<tr>
+									  <td> Preemergencia Ambiental </td>
+									  <td> Viernes </td>
+									  <td> 08-07-2016 </td>
+									  <td> 9-0-1-2-7-8 </td>
+									  <td> 8-9 </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Jueves </td>
+									  <td> 07-07-2016 </td>
+									  <td> 5-6-7-8 </td>
+									  <td> No Aplica </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Miércoles </td>
+									  <td> 06-07-2016 </td>
+									  <td> 1-2-3-4 </td>
+									  <td> No Aplica </td>
+									</tr>
+								 									<tr>
+									  <td> Preemergencia Ambiental </td>
+									  <td> Sábado </td>
+									  <td> 02-07-2016 </td>
+									  <td> 5-6-7-8-9-0 </td>
+									  <td> 6-7 </td>
+									</tr>
+								 									<tr>
+									  <td> Preemergencia Ambiental </td>
+									  <td> Viernes </td>
+									  <td> 01-07-2016 </td>
+									  <td> 9-0-1-2--7-8 </td>
+									  <td> 4-5 </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Jueves </td>
+									  <td> 30-06-2016 </td>
+									  <td> 5-6-7-8 </td>
+									  <td> No aplica </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Miércoles </td>
+									  <td> 29-06-2016 </td>
+									  <td> 1-2-3-4 </td>
+									  <td> No aplica </td>
+									</tr>
+								 									<tr>
+									  <td> Preemergencia Ambiental </td>
+									  <td> Martes </td>
+									  <td> 28-06-2016 </td>
+									  <td> 7-8-9-0-1-2 </td>
+									  <td> 2-3 </td>
+									</tr>
+								 									<tr>
+									  <td> Emergencia Ambiental </td>
+									  <td> Lunes </td>
+									  <td> 27-06-2016 </td>
+									  <td> 3-4-5-6-9-0-1-2 </td>
+									  <td> 8-9-0-1 </td>
+									</tr>
+								 									<tr>
+									  <td> Preemergencia Ambiental </td>
+									  <td> Domingo </td>
+									  <td> 26-06-2016 </td>
+									  <td> 3-4-5-6-7-8 </td>
+									  <td> 6-7 </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Sábado </td>
+									  <td> 25-06-2016 </td>
+									  <td> 1-2 </td>
+									  <td> No aplica </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Viernes </td>
+									  <td> 24-06-2016 </td>
+									  <td> 9-0-1-2 </td>
+									  <td> No aplica </td>
+									</tr>
+								 									<tr>
+									  <td> Preemergencia Ambiental </td>
+									  <td> Jueves </td>
+									  <td> 23-06-2016 </td>
+									  <td> 5-6-7-8-3-4 </td>
+									  <td> 4-5 </td>
+									</tr>
+								 									<tr>
+									  <td> Preemergencia Ambiental </td>
+									  <td> Miércoles </td>
+									  <td> 22-06-2016 </td>
+									  <td> 1-2-3-4-5-6 </td>
+									  <td> 2-3 </td>
+									</tr>
+								 									<tr>
+									  <td> Preemergencia Ambiental </td>
+									  <td> Martes </td>
+									  <td> 21-06-2016 </td>
+									  <td> 7-8-9-0-1-2 </td>
+									  <td> 0-1 </td>
+									</tr>
+								 									<tr>
+									  <td> Preemergencia Ambiental </td>
+									  <td> Lunes </td>
+									  <td> 20-06-2016 </td>
+									  <td> 3-4-5-6-7-8 </td>
+									  <td> 8-9 </td>
+									</tr>
+								 									<tr>
+									  <td> Preemergencia Ambiental </td>
+									  <td> Domingo </td>
+									  <td> 19-06-2016 </td>
+									  <td> 1-2-3-4-5-6 </td>
+									  <td> 6 -7 </td>
+									</tr>
+								 									<tr>
+									  <td> Preemergencia Ambiental </td>
+									  <td> Sábado </td>
+									  <td> 18-06-2016 </td>
+									  <td> 5-6-7-8-9-0 </td>
+									  <td> 4-5 </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Viernes </td>
+									  <td> 17-06-2016 </td>
+									  <td> 9-0-1-2 </td>
+									  <td> No aplica </td>
+									</tr>
+								 									<tr>
+									  <td> Preemergencia Ambiental </td>
+									  <td> Jueves </td>
+									  <td> 16-06-2016 </td>
+									  <td> 5-6-7-8-3-4 </td>
+									  <td> 2-3 </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Miércoles </td>
+									  <td> 15-06-2016 </td>
+									  <td> 1-2-3-4 </td>
+									  <td> No aplica </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Lunes </td>
+									  <td> 13-06-2016 </td>
+									  <td> 3-4-5-6 </td>
+									  <td> No aplica </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Domingo </td>
+									  <td> 12-06-2016 </td>
+									  <td> 1 - 2 </td>
+									  <td> No aplica </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Sábado </td>
+									  <td> 11-06-2016 </td>
+									  <td> 7 - 8 </td>
+									  <td> No aplica </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Viernes </td>
+									  <td> 10-06-2016 </td>
+									  <td> 9-0-1-2 </td>
+									  <td> No aplica </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Miércoles </td>
+									  <td> 08-06-2016 </td>
+									  <td> 1-2-3-4 </td>
+									  <td> No aplica </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta ambiental </td>
+									  <td> Domingo </td>
+									  <td> 29-05-2016 </td>
+									  <td> 5-6 </td>
+									  <td> No aplica </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Sábado </td>
+									  <td> 28-05-2016 </td>
+									  <td> 3-4 </td>
+									  <td> No aplica </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Viernes </td>
+									  <td> 27-05-2016 </td>
+									  <td> 9-0-1-2 </td>
+									  <td> No aplica </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Lunes </td>
+									  <td> 23-05-2016 </td>
+									  <td> 3-4-5-6 </td>
+									  <td> No aplica </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Domingo </td>
+									  <td> 01-05-2016 </td>
+									  <td> 1-2 </td>
+									  <td> No aplica </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Sábado </td>
+									  <td> 30-04-2016 </td>
+									  <td> 9-0 </td>
+									  <td> No aplica </td>
+									</tr>
+								 	                </tbody>
+	               </table>
+							 </div>
+				   	          <div class="table-container" id="table-2015">
+	           <table cellspacing="0" >
+	               	<thead>
+										<tr class="head"><th colspan="5">Cuadro Histórico de Episodios de 2015</th></tr>
+	                   </thead>
+	                   <tbody>
+	                   	<tr>
+												<td align="center" rowspan="2"><b>Tipo de Episodio</b></td>
+												<td align="center" rowspan="2"><b>D&iacute;a</b></td>
+												<td align="center" rowspan="2"><b>Fecha</b></td>
+												<td align="center" colspan="2"><b>D&iacute;gitos</b></td>
+											</tr>
+											<tr>
+												<td height="18" align="center" ><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Sin sello verde</td>
+												<td height="18" align="center"><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Con sello verde</td>
+											</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Martes </td>
+									  <td> 04-08-2015 </td>
+									  <td> 9-0-1-2 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Lunes </td>
+									  <td> 27-07-2015 </td>
+									  <td> 5-6-7-8 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Preemergencia Ambiental </td>
+									  <td> Domingo </td>
+									  <td> 26-07-2015 </td>
+									  <td> 3-4-5-6-7-8 </td>
+									  <td> 5-6 </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Sábado </td>
+									  <td> 25-07-2015 </td>
+									  <td> 1-2 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Preemergencia Ambiental </td>
+									  <td> Viernes </td>
+									  <td> 24-07-2015 </td>
+									  <td> 1-2-3-4-9-0 </td>
+									  <td> 3-4 </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Jueves </td>
+									  <td> 23-07-2015 </td>
+									  <td> 7-8-9-0 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Preemergencia Ambiental </td>
+									  <td> Miércoles </td>
+									  <td> 22-07-2015 </td>
+									  <td> 3-4-5-6-7-8 </td>
+									  <td> 1-2 </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Martes </td>
+									  <td> 21-07-2015 </td>
+									  <td> 9-0-1-2 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Domingo </td>
+									  <td> 19-07-2015 </td>
+									  <td> 1-2 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Sábado </td>
+									  <td> 18-07-2015 </td>
+									  <td> 9-0 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Viernes </td>
+									  <td> 17-07-2015 </td>
+									  <td> 1-2-3-4 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Jueves </td>
+									  <td> 16-07-2015 </td>
+									  <td> 7-8-9-0-7-8 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Jueves </td>
+									  <td> 09-07-2015 </td>
+									  <td> 7-8-9-0 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Miércoles </td>
+									  <td> 08-07-2015 </td>
+									  <td> 3-4-5-6 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Martes </td>
+									  <td> 07-07-2015 </td>
+									  <td> 9-0-1-2 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Domingo </td>
+									  <td> 05-07-2015 </td>
+									  <td> 3-4 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Preemergencia Ambiental </td>
+									  <td> Sábado </td>
+									  <td> 04-07-2015 </td>
+									  <td> 5-6-7-8-9-0 </td>
+									  <td> 9-0 </td>
+									</tr>
+								 									<tr>
+									  <td> Preemergencia Ambiental </td>
+									  <td> Viernes </td>
+									  <td> 03-07-2015 </td>
+									  <td> 1-2-3-4--9-0 </td>
+									  <td> 7-8 </td>
+									</tr>
+								 									<tr>
+									  <td> Preemergencia Ambiental </td>
+									  <td> Jueves </td>
+									  <td> 02-07-2015 </td>
+									  <td> 7-8-9-0--1-2 </td>
+									  <td> 5-6 </td>
+									</tr>
+								 									<tr>
+									  <td> Preemergencia Ambiental </td>
+									  <td> Miércoles </td>
+									  <td> 01-07-2015 </td>
+									  <td> 3-4-5-6--1-2 </td>
+									  <td> 3-4 </td>
+									</tr>
+								 									<tr>
+									  <td> Preemergencia Ambiental </td>
+									  <td> Martes </td>
+									  <td> 30-06-2015 </td>
+									  <td> 9-0-1-2-3-4 </td>
+									  <td> 1-2 </td>
+									</tr>
+								 									<tr>
+									  <td> Preemergencia Ambiental </td>
+									  <td> Lunes </td>
+									  <td> 29-06-2015 </td>
+									  <td> 5-6-7-8-3-4 </td>
+									  <td> 9-0 </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Domingo </td>
+									  <td> 28-06-2015 </td>
+									  <td> 1-2 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Preemergencia Ambiental </td>
+									  <td> Sábado </td>
+									  <td> 27-06-2015 </td>
+									  <td> 5-6-7-8-9-0 </td>
+									  <td> 7-8 </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Viernes </td>
+									  <td> 26-06-2015 </td>
+									  <td> 1-2-3-4 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Jueves </td>
+									  <td> 25-06-2015 </td>
+									  <td> 7-8-9-0 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Miércoles </td>
+									  <td> 24-06-2015 </td>
+									  <td> 3-4-5-6 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Preemergencia Ambiental </td>
+									  <td> Martes </td>
+									  <td> 23-06-2015 </td>
+									  <td> 9-0-1-2--3-4 </td>
+									  <td> 5-6 </td>
+									</tr>
+								 									<tr>
+									  <td> Emergencia Ambiental </td>
+									  <td> Lunes </td>
+									  <td> 22-06-2015 </td>
+									  <td> 5-6-7-8--9-0-1-2 </td>
+									  <td> 1-2-3-4 </td>
+									</tr>
+								 									<tr>
+									  <td> Preemergencia Ambiental </td>
+									  <td> Domingo </td>
+									  <td> 21-06-2015 </td>
+									  <td> 3-4-5-6-7-8 </td>
+									  <td> 9-0 </td>
+									</tr>
+								 									<tr>
+									  <td> Preemergencia Ambiental </td>
+									  <td> Sábado </td>
+									  <td> 20-06-2015 </td>
+									  <td> 7-8-9-0-1-2 </td>
+									  <td> 7-8 </td>
+									</tr>
+								 									<tr>
+									  <td> Preemergencia Ambiental </td>
+									  <td> Viernes </td>
+									  <td> 19-06-2015 </td>
+									  <td> 1-2-3-4--5-6 </td>
+									  <td> 5-6 </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Jueves </td>
+									  <td> 18-06-2015 </td>
+									  <td> 7-8-9-0 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Miércoles </td>
+									  <td> 17-06-2015 </td>
+									  <td> 3-4-5-6 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Preemergencia Ambiental </td>
+									  <td> Martes </td>
+									  <td> 16-06-2015 </td>
+									  <td> 9-0-1-2--3-4 </td>
+									  <td> 3-4 </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Lunes </td>
+									  <td> 15-06-2015 </td>
+									  <td> 5-6-7-8 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Domingo </td>
+									  <td> 14-06-2015 </td>
+									  <td> 1-2 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Sábado </td>
+									  <td> 13-06-2015 </td>
+									  <td> 9-0 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Sabado </td>
+									  <td> 06-06-2015 </td>
+									  <td> 7-8 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Preemergencia Ambiental </td>
+									  <td> Viernes </td>
+									  <td> 05-06-2015 </td>
+									  <td> 1-2-3-4--5-6 </td>
+									  <td> 1-2 </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Jueves </td>
+									  <td> 04-06-2015 </td>
+									  <td> 7-8-9-0 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Miercoles </td>
+									  <td> 03-06-2015 </td>
+									  <td> 3-4-5-6 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Martes </td>
+									  <td> 02-06-2015 </td>
+									  <td> 9-0-1-2 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Lunes </td>
+									  <td> 01-06-2015 </td>
+									  <td> 5-6-7-8 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Viernes </td>
+									  <td> 29-05-2015 </td>
+									  <td> 1-2-3-4 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Jueves </td>
+									  <td> 28-05-2015 </td>
+									  <td> 7-8-9-0 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Miercoles </td>
+									  <td> 27-05-2015 </td>
+									  <td> 3-4-5-6 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Martes </td>
+									  <td> 26-05-2015 </td>
+									  <td> 9-0-1-2 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Lunes </td>
+									  <td> 25-05-2015 </td>
+									  <td> 5-6-7-8 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Domingo </td>
+									  <td> 24-05-2015 </td>
+									  <td> 3-4 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Martes </td>
+									  <td> 19-05-2015 </td>
+									  <td> 9-0-1-2 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Lunes </td>
+									  <td> 18-05-2015 </td>
+									  <td> 5-6-7-8 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Sabado </td>
+									  <td> 16-05-2015 </td>
+									  <td> 1-2 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Jueves </td>
+									  <td> 14-05-2015 </td>
+									  <td> 7-8-9-0 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Lunes </td>
+									  <td> 11-05-2015 </td>
+									  <td> 5-6-7-8 </td>
+									  <td>  </td>
+									</tr>
+								 	                </tbody>
+	               </table>
+							 </div>
+				   	          <div class="table-container" id="table-2014">
+	           <table cellspacing="0" >
+	               	<thead>
+										<tr class="head"><th colspan="5">Cuadro Histórico de Episodios de 2014</th></tr>
+	                   </thead>
+	                   <tbody>
+	                   	<tr>
+												<td align="center" rowspan="2"><b>Tipo de Episodio</b></td>
+												<td align="center" rowspan="2"><b>D&iacute;a</b></td>
+												<td align="center" rowspan="2"><b>Fecha</b></td>
+												<td align="center" colspan="2"><b>D&iacute;gitos</b></td>
+											</tr>
+											<tr>
+												<td height="18" align="center" ><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Sin sello verde</td>
+												<td height="18" align="center"><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Con sello verde</td>
+											</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Lunes </td>
+									  <td> 18-08-2014 </td>
+									  <td> 5-6-7-8 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Domingo </td>
+									  <td> 17-08-2014 </td>
+									  <td> 9-0 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Martes </td>
+									  <td> 05-08-2014 </td>
+									  <td> 9-0-1-2 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Sabado </td>
+									  <td> 19-07-2014 </td>
+									  <td> 7-8 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Viernes </td>
+									  <td> 18-07-2014 </td>
+									  <td> 1-2-3-4 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Miercoles </td>
+									  <td> 09-07-2014 </td>
+									  <td> 3-4-5-6 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Martes </td>
+									  <td> 08-07-2014 </td>
+									  <td> 9-0-1-2 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Lunes </td>
+									  <td> 07-07-2014 </td>
+									  <td> 5-6-7-8 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Domingo </td>
+									  <td> 29-06-2014 </td>
+									  <td> 5 y 6 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Jueves </td>
+									  <td> 19-06-2014 </td>
+									  <td> 7-8-9-0 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Preemergencia ambiental </td>
+									  <td> Miercoles </td>
+									  <td> 18-06-2014 </td>
+									  <td> 3-4-5-6-7-8 </td>
+									  <td> 9-0 </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Martes </td>
+									  <td> 17-06-2014 </td>
+									  <td> 9-0-1-2 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Lunes </td>
+									  <td> 16-06-2014 </td>
+									  <td> 5-6-7-8 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Domingo </td>
+									  <td> 15-06-2014 </td>
+									  <td> 3-4 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Sabado </td>
+									  <td> 14-06-2014 </td>
+									  <td> 1-2 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Martes </td>
+									  <td> 10-06-2014 </td>
+									  <td> 9-0-1-2 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Martes </td>
+									  <td> 03-06-2014 </td>
+									  <td> 9-0-1-2 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Lunes </td>
+									  <td> 02-06-2014 </td>
+									  <td> 5-6-7-8 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Miercoles </td>
+									  <td> 28-05-2014 </td>
+									  <td> 3-4-5-6 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Martes </td>
+									  <td> 27-05-2014 </td>
+									  <td> 9-0-1-2 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Domingo </td>
+									  <td> 25-05-2014 </td>
+									  <td> 9-0 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Viernes </td>
+									  <td> 23-05-2014 </td>
+									  <td> 1-2-3-4 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Miercoles </td>
+									  <td> 23-04-2014 </td>
+									  <td> 3-4-5-6 </td>
+									  <td>  </td>
+									</tr>
+								 	                </tbody>
+	               </table>
+							 </div>
+				   	          <div class="table-container" id="table-2013">
+	           <table cellspacing="0" >
+	               	<thead>
+										<tr class="head"><th colspan="5">Cuadro Histórico de Episodios de 2013</th></tr>
+	                   </thead>
+	                   <tbody>
+	                   	<tr>
+												<td align="center" rowspan="2"><b>Tipo de Episodio</b></td>
+												<td align="center" rowspan="2"><b>D&iacute;a</b></td>
+												<td align="center" rowspan="2"><b>Fecha</b></td>
+												<td align="center" colspan="2"><b>D&iacute;gitos</b></td>
+											</tr>
+											<tr>
+												<td height="18" align="center" ><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Sin sello verde</td>
+												<td height="18" align="center"><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Con sello verde</td>
+											</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Miercoles </td>
+									  <td> 24-07-2013 </td>
+									  <td> 9-0-1-2 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Lunes </td>
+									  <td> 15-07-2013 </td>
+									  <td> 1-2-3-4 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Lunes </td>
+									  <td> 10-06-2013 </td>
+									  <td> 1-2-3-4 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Viernes </td>
+									  <td> 07-06-2013 </td>
+									  <td> 7-8-9-0 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Lunes </td>
+									  <td> 03-06-2013 </td>
+									  <td> 1-2-3-4 </td>
+									  <td>  </td>
+									</tr>
+								 									<tr>
+									  <td> Alerta Ambiental </td>
+									  <td> Sabado </td>
+									  <td> 25-05-2013 </td>
+									  <td> 5-6 </td>
+									  <td>  </td>
+									</tr>
+								 	                </tbody>
+	               </table>
+							 </div>
+				   
+
+
+
+							<div class="table-container" id="table-2012">
+								<table cellspacing="0">
+								<thead>
+								<tr class="head"><th colspan="5">Cuadro Histórico de Episodios de 2012</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+								<td width="197" height="40" align="center" rowspan="2"><b>Tipo
+								de Episodio</b></td>
+								<td width="101" height="40" align="center" rowspan="2"><b>Día</b></td>
+								<td width="96" height="40" align="center" rowspan="2"><b>Fecha</b></td>
+								<td height="22" align="center" colspan="2"><b>Dígitos</b></td>
+								</tr>
+								<tr>
+								<td width="125" height="18" align="center"><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Sin
+								sello verde</font></td>
+								<td width="122" height="18" align="center"><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Con
+								sello verde</font></td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Viernes</td>
+								<td>20-07-2012</td>
+								<td>3-4-5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Jueves</td>
+								<td>19-07-2012</td>
+								<td>9-0-1-2</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Miércoles</td>
+								<td>18-07-2012</td>
+								<td>5-6-7-8</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Preemergencia
+								Ambiental</td>
+								<td>Martes</td>
+								<td>17-07-2012</td>
+								<td>1-2-3-4-5-6</td>
+								<td>7-8</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Sábado</td>
+								<td>14-07-2012</td>
+								<td>7-8</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Viernes</td>
+								<td>13-07-2012</td>
+								<td>3-4-5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Jueves</td>
+								<td>12-07-2012</td>
+								<td>9-0-1-2</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Domingo</td>
+								<td>08-07-2012</td>
+								<td>1-2</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Sábado</td>
+								<td>07-07-2012</td>
+								<td>5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Martes</td>
+								<td>26-06-2012</td>
+								<td>1-2-3-4</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Lunes</td>
+								<td>25-06-2012</td>
+								<td>7-8-9-0</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Domingo</td>
+								<td>24-06-2012</td>
+								<td>3-4</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Sábado</td>
+								<td>23-06-2012</td>
+								<td>1-2</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Lunes</td>
+								<td>11-06-2012</td>
+								<td>7-8-9-0</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Preemergencia
+								Ambiental</td>
+								<td>Viernes</td>
+								<td>08-06-2012</td>
+								<td>3-4-5-6-7-8</td>
+								<td>5-6</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Jueves</td>
+								<td>07-06-2012</td>
+								<td>9-0-1-2</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Viernes</td>
+								<td>01-06-2012</td>
+								<td>3-4-5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Jueves</td>
+								<td>31-05-2012</td>
+								<td>9-0-1-2</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Viernes</td>
+								<td>25-05-2012</td>
+								<td>3-4-5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Jueves</td>
+								<td>24-05-2012</td>
+								<td>9-0-1-2</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Miércoles</td>
+								<td>23-05-2012</td>
+								<td>5-6-7-8</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Martes</td>
+								<td>22-05-2012</td>
+								<td>1-2-3-4</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Lunes</td>
+								<td>21-05-2012</td>
+								<td>7-8</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Sábado</td>
+								<td>05-05-2012</td>
+								<td>9-0</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Viernes</td>
+								<td>04-05-2012</td>
+								<td>3-4-5-6 </td>
+								<td>&nbsp;</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+
+							<div class="table-container" id="table-2011">
+								<table cellspacing="0">
+								<thead>
+								<tr class="head"><th colspan="5">Cuadro Histórico de Episodios de 2011</th>
+								</tr></thead>
+								<tbody>
+								<tr>
+								<td width="197" height="40" align="center" rowspan="2"><b>Tipo
+								de Episodio</b></td>
+								<td width="101" height="40" align="center" rowspan="2"><b>Día</b></td>
+								<td width="96" height="40" align="center" rowspan="2"><b>Fecha</b></td>
+								<td height="22" align="center" colspan="2"><b>Dígitos</b></td>
+								</tr>
+								<tr>
+								<td width="125" height="18" align="center"><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Sin
+								sello verde</font></td>
+								<td width="122" height="18" align="center"><font face="Verdana, Arial, Helvetica, sans-serif" size="1">Con
+								sello verde</font></td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Sábado</td>
+								<td>06-08-2011</td>
+								<td>3-4</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Jueves</td>
+								<td>04-08-2011</td>
+								<td>5-6-7-8</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Domingo</td>
+								<td>24-07-2011</td>
+								<td>9-0</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Preemergencia
+								Ambiental</td>
+								<td>Sábado</td>
+								<td>23-07-2011</td>
+								<td>3-4-5-6-7-8
+								</td>
+								<td>3-4</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Viernes</td>
+								<td>22-07-2011</td>
+								<td>9-0-1-2</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Sábado</td>
+								<td>09-07-2011</td>
+								<td>1-2</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Preemergencia
+								Ambiental</td>
+								<td>Viernes</td>
+								<td>08-07-2011</td>
+								<td>9-0-1-2-3-4</td>
+								<td>&nbsp;1-2</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Jueves</td>
+								<td>07-07-2011</td>
+								<td>5-6-7-8</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Preemergencia
+								Ambiental (se levantó y pasó a alerta)<p></p>
+								<p></p></td>
+								<td>Lunes</td>
+								<td>04-07-2011</td>
+								<td>3-4-5-6-7-8
+								</td>
+								<td>9-0</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Martes</td>
+								<td>28-06-2011</td>
+								<td>7-8-9-0</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Preemergencia
+								Ambiental</td>
+								<td>Lunes</td>
+								<td>27-06-2011</td>
+								<td>1-2-3-4-5-6
+								</td>
+								<td>7-8</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Domingo</td>
+								<td>26-06-2011</td>
+								<td>9-0</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Jueves</td>
+								<td>23-06-2011</td>
+								<td>5-6-7-8</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Lunes</td>
+								<td>13-06-2011</td>
+								<td>3-4-5-6
+								</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Viernes</td>
+								<td>10-06-2011</td>
+								<td>9-0-1-2
+								</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Miércoles</td>
+								<td>08-06-2011</td>
+								<td>1-2-3-4</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Preemergencia
+								Ambiental</td>
+								<td>Sábado</td>
+								<td>04-06-2011</td>
+								<td>3-4-5-6-7-8
+								</td>
+								<td>5-6</td>
+								</tr>
+								<tr>
+								<td>Preemergencia
+								Ambiental</td>
+								<td>Miércoles</td>
+								<td>01-06-2011</td>
+								<td>1-2-3-4-5-6
+								</td>
+								<td>3-4</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Martes</td>
+								<td>31-05-2011</td>
+								<td>7-8-9-0</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Lunes</td>
+								<td>30-05-2011</td>
+								<td>3-4-5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Preemergencia
+								Ambiental</td>
+								<td>Domingo</td>
+								<td>29-05-2011</td>
+								<td>7-8-9-0-1-2</td>
+								<td>1-2</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Sábado</td>
+								<td>28-05-2011</td>
+								<td>5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Viernes</td>
+								<td>27-05-2011</td>
+								<td>9-0-1-2</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Sábado</td>
+								<td>14-05-2011</td>
+								<td>3-4</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Viernes</td>
+								<td>13-05-2011</td>
+								<td>9-0-1-2</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Jueves</td>
+								<td>05-05-2011</td>
+								<td>5-6-7-8</td>
+								<td>&nbsp;</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+
+							<div class="table-container" id="table-2010">
+								<table cellspacing="0">
+								<thead>
+								<tr class="head"><th colspan="5">Cuadro Histórico de Episodios de 2010</th>
+								</tr></thead>
+								<tbody>
+								<tr>
+								<td width="197" height="40" align="center" rowspan="2"><b>Tipo
+								de Episodio</b></td>
+								<td width="101" height="40" align="center" rowspan="2"><b>Día</b></td>
+								<td width="96" height="40" align="center" rowspan="2"><b>Fecha</b></td>
+								<td height="22" align="center" colspan="2"><b>Dígitos</b></td>
+								</tr>
+								<tr>
+								<td width="125" height="18" align="center">Sin
+								sello verde</td>
+								<td width="122" height="18" align="center">Con
+								sello verde</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Domingo</td>
+								<td>11-07-2010</td>
+								<td>3-4</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Sábado</td>
+								<td>10-07-2010</td>
+								<td>1-2</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Viernes</td>
+								<td>09-07-2010</td>
+								<td>5-6-7-8</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Martes</td>
+								<td>29-06-2010</td>
+								<td>3-4-5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Martes</td>
+								<td>22-06-2010</td>
+								<td>3-4-5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Preemergencia
+								Ambiental </td>
+								<td>Lunes</td>
+								<td>10-05-2010</td>
+								<td>9-0-1-2-3-4</td>
+								<td>9-0</td>
+								</tr>
+								<tr>
+								<td>Preemergencia
+								Ambiental </td>
+								<td>Domingo</td>
+								<td>09-05-2010</td>
+								<td>5-6-7-8</td>
+								<td>7-8</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental(elevada a Preemergencia)</td>
+								<td>Domingo</td>
+								<td>09-05-2010</td>
+								<td>5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Domingo</td>
+								<td>02-05-2010</td>
+								<td>3-4</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Viernes</td>
+								<td>30-04-2010</td>
+								<td>5-6-7-8</td>
+								<td>&nbsp;</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+
+							<div class="table-container" id="table-2009">
+								<table cellspacing="0">
+								<thead>
+								<tr class="head"><th colspan="5">Cuadro Histórico de Episodios de 2009</th>
+								</tr></thead>
+								<tbody>
+								<tr>
+								</tr><tr>
+								<td width="197" height="40" align="center" rowspan="2"><b>Tipo
+								de Episodio</b></td>
+								<td width="101" height="40" align="center" rowspan="2"><b>Día</b></td>
+								<td width="96" height="40" align="center" rowspan="2"><b>Fecha</b></td>
+								<td height="22" align="center" colspan="2"><b>Dígitos</b></td>
+								</tr>
+								<tr>
+								<td width="125" height="18" align="center">Sin
+								sello verde</td>
+								<td width="122" height="18" align="center">Con
+								sello verde</td>
+								</tr>
+								<tr><td>Alerta
+								Ambiental </td>
+								<td>Martes</td>
+								<td>11-08-2009</td>
+								<td>9-0-1-2</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Domingo</td>
+								<td>09-08-2009</td>
+								<td>1-2-3-4</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Domingo</td>
+								<td>02-08-2009</td>
+								<td>7-8-9-0</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Miércoles</td>
+								<td>29-07-2009</td>
+								<td>3-4-5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Sábado</td>
+								<td>25-07-2009</td>
+								<td>3-4-5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Martes</td>
+								<td>14-07-2009</td>
+								<td>9-0-1-2</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Viernes</td>
+								<td>03-07-2009</td>
+								<td>1-2-3-4</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Jueves</td>
+								<td>25-06-2009</td>
+								<td>7-8-9-0</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Miércoles</td>
+								<td>24-06-2009</td>
+								<td>3-4-5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Viernes</td>
+								<td>12-06-2009</td>
+								<td>1-2-3-4</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Jueves</td>
+								<td>11-06-2009</td>
+								<td>7-8-9-0</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Miércoles</td>
+								<td>10-06-2009</td>
+								<td>3-4-5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Martes</td>
+								<td>09-06-2009</td>
+								<td>9-0-1-2</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Domingo</td>
+								<td>07-06-2009</td>
+								<td>9-0-1-2</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Viernes</td>
+								<td>05-06-2009</td>
+								<td>1-2-3-4</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Jueves</td>
+								<td>04-06-2009</td>
+								<td>7-8-9-0</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Miércoles</td>
+								<td>03-06-2009</td>
+								<td>3-4-5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Martes</td>
+								<td>02-06-2009</td>
+								<td>9-0-1-2</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Miércoles</td>
+								<td>22-05-2009</td>
+								<td>1-2-3-4</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Martes</td>
+								<td>12-05-2009</td>
+								<td>9-0-1-2</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Lunes</td>
+								<td>11-05-2009</td>
+								<td>5-6-7-8</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Miércoles</td>
+								<td>06-05-2009</td>
+								<td>3-4-5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Miércoles</td>
+								<td>08-04-2009</td>
+								<td>3-4-5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+							<div class="table-container" id="table-2008">
+								<table cellspacing="0">
+								<thead>
+								<tr class="head"><th colspan="5">Cuadro Histórico de Episodios de 2008</th>
+								</tr></thead>
+								<tbody>
+								<tr>
+								</tr><tr>
+								<td width="197" height="40" align="center" rowspan="2"><b>Tipo
+								de Episodio</b></td>
+								<td width="101" height="40" align="center" rowspan="2"><b>Día</b></td>
+								<td width="96" height="40" align="center" rowspan="2"><b>Fecha</b></td>
+								<td height="22" align="center" colspan="2"><b>Dígitos</b></td>
+								</tr>
+								<tr>
+								<td width="125" height="18" align="center">Sin
+								sello verde</td>
+								<td width="122" height="18" align="center">Con
+								sello verde</td>
+								</tr>
+								<tr><td>Alerta
+								Ambiental </td>
+								<td>Domingo</td>
+								<td>10-08-2008</td>
+								<td>3-4</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Sábado</td>
+								<td>09-08-2008</td>
+								<td>1-2</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Viernes</td>
+								<td>25-07-2008</td>
+								<td>7-8-9-0</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Martes</td>
+								<td>15-07-2008</td>
+								<td>5-6-7-8</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Miércoles</td>
+								<td>09-07-2008</td>
+								<td>0-9-1-2</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Jueves</td>
+								<td>03-07-2008</td>
+								<td>3-4-5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Miércoles</td>
+								<td>02-07-2008</td>
+								<td>9-0-1-2</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Preemergencia
+								Ambiental </td>
+								<td>Martes</td>
+								<td>01-07-2008</td>
+								<td>5-6-7-8-9-0</td>
+								<td>5-6</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Lunes</td>
+								<td>30-06-2008</td>
+								<td>1-2-3-4</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td height="23" align="center">Preemergencia
+								Ambiental </td>
+								<td height="23" align="center">Domingo</td>
+								<td height="23" align="center">29-06-2008</td>
+								<td height="23" align="center">9-0-1-2-5-6</td>
+								<td height="23" align="center">3-4</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Sábado</td>
+								<td>28-06-2008</td>
+								<td>7-8</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Viernes</td>
+								<td>27-06-2008</td>
+								<td>7-8-9-0</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Jueves</td>
+								<td>26-06-2008</td>
+								<td>3-4-5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Preemergencia
+								Ambiental </td>
+								<td>Miércoles</td>
+								<td>25-06-2008</td>
+								<td>9-0-1-2-3-4</td>
+								<td>1-2</td>
+								</tr>
+								<tr>
+								<td>Preemergencia
+								Ambiental </td>
+								<td>Martes</td>
+								<td>24-06-2008</td>
+								<td>5-6-7-8-9-0</td>
+								<td>9-0</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Lunes</td>
+								<td>23-06-2008</td>
+								<td>1-2-3-4</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Sábado</td>
+								<td>21-06-2008</td>
+								<td>5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Preemergencia
+								Ambiental </td>
+								<td>Lunes</td>
+								<td>16-06-2008</td>
+								<td>1-2-3-4-5-6</td>
+								<td>7-8</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Sábado</td>
+								<td>14-06-2008</td>
+								<td>1-2</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Martes</td>
+								<td>10-06-2008</td>
+								<td>5-6-7-8</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Preemergencia
+								Ambiental(Suspendida)</td>
+								<td>Martes</td>
+								<td>03-06-2008</td>
+								<td>3-4-5-6-7-8</td>
+								<td>5-6</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Lunes</td>
+								<td>02-06-2008</td>
+								<td>1-2-3-4</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Preemergencia
+								Ambiental </td>
+								<td>Domingo</td>
+								<td>01-06-2008</td>
+								<td>1-2-3-4-9-0</td>
+								<td>3-4</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Sábado</td>
+								<td>31-05-2008</td>
+								<td>7-8</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Preemergencia
+								Ambiental </td>
+								<td>Viernes</td>
+								<td>30-05-2008</td>
+								<td>5-6-7-8-9-0</td>
+								<td>1-2</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Viernes</td>
+								<td>16-05-2008</td>
+								<td>7-8-9-0</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Miércoles
+								</td>
+								<td>14-05-2008</td>
+								<td>0-9-1-2</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Martes</td>
+								<td>13-05-2008</td>
+								<td>5-6-7-8</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Lunes</td>
+								<td>12-05-2008</td>
+								<td>1-2-3-4</td>
+								<td>&nbsp;</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+
+							<div class="table-container" id="table-2007">
+								<table cellspacing="0">
+								<thead>
+								<tr class="head"><th colspan="5">Cuadro Histórico de Episodios de 2007</th>
+								</tr></thead>
+								<tbody>
+								<tr>
+								</tr><tr>
+								<td width="197" height="40" align="center" rowspan="2"><b>Tipo
+								de Episodio</b></td>
+								<td width="101" height="40" align="center" rowspan="2"><b>Día</b></td>
+								<td width="96" height="40" align="center" rowspan="2"><b>Fecha</b></td>
+								<td height="22" align="center" colspan="2"><b>Dígitos</b></td>
+								</tr>
+								<tr>
+								<td width="125" height="18" align="center">Sin
+								sello verde</td>
+								<td width="122" height="18" align="center">Con
+								sello verde</td>
+								</tr>
+								<tr><td>Alerta
+								Ambiental </td>
+								<td>Sábado</td>
+								<td>11-08-2007</td>
+								<td>0-9</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Martes</td>
+								<td>31-07-2007</td>
+								<td>0-5-6-9</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Sábado</td>
+								<td>28-07-2007</td>
+								<td>0-9</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Viernes</td>
+								<td>27-07-2007</td>
+								<td>1-2-5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental </td>
+								<td>Jueves</td>
+								<td>26-07-2007</td>
+								<td>0-3-4-9</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Preemergencia
+								Ambiental </td>
+								<td>Jueves</td>
+								<td>19-07-2007</td>
+								<td>0-3-4-5-6-9</td>
+								<td>7-8</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Miércoles</td>
+								<td>11-07-2007</td>
+								<td>1-2-7-8</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Miércoles</td>
+								<td>04-07-2007</td>
+								<td>1-2-7-8</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Sábado</td>
+								<td>30-06-2007</td>
+								<td>3-4</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Preemergencia
+								Ambiental </td>
+								<td>Viernes</td>
+								<td>29-06-2007</td>
+								<td>1-2-5-6-7-8</td>
+								<td>5-6</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Jueves</td>
+								<td>28-06-2007</td>
+								<td>0-3-4-9</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Miércoles</td>
+								<td>27-06-2007</td>
+								<td>1-2-7-8</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Lunes</td>
+								<td>25-06-2007</td>
+								<td>3-4-7-8</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Martes</td>
+								<td>19-06-2007</td>
+								<td>0-9-5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Domingo</td>
+								<td>17-06-2007</td>
+								<td>1-2</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Viernes</td>
+								<td>08-06-2007</td>
+								<td>1-2-5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Jueves</td>
+								<td>07-06-2007</td>
+								<td>0-3-4-9</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Martes</td>
+								<td>05-06-2007</td>
+								<td>0-5-6-9</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Lunes</td>
+								<td>04-06-2007</td>
+								<td>3-4-7-8</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Domingo</td>
+								<td>03-06-2007</td>
+								<td>1-2</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Lunes</td>
+								<td>28-05-2007</td>
+								<td>3-4-7-8</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Preemergencia
+								Ambiental</td>
+								<td>Jueves</td>
+								<td>24-05-2007</td>
+								<td>0-3-4-5-6-9</td>
+								<td>3-4</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Miércoles</td>
+								<td>23-05-2007</td>
+								<td>1-2-7-8</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Domingo</td>
+								<td>20-05-2007</td>
+								<td>0-9</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Martes</td>
+								<td>15-05-2007</td>
+								<td>0-5-6-9</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Lunes</td>
+								<td>14-05-2007</td>
+								<td>3-4-7-8</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Preemergencia
+								Ambiental</td>
+								<td>Sábado</td>
+								<td>12-05-2007</td>
+								<td>3-4-7-8</td>
+								<td>1-2</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Viernes</td>
+								<td>11-05-2007</td>
+								<td>1-2-5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Miércoles</td>
+								<td>09-05-2007</td>
+								<td>1-2-7-8</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr><td>Alerta
+								Ambiental</td>
+								<td>Domingo</td>
+								<td>29-04-2007</td>
+								<td>9-0</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Viernes</td>
+								<td>27-04-2007</td>
+								<td>1-2-5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+
+							<div class="table-container" id="table-2006">
+								<table cellspacing="0">
+								<thead>
+								<tr class="head"><th colspan="5">Cuadro Histórico de Episodios de 2006</th>
+								</tr></thead>
+								<tbody>
+								<tr>
+								</tr><tr>
+								<td width="197" height="40" align="center" rowspan="2"><b>Tipo
+								de Episodio</b></td>
+								<td width="101" height="40" align="center" rowspan="2"><b>Día</b></td>
+								<td width="96" height="40" align="center" rowspan="2"><b>Fecha</b></td>
+								<td height="22" align="center" colspan="2"><b>Dígitos</b></td>
+								</tr>
+								<tr>
+								<td width="125" height="18" align="center">Sin
+								sello verde</td>
+								<td width="122" height="18" align="center">Con
+								sello verde</td>
+								</tr>
+								<tr><td>Preemergencia
+								Ambiental</td>
+								<td>Miércoles</td>
+								<td>02-08-2006</td>
+								<td>3-4-5-6-9-0</td>
+								<td>9-0</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Miércoles</td>
+								<td>19-07-2006</td>
+								<td>3-4-9-0</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Domingo</td>
+								<td>02-07-2006</td>
+								<td>1-2</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Viernes</td>
+								<td>23-06-2006</td>
+								<td>3-4-7-8</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Jueves</td>
+								<td>22-06-2006</td>
+								<td>1-2-5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Jueves</td>
+								<td>15-06-2006</td>
+								<td>1-2-5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Miércoles</td>
+								<td>14-06-2006</td>
+								<td>9-0-3-4</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Lunes</td>
+								<td>12-06-2006</td>
+								<td>9-0</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Martes</td>
+								<td>23-05-2006</td>
+								<td>1-2-7-8</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Preemergencia
+								Ambiental</td>
+								<td>Domingo</td>
+								<td>21-05-2006</td>
+								<td>3-4-7-8</td>
+								<td>7-8</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Sábado</td>
+								<td>20-05-2006</td>
+								<td>1-2</td>
+								<td>&nbsp;
+								</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Domingo</td>
+								<td>14-05-2006</td>
+								<td>7-8</td>
+								<td>&nbsp;
+								</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Sábado</td>
+								<td>13-05-2006</td>
+								<td>1-2</td>
+								<td>&nbsp;
+								</td>
+								</tr>
+								<tr>
+								<td>Preemergencia
+								Ambiental</td>
+								<td>Viernes</td>
+								<td>12-05-2006</td>
+								<td>3-4-7-8-9-0</td>
+								<td>5-6</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Jueves</td>
+								<td>11-05-2006</td>
+								<td>1-2-5-6</td>
+								<td>&nbsp;
+								</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Miércoles</td>
+								<td>10-05-2006</td>
+								<td>9-0-3-4</td>
+								<td>&nbsp;
+								</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Domingo</td>
+								<td>07-05-2006</td>
+								<td>1-2</td>
+								<td>&nbsp;
+								</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Lunes</td>
+								<td>01-05-2006</td>
+								<td>0-9</td>
+								<td>&nbsp;
+								</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Domingo</td>
+								<td>30-04-2006</td>
+								<td>7-8</td>
+								<td>&nbsp;
+								</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Sábado</td>
+								<td>29-04-2006</td>
+								<td>5-6</td>
+								<td>&nbsp;
+								</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Jueves</td>
+								<td>27-04-2006</td>
+								<td>1-2-5-6</td>
+								<td>&nbsp;
+								</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Miércoles</td>
+								<td>26-04-2006</td>
+								<td>9-0-3-4</td>
+								<td>&nbsp;
+								</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Miércoles</td>
+								<td>19-04-2006</td>
+								<td>9-0-3-4</td>
+								<td>&nbsp;
+								</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Lunes</td>
+								<td>17-04-2006</td>
+								<td>5-6-9-0</td>
+								<td>&nbsp;
+								</td>
+								</tr></tbody>
+								</table>
+							</div>
+							<div class="table-container" id="table-2005">
+
+								<table cellspacing="0">
+								<thead>
+								<tr class="head"><th colspan="5">Cuadro Histórico de Episodios de 2005</th>
+								</tr></thead>
+								<tbody>
+								<tr>
+								</tr><tr>
+								<td width="197" height="40" align="center" rowspan="2"><b>Tipo
+								de Episodio</b></td>
+								<td width="101" height="40" align="center" rowspan="2"><b>Día</b></td>
+								<td width="96" height="40" align="center" rowspan="2"><b>Fecha</b></td>
+								<td height="22" align="center" colspan="2"><b>Dígitos</b></td>
+								</tr>
+								<tr>
+								<td width="125" height="18" align="center">Sin
+								sello verde</td>
+								<td width="122" height="18" align="center">Con
+								sello verde</td>
+								</tr>
+								<tr><td>Preemergencia
+								Ambiental</td>
+								<td>Viernes</td>
+								<td>29-07-2005</td>
+								<td>1-2-5-6-9-0</td>
+								<td>3-4</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Miércoles</td>
+								<td>06-07-2005</td>
+								<td>1-2-5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Martes</td>
+								<td>31-05-2005</td>
+								<td>3-4-9-0</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Sábado</td>
+								<td>28-05-2005</td>
+								<td>1-2</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Viernes</td>
+								<td>27-05-2005</td>
+								<td>5-6-9-0</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Sábado</td>
+								<td>30-04-2005</td>
+								<td>7-8</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Domingo</td>
+								<td>24-04-2005</td>
+								<td>5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Alerta
+								Ambiental</td>
+								<td>Miércoles</td>
+								<td>20-04-2005</td>
+								<td>1-2-5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>Preemergencia
+								Ambiental</td>
+								<td>Domingo</td>
+								<td>17-04-2005</td>
+								<td>1-2-3-4</td>
+								<td>1-2</td>
+								</tr>
+								</tbody>
+								</table>
+</div>
+
+							<div class="table-container" id="table-2004">
+								<table cellspacing="0">
+								<thead>
+								<tr class="head"><th colspan="5">Cuadro Histórico de Episodios de 2004</th>
+								</tr></thead>
+								<tbody>
+								<tr>
+								</tr><tr>
+								<td width="197" height="40" align="center" rowspan="2"><b>Tipo
+								de Episodio</b></td>
+								<td width="101" height="40" align="center" rowspan="2"><b>Día</b></td>
+								<td width="96" height="40" align="center" rowspan="2"><b>Fecha</b></td>
+								<td height="22" align="center" colspan="2"><b>Dígitos</b></td>
+								</tr>
+								<tr>
+								<td width="125" height="18" align="center">Sin
+								sello verde</td>
+								<td width="122" height="18" align="center">Con
+								sello verde</td>
+								</tr>
+								<tr><td>&nbsp;Alerta
+								Ambiental </td>
+								<td>Domingo</td>
+								<td>18-07-2004</td>
+								<td>5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr><td>&nbsp;Preemergencia
+								Ambiental </td>
+								<td>Sábado</td>
+								<td>17-07-2004</td>
+								<td>1-2-3-4</td>
+								<td>9-0</td>
+								</tr>
+								<tr><td>&nbsp;Alerta
+								Ambiental </td>
+								<td>Martes</td>
+								<td>15-06-2004</td>
+								<td>1-2-5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>&nbsp;Alerta
+								Ambiental </td>
+								<td>Domingo</td>
+								<td>13-06-2004</td>
+								<td>5-6</td>
+								<td></td>
+								</tr>
+								<tr>
+								<td>&nbsp;Alerta
+								Ambiental </td>
+								<td>Sábado</td>
+								<td>12-06-2004</td>
+								<td>1-2</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>&nbsp;Alerta
+								Ambiental </td>
+								<td>Jueves</td>
+								<td>03-06-2004</td>
+								<td>5-6-9-0</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>&nbsp;&nbsp;Alerta
+								Ambiental </td>
+								<td>Miércoles</td>
+								<td>02-06-2004</td>
+								<td>3-4-7-8</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>&nbsp;Alerta
+								Ambiental </td>
+								<td>Martes</td>
+								<td>01-06-2004</td>
+								<td>1-2-5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>&nbsp;Alerta
+								Ambiental </td>
+								<td>Jueves</td>
+								<td>27-05-2004</td>
+								<td>5-6-9-0</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>&nbsp;Alerta
+								Ambiental </td>
+								<td>Jueves</td>
+								<td>20-05-2004</td>
+								<td>5-6-9-0</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>&nbsp;Preemergencia
+								Ambiental </td>
+								<td>Miércoles</td>
+								<td>19-05-2004</td>
+								<td>3-4-7-8-9-0</td>
+								<td>7-8</td>
+								</tr>
+								<tr>
+								<td>&nbsp;Alerta
+								Ambiental </td>
+								<td>Martes</td>
+								<td>18-05-2004</td>
+								<td>1-2-5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>&nbsp;Alerta
+								Ambiental </td>
+								<td>Miércoles</td>
+								<td>05-05-2004</td>
+								<td>3-4-7-8</td>
+								<td>&nbsp;</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+							<div class="table-container" id="table-2003">
+								<table cellspacing="0">
+								<thead>
+								<tr class="head"><th colspan="5">Cuadro Histórico de Episodios de 2003</th>
+								</tr></thead>
+								<tbody>
+								<tr>
+								</tr><tr>
+								<td width="197" height="40" align="center" rowspan="2"><b>Tipo
+								de Episodio</b></td>
+								<td width="101" height="40" align="center" rowspan="2"><b>Día</b></td>
+								<td width="96" height="40" align="center" rowspan="2"><b>Fecha</b></td>
+								<td height="22" align="center" colspan="2"><b>Dígitos</b></td>
+								</tr>
+								<tr>
+								<td width="125" height="18" align="center">Sin
+								sello verde</td>
+								<td width="122" height="18" align="center">Con
+								sello verde</td>
+								</tr>
+								<tr><td>&nbsp;Alerta
+								Ambiental </td>
+								<td>Domingo</td>
+								<td>10-08-2003</td>
+								<td>1-2</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>&nbsp;Alerta
+								Ambiental </td>
+								<td>Sábado</td>
+								<td>19-07-2003</td>
+								<td>7-8</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>&nbsp;Alerta
+								Ambiental </td>
+								<td>Miércoles</td>
+								<td>16-07-2003</td>
+								<td>1-2-5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>&nbsp;Alerta
+								Ambiental </td>
+								<td>Sábado</td>
+								<td>12-07-2003</td>
+								<td>7-8</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>&nbsp;Preemergencia
+								Ambiental </td>
+								<td>Viernes</td>
+								<td>11-07-2003</td>
+								<td>5-6-9-0-1-2</td>
+								<td>5-6</td>
+								</tr>
+								<tr>
+								<td>&nbsp;Alerta
+								Ambiental </td>
+								<td>Miércoles</td>
+								<td>02-07-2003</td>
+								<td>1-2-5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>&nbsp;Alerta
+								Ambiental </td>
+								<td>Viernes</td>
+								<td>20-06-2003</td>
+								<td>5-6-9-0</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>&nbsp;Alerta
+								Ambiental </td>
+								<td>Domingo</td>
+								<td>08-06-2003</td>
+								<td>9-0</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>&nbsp;Alerta
+								Ambiental </td>
+								<td>Domingo</td>
+								<td>01-06-2003</td>
+								<td>9-0</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>&nbsp;Alerta
+								Ambiental </td>
+								<td>Jueves</td>
+								<td>29-05-2003</td>
+								<td>3-4-7-8</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>&nbsp;Preemergencia
+								Ambiental </td>
+								<td>Miércoles</td>
+								<td>28-05-2003</td>
+								<td>1-2-5-6-7-8</td>
+								<td>3-4</td>
+								</tr>
+								<tr>
+								<td>&nbsp;Alerta
+								Ambiental </td>
+								<td>Martes</td>
+								<td>27-05-2003</td>
+								<td>9-0-3-4</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>&nbsp;Alerta
+								Ambiental </td>
+								<td>Lunes</td>
+								<td>26-05-2003</td>
+								<td>7-8-1-2</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>&nbsp;Alerta
+								Ambiental </td>
+								<td>Domingo</td>
+								<td>25-05-2003</td>
+								<td>9-0</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>&nbsp;Alerta
+								Ambiental </td>
+								<td>Sábado</td>
+								<td>24-05-2003</td>
+								<td>7-8</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>&nbsp;Preemergencia
+								Ambiental </td>
+								<td>Martes</td>
+								<td>20-05-2003</td>
+								<td>9-0-3-4-5-6</td>
+								<td>1-2</td>
+								</tr>
+								<tr>
+								<td>&nbsp;Preemergencia
+								Ambiental </td>
+								<td>Lunes</td>
+								<td>19-05-2003</td>
+								<td>7-8-1-2-3-4</td>
+								<td>9-0</td>
+								</tr>
+								<tr>
+								<td>&nbsp;Preemergencia
+								Ambiental </td>
+								<td>Lunes</td>
+								<td>12-05-2003</td>
+								<td>7-8-1-2-3-4</td>
+								<td>7-8</td>
+								</tr>
+								<tr>
+								<td>&nbsp;Alerta
+								Ambiental </td>
+								<td>Domingo</td>
+								<td>11-05-2003</td>
+								<td>1-2</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>&nbsp;Alerta
+								Ambiental </td>
+								<td>Sábado</td>
+								<td>10-05-2003</td>
+								<td>7-8</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>&nbsp;Alerta
+								Ambiental </td>
+								<td>Miércoles</td>
+								<td>07-05-2003</td>
+								<td>1-2-5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>&nbsp;Alerta
+								Ambiental </td>
+								<td>Martes</td>
+								<td>06-05-2003</td>
+								<td>9-0-3-4</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>&nbsp;Alerta
+								Ambiental </td>
+								<td>Domingo</td>
+								<td>04-05-2003</td>
+								<td>5-6</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>&nbsp;Alerta
+								Ambiental </td>
+								<td>Sábado</td>
+								<td>03-05-2003</td>
+								<td>3-4</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>&nbsp;Alerta
+								Ambiental </td>
+								<td>Viernes</td>
+								<td>02-05-2003</td>
+								<td>5-6-9-0</td>
+								<td>&nbsp;</td>
+								</tr>
+								<tr>
+								<td>&nbsp;Alerta
+								Ambiental </td>
+								<td>Viernes</td>
+								<td>11-04-2003</td>
+								<td>5-6-9-0</td>
+								<td>&nbsp;</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<div class="container full">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="banners">
+				<div class="row">
+					<div class="flexbanners">
+						<ul class="slides">
+          <li>					<div class="col-sm-3">
+						<a target="_blank" href="http://www.ciclorecreovia.cl/"><img src="http://www.uoct.cl/wp-content/files_mf/cache/th_ab22b37682877dd2150084cfc9ae7bc8_4713108ciclorecreovia.jpg"></a>
+					</div>
+										<div class="col-sm-3">
+						<a target="_blank" href="http://www.metro.cl/"><img src="http://www.uoct.cl/wp-content/files_mf/cache/th_ab22b37682877dd2150084cfc9ae7bc8_5269595metro.jpg"></a>
+					</div>
+										<div class="col-sm-3">
+						<a target="_blank" href="http://www.prt.cl/"><img src="http://www.uoct.cl/wp-content/files_mf/cache/th_ab22b37682877dd2150084cfc9ae7bc8_9240927prt.jpg"></a>
+					</div>
+										<div class="col-sm-3">
+						<a target="_blank" href="http://www.transporteinforma.cl/"><img src="http://www.uoct.cl/wp-content/files_mf/cache/th_ab22b37682877dd2150084cfc9ae7bc8_3945110banner_transporteinforma.jpg"></a>
+					</div>
+					</li><li>					<div class="col-sm-3">
+						<a target="_blank" href="http://www.tuparada.cl/"><img src="http://www.uoct.cl/wp-content/files_mf/cache/th_ab22b37682877dd2150084cfc9ae7bc8_1161639tuparada.png"></a>
+					</div>
+										<div class="col-sm-3">
+						<a target="_blank" href="http://www.trencentral.cl/link.cgi/#"><img src="http://www.uoct.cl/wp-content/files_mf/cache/th_ab22b37682877dd2150084cfc9ae7bc8_9800414trecentral.jpg"></a>
+					</div>
+										<div class="col-sm-3">
+						<a target="_blank" href="http://tcarga.fiscalizacion.cl/"><img src="http://www.uoct.cl/wp-content/files_mf/cache/th_ab22b37682877dd2150084cfc9ae7bc8_5142180restriccion.jpg"></a>
+					</div>
+											</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="contact">
+				<div class="row">
+					<div class="col-sm-12" id="contacto">
+						<h3><strong>Contacto:</strong> Si necesitas realizar una consulta, reclamo o aviso a la Unidad Operativa de Control de Tránsito, ingresa tus datos en el siguiente formulario.</h3>
+					</div>
+				</div>
+				<div class="row">	
+					
+					<div class="col-sm-4">
+						<form id="contacto_form" method="post" action="http://www.uoct.cl/enviar-contacto/">
+							<div class="contactform">
+								<input type="text" name="nombre" placeholder="Ingresa nombre">
+								<input type="text" name="email" placeholder="Ingresa correo electrónico">
+								<textarea name="comentario" placeholder="Escribe tu mensaje aquí"></textarea>
+								<div class="g-recaptcha" style="padding-top:15px;" data-sitekey="6LeefQUTAAAAAHtsDaxbzwmisBlDxvcYbkByTewW"></div>
+								<button type="button" id="send_contact">Enviar Mensaje</button>
+							</div>
+						</form>
+					
+					
+						<div id="msg_success" class="successmsg" style="display:none;">
+							<div class="successmsg">
+								<p>Tu consulta ha sido enviada exitosamente. Nos pondremos en contacto contigo a la brevedad.</p>
+								<p>
+									<a href="#" class="close_success_contact">Cerrar</a>
+								</p>
+							</div>
+						</div>
+					
+						<div id="msg_error" class="failmsg"  style="display:none;">
+							<div class="failmsg">
+								<p class="txt_msg">Tu consulta ha presentado un error. Por favor, vuelve a intentarlo.</p>
+								<p>
+									<a href="#" class="close_error_contact">Intentar de nuevo</a>
+								</p>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-sm-4">
+						<p><strong>Atención a usuarios:</strong><br> Teléfono +56 2 2676 0860</p>
+						<p>Lunes a viernes: 06:30 a 21:00 horas.<br/>Sábado: 09:30 a 14:30 horas.</p>
+						<p><strong>Mesa Central:</strong><br> Teléfono +56 2 2676 0800</p>
+						<p><strong>Dirección:</strong><br> Santa Beatriz 319, Providencia. Santiago.</p>
+					</div>
+					
+					<div class="col-sm-4">
+						<p>Síguenos en nuestra cuenta de Twitter</p>
+						<p><a href="https://twitter.com/UOCT_RM">@uoct_rm</a></p>
+						<p style="text-align: center;"><a href="https://twitter.com/UOCT_RM"><img src="http://www.uoct.cl/wp-content/themes/wp-uoct-responsive/img/tw-footer.png"></a></p>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--div class="container">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="social">
+				<div class="row">
+					<div class="col-sm-5" id="contacto_m">
+						<h3><strong>Contacto a nuestro equipo:</strong> Si tienes dudas, consultas, reclamos o sugerencias sobre nuestro sitio web, twitter y sus contenidos te podemos atender por estos canales directos.</h3>
+					</div>
+					<div class="col-sm-5">
+						<h3><strong>Mesa Central:</strong><br> <a href="tel:+56 2 2676 0800">+56 2 2676 0800</a></h3>
+						<h3><strong>Atención a usuarios:</strong><br> <a href="tel:+56 2 2676 0860">+56 2 2676 0860</a></h3>
+					</div>
+					<div class="col-sm-2">
+						<a href="https://twitter.com/UOCT_RM"  target="_blank"><img src="http://www.uoct.cl/wp-content/themes/wp-uoct-responsive/img/tw-footer.png"></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div-->
+
+<div class="container final full">
+	<div class="row">
+		<div class="col-sm-4">
+			<ul>
+				<li><strong>UOCT</strong></li>
+				<li><a href="http://antofagasta.uoct.cl">Antofagasta</a></li>
+				<li><a href="http://valparaiso.uoct.cl">Valparaíso</a></li>
+				<li><a href="http://www.uoct.cl">Santiago</a></li>
+				<li><a href="http://rancagua.uoct.cl">Rancagua</a></li>
+				<li><a href="http://concepcion.uoct.cl">Concepción</a></li>
+			</ul>
+		</div>
+		<div class="col-sm-4">
+			<ul>
+				<li><strong>Organismos relacionados</strong></li>
+				<li><a href="http://www.mtt.gob.cl/">MTT</a></li>
+				<li><a href="http://www.dtpm.cl/">DTPM</a></li>
+				<li><a href="http://www.conaset.cl/">Conaset</a></li>
+				<li><a href="http://www.sectra.gob.cl/">Sectra</a></li>
+				<li><a href="http://www.mtt.gob.cl/3cv.html">3CV</a></li>
+				<li><a href="http://www.fiscalizacion.cl/">Programa de Fiscalización</a></li>
+			</ul>
+		</div>
+		<div class="col-sm-4">
+			<ul>
+				<li><strong>Enlaces de interés</strong></li>
+				<li><a href="http://www.gobiernotransparentechile.cl/">Gobierno Transparente</a></li>
+				<li><a href="http://www.carabineros.cl/">Carabineros de Chile</a></li>
+				<li><a href="http://www.mop.cl/Paginas/default.aspx">Ministerio de Obras Públicas</a></li>
+				<li><a href="http://www.vialidad.cl/Paginas/default.aspx">Dirección de Vialidad</a></li>
+				<li><a href="http://www.msgg.gob.cl/consejodelasociedadcivil/">Consejo de la Sociedad Civil</a></li>
+				<li><a href="http://www.subtrans.gob.cl/promovilidad.html">Promovilidad Urbana</a></li>
+				<li><a href="http://www.transportescucha.cl/">TransporTescucha</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"bc8b4e36d4","applicationID":"24235570","transactionName":"MgZRZkoFDUJTVRYKCQtMclFMDQxfHUYDBANIEVZBTBYKUlFfDQ1LEwZbW1sRD1BA","queueTime":0,"applicationTime":102974,"atts":"HkFSEAIfHkw=","errorBeacon":"bam.nr-data.net","agent":""}</script><script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"bc8b4e36d4","applicationID":"24235570","transactionName":"MgZRZkoFDUJTVRYKCQtMclFMDQxfHUYDBANIEVZBTBYKUlFfDQ1LEwZbW1sRD1BA","queueTime":0,"applicationTime":367,"atts":"HkFSEAIfHkw=","errorBeacon":"bam.nr-data.net","agent":""}</script></body>
+</html>
